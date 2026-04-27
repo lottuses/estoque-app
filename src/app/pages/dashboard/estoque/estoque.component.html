@@ -3,9 +3,15 @@
     <header class="header">
         <h1>Estoque</h1>
 
-        <button class="btn-primary" (click)="abrirModal()">
-            + Novo Produto
-        </button>
+        <div>
+            <button class="btn-primary" (click)="abrirModal()">
+                + Novo Produto
+            </button>
+
+            <button disabled>
+                + Produtos XML
+            </button>
+        </div>
     </header>
 
     <!-- FILTRO -->
@@ -27,6 +33,7 @@
                     <th>Produto</th>
                     <th>Tipo</th>
                     <th>Quantidade</th>
+                    <th>Preço</th>
                     <th>Local</th>
                     <th>Ações</th>
                 </tr>
@@ -50,6 +57,10 @@
 
                     <td>
                         {{ produto.quantidade }} {{ produto.unidade || 'un' }}
+                    </td>
+
+                    <td>
+                        R$ {{ produto.preco }}
                     </td>
 
                     <td>
@@ -87,6 +98,8 @@
             <input type="number" [(ngModel)]="produto.quantidade" placeholder="Quantidade" />
 
             <input [(ngModel)]="produto.unidade" placeholder="Unidade (ex: un, caixa)" />
+
+            <input type="number" [(ngModel)]="produto.preco" placeholder="Preço" />
 
             <input [(ngModel)]="produto.localizacao" placeholder="Localização" />
 

@@ -40,7 +40,8 @@ export class EstoqueComponent implements OnInit {
         return {
             nome: '',
             tipo: 'ferragem',
-            quantidade: 0
+            quantidade: 0,
+            preco: 0 // 👈 OBRIGATÓRIO AGORA
         };
     }
 

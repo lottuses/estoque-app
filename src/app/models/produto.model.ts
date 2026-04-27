@@ -1,5 +1,5 @@
 export interface Produto {
-    id?: string; // gerado pelo Firestore
+    id?: string;
 
     nome: string;
     tipo: 'ferragem' | 'ferramenta';
@@ -8,11 +8,11 @@ export interface Produto {
 
     quantidade: number;
 
-    unidade?: string; // ex: un, caixa, metro
+    preco: number; // 👈 ADICIONA ISSO
 
-    localizacao?: string; // ex: prateleira A
-
-    imagem?: string; // caminho local
+    unidade?: string;
+    localizacao?: string;
+    imagem?: string;
 
     criadoEm?: Date;
     atualizadoEm?: Date;

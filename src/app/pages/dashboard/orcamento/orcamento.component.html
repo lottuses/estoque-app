@@ -1,0 +1,60 @@
+<div class="container">
+
+    <h1>Orçamentos</h1>
+
+    <div *ngIf="(orcamentos$ | async)?.length === 0" class="vazio">
+        Nenhum orçamento encontrado
+    </div>
+
+    <div class="orcamento-card" *ngFor="let orc of orcamentos$ | async">
+
+        <!-- HEADER -->
+        <div class="header">
+            <span class="data">
+                {{ orc.data | date:'dd/MM/yyyy HH:mm' }}
+            </span>
+
+            <span class="status" [ngClass]="orc.status">
+                {{ orc.status }}
+            </span>
+        </div>
+
+        <!-- ITENS -->
+        <div class="itens">
+            <div class="item" *ngFor="let item of orc.itens">
+
+                <img *ngIf="item.imagem" [src]="item.imagem" />
+
+                <div class="info">
+                    <strong>{{ item.nome }}</strong>
+                    <span>{{ item.quantidade }} x R$ {{ item.preco }}</span>
+                </div>
+
+                <div class="subtotal">
+                    R$ {{ item.preco * item.quantidade }}
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TOTAL -->
+        <div class="total">
+            Total: <strong>R$ {{ orc.total }}</strong>
+        </div>
+
+        <!-- AÇÕES -->
+        <div class="acoes">
+
+            <button class="btn-aprovar" *ngIf="orc.status !== 'aprovado'" (click)="aprovar(orc)">
+                Aprovar
+            </button>
+
+            <button class="btn-excluir" (click)="excluir(orc.id)">
+                Excluir
+            </button>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,3 +1,78 @@
-<p>
-  pedidos works!
-</p>
+<div class="container">
+
+    <!-- 🔹 PRODUTOS -->
+    <div class="card produtos">
+        <h2>Produtos</h2>
+        <input type="text" placeholder="Buscar produto..." class="input-busca"
+            (input)="onBuscar($event.target.value)" />
+
+        <div class="produto" *ngFor="let produto of produtosFiltrados$ | async">
+
+            <div class="produto-info">
+
+                <img *ngIf="produto.imagem; else semImagem" [src]="produto.imagem" alt="produto"
+                    class="imagem-produto" />
+
+                <ng-template #semImagem>
+                    <div class="sem-imagem">📦</div>
+                </ng-template>
+
+                <div class="info">
+                    <strong>{{ produto.nome }}</strong>
+                    <span>Estoque: {{ produto.quantidade }}</span>
+                    <span class="preco">R$ {{ produto.preco }}</span>
+                </div>
+
+            </div>
+
+            <button class="btn-add" (click)="adicionar(produto)">
+                +
+            </button>
+
+        </div>
+    </div>
+
+    <!-- 🔹 CARRINHO -->
+    <div class="card carrinho">
+        <h2>Carrinho</h2>
+
+        <div *ngFor="let item of itens$ | async" class="item">
+
+            <div class="produto-info">
+
+                <img *ngIf="item.imagem; else semImagem" [src]="item.imagem" class="imagem-produto" />
+
+                <ng-template #semImagem>
+                    <div class="sem-imagem">📦</div>
+                </ng-template>
+
+                <div class="info">
+                    <span class="nome">{{ item.nome }}</span>
+                    <span class="preco">R$ {{ item.preco }}</span>
+                </div>
+
+            </div>
+
+            <div class="acoes">
+                <input type="number" [value]="item.quantidade" (change)="alterar(item, $event)" />
+
+                <span class="subtotal">
+                    R$ {{ item.preco * item.quantidade }}
+                </span>
+
+                <button class="btn-remove" (click)="remover(item)">✕</button>
+            </div>
+
+        </div>
+
+        <div class="total">
+            Total: <strong>R$ {{ total }}</strong>
+        </div>
+
+        <button class="btn-finalizar" (click)="gerarOrcamento()">
+            Gerar Orçamento
+        </button>
+
+    </div>
+
+</div>

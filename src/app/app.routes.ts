@@ -44,6 +44,12 @@ export const routes: Routes = [
                 loadComponent: () =>
                     import('./pages/dashboard/pedidos/pedidos.component')
                         .then(m => m.PedidosComponent)
+            },
+            {
+                path: 'orcamento',
+                loadComponent: () =>
+                    import('./pages/dashboard/orcamento/orcamento.component')
+                        .then(m => m.OrcamentoComponent)
             }
         ]
     }
