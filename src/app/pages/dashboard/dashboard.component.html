@@ -1,0 +1,36 @@
+<section class="dashboard">
+
+    <aside class="dashboard-sidebar">
+        <div class="sidebar-logo">
+            <img src="../../../assets/login/logo.png" alt="">
+        </div>
+
+        <nav class="sidebar-menu">
+            <a routerLink="/dashboard/infos" routerLinkActive="active">Informações</a>
+            <a routerLink="/dashboard/estoque" routerLinkActive="active">Estoque</a>
+            <a routerLink="/dashboard/financeiro" routerLinkActive="active">Financeiro</a>
+            <a routerLink="/dashboard/pedidos" routerLinkActive="active">Pedidos</a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button>Sair</button>
+        </div>
+    </aside>
+
+    <main class="dashboard-main">
+
+        <header class="dashboard-header">
+            <h1>Dashboard</h1>
+
+            <div class="user-info">
+                <span>Olá, Adriano</span>
+            </div>
+        </header>
+
+        <section class="dashboard-content">
+            <router-outlet></router-outlet>
+        </section>
+
+    </main>
+
+</section>

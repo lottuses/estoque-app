@@ -1,0 +1,103 @@
+<div class="container">
+
+    <header class="header">
+        <h1>Estoque</h1>
+
+        <button class="btn-primary" (click)="abrirModal()">
+            + Novo Produto
+        </button>
+    </header>
+
+    <!-- FILTRO -->
+    <div class="filtros">
+        <input type="text" placeholder="Buscar produto..." [(ngModel)]="busca" (ngModelChange)="aplicarFiltros()" />
+
+        <select [(ngModel)]="filtroTipo" (change)="aplicarFiltros()">
+            <option value="">Todos</option>
+            <option value="ferragem">Ferragem</option>
+            <option value="ferramenta">Ferramenta</option>
+        </select>
+    </div>
+
+    <!-- TABELA -->
+    <div class="tabela-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Tipo</th>
+                    <th>Quantidade</th>
+                    <th>Local</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let produto of produtosFiltrados">
+                    <td class="produto-info">
+                        <img *ngIf="produto.imagem" [src]="produto.imagem" />
+                        <div>
+                            <strong>{{ produto.nome }}</strong>
+                            <span>{{ produto.especificacao }}</span>
+                        </div>
+                    </td>
+
+                    <td>
+                        <span class="badge" [ngClass]="produto.tipo">
+                            {{ produto.tipo }}
+                        </span>
+                    </td>
+
+                    <td>
+                        {{ produto.quantidade }} {{ produto.unidade || 'un' }}
+                    </td>
+
+                    <td>
+                        {{ produto.localizacao || '-' }}
+                    </td>
+
+                    <td class="acoes">
+                        <button class="btn-edit" (click)="editar(produto)">✏️</button>
+                        <button class="btn-delete" (click)="excluir(produto.id)">🗑️</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal-backdrop" *ngIf="mostrarModal">
+    <div class="modal">
+
+        <h2>{{ editando ? 'Editar Produto' : 'Novo Produto' }}</h2>
+
+        <div class="form-grid">
+
+            <input [(ngModel)]="produto.nome" placeholder="Nome" />
+
+            <select [(ngModel)]="produto.tipo">
+                <option value="ferragem">Ferragem</option>
+                <option value="ferramenta">Ferramenta</option>
+            </select>
+
+            <input [(ngModel)]="produto.especificacao" placeholder="Especificação" />
+
+            <input type="number" [(ngModel)]="produto.quantidade" placeholder="Quantidade" />
+
+            <input [(ngModel)]="produto.unidade" placeholder="Unidade (ex: un, caixa)" />
+
+            <input [(ngModel)]="produto.localizacao" placeholder="Localização" />
+
+            <input [(ngModel)]="produto.imagem" placeholder="URL da imagem" />
+
+        </div>
+
+        <div class="modal-actions">
+            <button class="btn-primary" (click)="salvar()">Salvar</button>
+            <button class="btn-secondary" (click)="fecharModal()">Cancelar</button>
+        </div>
+
+    </div>
+</div>

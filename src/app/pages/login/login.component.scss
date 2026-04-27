@@ -1,0 +1,128 @@
+.login {
+    display: flex;
+    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* LADO ESQUERDO */
+.login-dec {
+    width: 20%;
+    color: white;
+
+    background-image: 
+        linear-gradient(rgb(255, 255, 255) 10%
+        ,  rgba(0, 0, 0, 0), rgba(0,0,0,0.5)),
+        url('../../../assets/login/barralateral.avif');
+
+    background-position: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-dec-content {
+    width: 80%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* LOGO */
+.logo h1 {
+    font-size: 32px;
+    color: black;
+    margin: 0;
+}
+
+.logo span {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* FOOTER */
+.footer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.socials {
+    display: flex;
+    gap: 10px;
+}
+
+.socials a {
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.support-btn {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: white;
+    color: #3a7bd5;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* LADO DIREITO */
+.login-main {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f7fa;
+}
+
+/* BOX LOGIN */
+.login-box {
+    width: 350px;
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.login-box h2 {
+    margin-bottom: 20px;
+}
+
+/* INPUTS */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+/* BOTÃO */
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #3a7bd5;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+    background: #2f65b0;
+}
