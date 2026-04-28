@@ -1,60 +1,119 @@
-.dashboard {
-  display: flex;
-  height: 100vh;
-  font-family: 'Segoe UI', sans-serif;
-  background: #f5f7fa;
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* SIDEBAR */
-.dashboard-sidebar {
-  width: 250px;
-  background: #1e293b;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 20px;
-}
 
-.sidebar-logo h2 {
-  margin: 0;
-}
-
-.sidebar-logo span {
-  font-size: 12px;
-  opacity: 0.7;
-}
-
-.sidebar-menu {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 30px;
-  
-}
-
-.sidebar-menu a {
+a {
+  color: #ffffff;
   text-decoration: none;
-  color: white;
-  padding: 10px;
-  border-radius: 8px;
+}
+
+nav {
+  position: fixed;
+  width: 300px;
+  height: 100vh; /* Ocupa a altura inteira da janela */
+  background: #ffffff;
+  left: -300px; /* Começa escondida */
+  top: 0;
+  padding: 60px 20px 20px 20px; /* Espaço no topo para não bater no botão de fechar */
+  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+  z-index: 2000; /* Garante que fica na frente de TUDO */
+  transition: 0.4s;
+  display: block; /* Garante que se comporte como bloco */
+}
+
+.nav-brand {
+  color: #000000;
+  margin-bottom: 30px;
+  padding: 0 20px;
+  display: block;
+  transition: 0.4s;
+
+}
+
+nav h2 {
+  background: #000000;
+  text-transform: uppercase;
+  font-size: 12px;
+  padding: 12px 20px;
+  opacity: 0;
+  margin-left: -50px;
+  transition: 0.4s;
+
+}
+
+nav ul {
+  padding-top: 10px;
+  margin-bottom: 30px;
+}
+
+nav ul li {
+
+  opacity: 0;
+  margin-left: -50px;
+  transition: 0.4s;
+
+}
+
+nav ul li a {
+  color: #000000; /* Texto preto para aparecer no fundo branco */
+  font-size: 13px;
+  padding: 15px;
+  display: block;
   transition: 0.3s;
 }
 
-.sidebar-menu a:hover,
-.sidebar-menu a.active {
-  background: #3a7bd5;
+nav ul li a:hover {
+  color: #000000;
+  transform: translate(8px);
 }
 
-.sidebar-footer button {
-  padding: 10px;
-  border: none;
-  border-radius: 8px;
-  background: #ef4444;
-  color: white;
+.btn-show-nav {
+  position: fixed; /* Fixado na tela */
+  left: 40px;
+  top: 40px;
+  z-index: 999; /* Um pouco abaixo da nav, mas acima do conteúdo */
+  font-size: 24px;
   cursor: pointer;
+  background: #000000; /* Fundo branco para não sumir no fundo cinza */
+  padding: 15px 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
 
-  width: 100%;
+.btn-hide-nav {
+  position: absolute;
+  right: 8px;
+  top: 15px;
+  width: 34px;
+  height: 34px;
+  background: black;
+  text-align: center;
+  cursor: pointer;
+}
+
+input {
+  display: none;
+}
+input:checked ~ nav {
+  left: 0;
+}
+
+
+input:checked ~ nav ul li,
+input:checked ~ nav .nav-brand,
+input:checked ~ nav h2{
+  opacity: 1;
+  margin-left: 0;
+  transition-delay: 0.4s;
+}
+nav ul li a {
+  color: #000000 !important; 
+  display: flex;
+  align-items: center;
 }
 
 /* MAIN */

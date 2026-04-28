@@ -2,16 +2,28 @@
 
     <aside class="dashboard-sidebar">
         <div class="sidebar-logo">
-            <img src="../../../assets/login/logo.png" alt="">
+            
         </div>
+       <input type="checkbox" id="close">
 
-        <nav class="sidebar-menu">
-            <a routerLink="/dashboard/infos" routerLinkActive="active">Informações</a>
-            <a routerLink="/dashboard/estoque" routerLinkActive="active">Estoque</a>
-            <a routerLink="/dashboard/financeiro" routerLinkActive="active">Financeiro</a>
-            <a routerLink="/dashboard/pedidos" routerLinkActive="active">Pedidos</a>
-            <a routerLink="/dashboard/orcamento" routerLinkActive="active">Orçamentos</a>
-        </nav>
+<label for="close" class="btn-show-nav">
+    <i class="fas fa-bars"></i>
+</label>
+
+<nav>
+    <label for="close" class="btn-hide-nav">
+        <i class="fas fa-times"></i>
+    </label>
+    <a href="/dashboard/estoque" class="nav-brand">CODING</a>
+    <h2>Menu</h2>
+    <ul>
+        <li><a routerLink="/dashboard/infos" routerLinkActive="active"><i class="fas fa-home"></i>Informações</a></li>
+        <li><a routerLink="/dashboard/estoque" routerLinkActive="active"><i class="fas fa-user"></i>Estoque</a></li>
+        <li><a routerLink="/dashboard/financeiro" routerLinkActive="active"><i class="fas fa-cog"></i>Financeiro</a></li>
+        <li><a routerLink="/dashboard/pedidos" routerLinkActive="active"><i class="fas fa-newspaper"></i>Pedidos</a></li>
+        <li><a routerLink="/dashboard/orcamento" routerLinkActive="active"><i class="fas fa-phone-alt"></i>Orçamentos</a></li>
+    </ul>
+</nav>
 
         <div class="sidebar-footer">
             <button>Sair</button>
