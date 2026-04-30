@@ -1,17 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
+<div class="container">
 
-  <p>
-  infos works!
-</p>
+    <h1 class="page-title">Central de Informações</h1>
 
-</body>
-</html>
+    <!-- 📌 Informações Gerais -->
+    <div class="card info">
+        <div class="card-header">
+            <span>📌</span>
+            <h2>Informações Gerais</h2>
+        </div>
 
+        <p>
+            Este sistema foi desenvolvido para facilitar o controle de estoque, vendas e organização geral da empresa.
+        </p>
 
+        <p>
+            Aqui você pode gerenciar produtos, acompanhar movimentações e manter tudo atualizado de forma simples e
+            rápida.
+        </p>
+
+        <p>
+            Nosso objetivo é reduzir erros, melhorar a produtividade e garantir que todas as informações estejam sempre
+            acessíveis.
+        </p>
+    </div>
+
+    <!-- 📖 Instruções -->
+    <div class="card instructions">
+        <div class="card-header">
+            <span>📖</span>
+            <h2>Instruções de Uso</h2>
+        </div>
+
+        <ul>
+            <li>Utilize o botão <strong>"Novo Produto"</strong> para cadastrar itens.</li>
+            <li>Preencha todas as informações corretamente antes de salvar.</li>
+            <li>Use a opção de edição para atualizar dados.</li>
+            <li>Evite excluir itens sem necessidade.</li>
+            <li>Mantenha os dados sempre atualizados.</li>
+        </ul>
+
+        <div class="tip">
+            💡 Quanto mais organizado o cadastro, mais fácil será o controle.
+        </div>
+    </div>
+
+    <!-- ⚠️ Avisos -->
+    <div class="card warning">
+        <div class="card-header">
+            <span>⚠️</span>
+            <h2>Avisos Importantes</h2>
+        </div>
+
+        <ul>
+            <li>Não deixe campos em branco.</li>
+            <li>Evite inserir valores incorretos.</li>
+            <li>Revise sempre antes de salvar.</li>
+            <li>Exclusões não podem ser desfeitas.</li>
+        </ul>
+
+        <div class="alert">
+            Erros de cadastro podem impactar diretamente no estoque e financeiro.
+        </div>
+    </div>
+
+    <!-- 🆘 Ajuda -->
+    <div class="card help">
+        <div class="card-header">
+            <span>🆘</span>
+            <h2>Solicitar Ajuda</h2>
+        </div>
+
+        <p>
+            Encontrou algum problema ou tem dúvidas? Envie uma solicitação.
+        </p>
+
+        <textarea [(ngModel)]="mensagemAjuda" placeholder="Descreva o problema com detalhes...">
+    </textarea>
+
+        <button class="btn-primary" (click)="enviarAjuda()" [disabled]="carregando">
+            {{ carregando ? 'Enviando...' : 'Solicitar Ajuda' }}
+        </button>
+
+        <p class="success" *ngIf="mensagemEnviada">
+            ✅ Solicitação enviada com sucesso!
+        </p>
+    </div>
+
+</div>
