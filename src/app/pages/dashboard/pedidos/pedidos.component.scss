@@ -1,12 +1,21 @@
 /* 🔹 BASE */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
 .container {
     display: grid;
-    grid-template-columns: 2fr 1fr;
     gap: 20px;
     padding: 20px;
     background: #0f172a;
-    min-height: 100vh;
     color: #e2e8f0;
+    margin-left: 10%;
+    margin-right: 10%;
+    border-radius: 12px;
+    margin-bottom: 10%;
 }
 
 /* 🔹 CARDS */

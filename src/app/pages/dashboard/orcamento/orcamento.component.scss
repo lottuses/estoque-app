@@ -1,5 +1,12 @@
+body {
+    margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
 .container {
-    padding: 20px;
+    padding: 60px;
     background: #0f172a;
     min-height: 100vh;
     color: #e2e8f0;

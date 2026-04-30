@@ -1,247 +1,498 @@
 body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
 .container {
-    
-    padding: 24px;
-    font-family: 'Segoe UI', sans-serif;
-    background: #afaeae; /* fundo principal */
-    color: #000000;
-    min-height: 100vh;
-    
+
+  font-family: 'Segoe UI', sans-serif;
+  background: #ffffff;
+  color: #000000;
+  margin-left: 10%;
+  margin-right: 10%;
+  border-radius: 12px;
+  margin-bottom: 10%;
+
 }
 
-/* HEADER */
 .header {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: 20px 40px;
-    
-    margin-bottom: 20px;
-}
-
-.estoque {
-    display: flex;
-    position: relative;
-    background-color: rgb(255, 255, 255);
-    
-    border-radius: 12px;
-    padding: 12px;
-    text-align: center;
-    margin: 0;
-    
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  background-color: transparent;
+  padding-top: 20px;
+  margin: 10px;
+  flex-wrap: wrap;
 
 }
 
-button.btn-primary {
-
-    padding: 12px;
-    
-    
-    color: rgb(55, 94, 224);
-    background-color: white;
-}
-
-/* FILTROS */
 .filtros {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
+  display: grid;
+  align-items: center;
+  gap: 15px;
+  margin: 20px 0;
+  padding: 10px;
+  background-color: transparent;
+  border-radius: 8px;
 }
 
-.filtros input,
-.filtros select {
-    padding: 10px;
-    border-radius: 12px;
-    border: 1px solid #000000;
-    background: #ffffff;
-    color: #000000;
+.search-field {
+  flex: 2; 
+  min-width: 200px;
 }
 
-.filtros input::placeholder {
-    color: #000000;
+.category-field {
+  flex: 1;
+  max-width: 250px;
 }
 
-/* TABELA */
-.tabela-container {
-    background: #ffffff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+.filtros label i {
+  margin-right: 8px;
+  font-size: 0.9em;
+  opacity: 0.7;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+.filtros select option {
+  background-color: #ffffff;
+  color: #000000;
 }
 
-thead {
-    background: #0f172a;
+.filtros .mat-input input, 
+.filtros .mat-input select {
+  color: #000000 !important;
 }
 
-th {
-    color: #94a3b8;
-    font-weight: 500;
+.filtros .mat-input label {
+  color: #000000 !important;
+  
 }
 
-th,
-td {
-    padding: 14px;
-    text-align: left;
+/* 3. Cor da Label e da borda quando você clica ou já tem texto (Flutuando) */
+.filtros .mat-input:has(input:focus) label,
+.filtros .mat-input:not(:has(input:placeholder-shown)) label,
+.filtros .mat-input:has(select:focus) label,
+.filtros .mat-input:has(select:valid) label {
+  color: #000000 !important; /* Exemplo: Roxo para combinar com seus botões */
+  
 }
 
-tbody tr {
-    border-top: 1px solid #334155;
-    transition: 0.2s;
+/* 4. Cor da linha inferior quando ganha foco */
+.filtros .mat-input input:focus, 
+.filtros .mat-input select:focus {
+  border-color: #ffd445 !important;
 }
 
-tbody tr:hover {
-    background: #273449;
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 25px;
+  padding: 20px;
+  background: transparent;
+
 }
 
-/* PRODUTO */
-.produto-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.card-item {
+
+  background-color: #ededed;
+  color: #000000;
+  box-sizing: border-box;
+  box-shadow: rgba(0, 0, 0, 0.368) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+  border-right: 2px solid rgba(74, 74, 74, 0.053);
+  border-bottom: 2px solid rgba(74, 74, 74, 0.053);
+  width: 250px;
+  min-height: 320px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 10px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, Helvetica, sans-serif;
+  transition: all 0.3s;
+
 }
 
-.produto-info img {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-    object-fit: cover;
+.card-item:hover {
+  transform: scale(1.01);
+
 }
 
-.produto-info span {
-    font-size: 12px;
-    color: #94a3b8;
+.card-img {
+  width: 100%;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 18px, rgba(0, 0, 0, 0.22) 0px 10px 8px;
+  overflow: hidden;
 }
 
-/* BADGES */
-.badge {
-    padding: 4px 10px;
-    border-radius: 999px;
-    font-size: 12px;
-    text-transform: capitalize;
+.img-real {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.badge.ferragem {
-    background: rgba(56, 189, 248, 0.15);
-    color: #38bdf8;
+.card-img .badge {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 3px;
+  border-radius: 6px;
+  background: rgb(255, 230, 130);
+
 }
 
-.badge.ferramenta {
-    background: rgba(251, 191, 36, 0.15);
-    color: #fbbf24;
+.card-title {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  color: rgb(0, 0, 0);
 }
 
-/* BOTÕES */
-button {
-    border: none;
-    cursor: pointer;
-    transition: 0.2s;
+.card-subtitle {
+  font-size: 14px;
+  color: rgb(0, 0, 0);
+  flex-grow: 1;
 }
 
-/* BOTÕES PRINCIPAIS */
-.btn-primary {
-    background: #22c55e;
-    color: white;
-    padding: 10px 16px;
-    border-radius: 8px;
+.info-detalhe {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
 }
 
-.btn-primary:hover {
-    background: #16a34a;
+.label {
+  font-weight: 600;
+  color: rgb(0, 0, 0);
 }
 
-.btn-secondary {
-    background: #334155;
-    color: #e2e8f0;
-    padding: 10px 16px;
-    border-radius: 8px;
+.card-divider {
+  width: 100%;
+  margin: 10px 0;
 }
 
-.btn-secondary:hover {
-    background: #475569;
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* AÇÕES */
-.btn-edit {
-    background: #3b82f6;
-    color: white;
-    padding: 6px 10px;
-    border-radius: 6px;
+.card-price {
+  font-size: 20px;
+  font-weight: 700;
+  color: #000000;
 }
 
-.btn-edit:hover {
-    background: #2563eb;
-}
-
-.btn-delete {
-    background: #ef4444;
-    color: white;
-    padding: 6px 10px;
-    border-radius: 6px;
-}
-
-.btn-delete:hover {
-    background: #dc2626;
+.card-price span {
+  font-size: 12px;
+  color: rgb(0, 0, 0);
 }
 
 .acoes {
-    display: flex;
-    gap: 8px;
+  display: flex;
+  gap: 8px;
 }
 
-/* MODAL */
+.card-btn {
+
+  width: 40px;
+  height: 40px;
+  background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.368) 3px 3px 6px 0px inset,
+    rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+  border: none;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  margin: 5px;
+  box-sizing: border-box;
+  transition: all 0.4s ease;
+}
+
+.card-btn .fas {
+  font-size: 16px;
+  background: transparent;
+  color: transparent;
+  transition: all 0.4s ease;
+
+}
+
+.card-btn:hover {
+
+  transform: scale(1.1);
+
+
+}
+
+.btn-edit {
+  border-right: 2px solid #CCFF00;
+  border-bottom: 2px solid #CCFF00;
+  border-radius: 6px;
+}
+
+.btn-delete {
+  border-right: 2px solid #FF3131;
+  border-bottom: 2px solid #FF3131;
+  border-radius: 6px;
+}
+
+.btn-edit .fas {
+  -webkit-text-stroke: 1px #CCFF00;
+  color: transparent;
+
+}
+
+.btn-delete .fas {
+  -webkit-text-stroke: 1px #FF3131;
+  color: transparent;
+
+}
+
+@media (max-width: 768px) {
+  .cards-grid {
+  grid-template-columns: 1fr !important;
+  justify-items: center;
+  }
+}
+
 .modal-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-
-    background: rgba(2, 6, 23, 0.7);
-    backdrop-filter: blur(4px);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999 !important;
+  backdrop-filter: blur(4px);
 }
 
 .modal {
-    background: #1e293b;
-    padding: 24px;
-    border-radius: 12px;
-    width: 400px;
-    color: #e2e8f0;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  background-color: #b1b1b1;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  z-index: 10000 !important;
 }
 
-.form-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 12px;
+.modal h2 {
+  color: #000000;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
 }
 
-.form-grid input,
-.form-grid select {
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #334155;
-    background: #0f172a;
-    color: #e2e8f0;
+.mat-input {
+  position: relative;
+  font-size: 16px;
+  width: 100%;
+}
+
+.mat-input input,
+.mat-input select {
+  width: 100%;
+  box-sizing: border-box;
+  border-width: 0 0 1px;
+  outline: none;
+  background-color: rgba(148, 148, 148, 0.04);
+  border-radius: 4px 4px 0 0;
+  padding: 1.8em 0.75em 0.75em;
+  border-color: #4d4d4d;
+  border-style: solid;
+  font-size: inherit;
+  color: #000000;
+  transition: 0.2s;
+}
+
+.mat-input input:hover,
+.mat-input input:focus,
+.mat-input select:hover,
+.mat-input select:focus {
+  border-bottom-width: 2px;
+  padding-bottom: calc(0.75em - 1px);
+  background-color: rgba(0, 0, 0, 0.07);
+  border-radius: 12px;
+}
+
+.mat-input input:hover,
+.mat-input select:hover {
+  border-color: #000000;
+}
+
+.mat-input input:focus,
+.mat-input select:focus {
+  border-color: rgb(241, 255, 150);
+}
+
+.mat-input label {
+  position: absolute;
+  top: 1.4em;
+  left: 0.8em;
+  pointer-events: none;
+  transition: 0.2s;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.mat-input:has(input:focus) label,
+.mat-input:has(select:focus) label {
+
+  color: rgb(241, 255, 150);
+}
+
+.mat-input:has(input:focus) label,
+.mat-input:not(:has(input:placeholder-shown)) label,
+.mat-input:has(select:focus) label,
+.mat-input:has(select:valid) label {
+  top: 0.5em;
+  font-size: 0.75em;
+}
+
+.mat-input input::placeholder {
+  opacity: 0;
+  transition: 0.2s;
+  color: rgb(241, 255, 150);
+}
+
+.mat-input input:focus::placeholder {
+  opacity: 1;
+}
+
+.mat-select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.mat-select option {
+  background-color: #b1b1b1;
+  color: #000000;
 }
 
 .modal-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.actions-container {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.saveBtn .IconContainer {
+  background: linear-gradient(to bottom, #6366f1, #a855f7);
+}
+
+.xmlBtn .IconContainer {
+  background: linear-gradient(to bottom, #11998e, #38ef7d);
+}
+
+.bookmarkBtn {
+  width: 100px;
+  height: 40px;
+  border-radius: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.349);
+  background-color: rgb(12, 12, 12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  position: relative;
+  padding: 0;
+}
+
+.IconContainer {
+  width: 30px;
+  height: 30px;
+
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 2;
+  transition-duration: 0.3s;
+}
+
+.IconContainer i {
+  color: rgb(0, 0, 0);
+  font-size: 14px;
+}
+
+.saveBtn .IconContainer {
+  background: linear-gradient(to bottom, rgb(186, 186, 186), rgb(220, 220, 220));
+}
+
+.cancelBtn .IconContainer {
+  background: linear-gradient(to bottom, rgb(186, 186, 186), rgb(220, 220, 220));
+}
+
+.text {
+  height: 100%;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 1;
+  transition-duration: 0.3s;
+  font-size: 0.95em;
+  font-weight: 600;
+  margin: 0;
+}
+
+.bookmarkBtn:hover .IconContainer {
+  width: 90px;
+  border-radius: 40px;
+  transition-duration: 0.3s;
+}
+
+.bookmarkBtn:hover .text {
+  transform: translate(10px);
+  width: 0;
+  font-size: 0;
+  opacity: 0;
+  transition-duration: 0.3s;
+}
+
+.bookmarkBtn:active {
+  transform: scale(0.95);
+  transition-duration: 0.3s;
+}
+
+.bookmarkBtn:hover:not(:disabled) .IconContainer {
+  width: 90px;
+  border-radius: 40px;
+}
+
+.bookmarkBtn:hover:not(:disabled) .text {
+  transform: translateX(10px);
+  width: 0;
+  opacity: 0;
+}
+
+.bookmarkBtn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.bookmarkBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(1);
 }
