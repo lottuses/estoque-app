@@ -42,12 +42,13 @@ body {
 
 .search-field {
   flex: 2; 
-  min-width: 200px;
+  
+  width: 500px;
 }
 
 .category-field {
   flex: 1;
-  max-width: 250px;
+  width: 300px;
 }
 
 .filtros label i {
@@ -64,6 +65,7 @@ body {
 .filtros .mat-input input, 
 .filtros .mat-input select {
   color: #000000 !important;
+  width: 300px;
 }
 
 .filtros .mat-input label {
@@ -297,8 +299,11 @@ body {
 
 .mat-input {
   position: relative;
-  font-size: 16px;
-  width: 100%;
+  height: 56px; /* Defina uma altura fixa para o container do input */
+  display: flex;
+  align-items: center;
+  
+  
 }
 
 .mat-input input,
