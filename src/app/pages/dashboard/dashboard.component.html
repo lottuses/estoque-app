@@ -1,57 +1,96 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 
+
+
 <section class="dashboard">
 
-    <aside class="dashboard-sidebar">
-        <div class="sidebar-logo">
+<nav class="navtop">
+  <div class="logos"></div>
+  <ul class="ultop">
+    <li class="litop"><a href="#">Item 1</a></li>
+    <li class="litop"><a href="#">Item 2</a></li>
+    <li class="litop"><a href="#">Item 3</a></li>
+    <li class="litop"><a href="#">Item 4</a></li>
+  </ul>
+</nav>
 
-        </div>
+<header class="headertop">
+  <div class="headline">
+    <div class="inner">
+      <h1>DASHBOARD</h1>
+      <p>Olá</p>
+    </div>
+  </div>
+</header>
+    
+
+    <aside class="dashboard-sidebar">
+        
         <input type="checkbox" id="close">
 
         <label for="close" class="btn-show-nav">
             <i class="fas fa-bars"></i>
         </label>
 
-        <nav>
-            <label for="close" class="btn-hide-nav">
-                <i class="fas fa-times"></i>
-            </label>
-            <a href="/dashboard/estoque" class="nav-brand">CODING</a>
-            <h2>Menu</h2>
-            <ul>
-                <li><a routerLink="/dashboard/infos" routerLinkActive="active"><i
-                            class="fas fa-home"></i>Informações</a></li>
-                <li><a routerLink="/dashboard/estoque" routerLinkActive="active"><i class="fas fa-user"></i>Estoque</a>
-                </li>
-                <li><a routerLink="/dashboard/financeiro" routerLinkActive="active"><i
-                            class="fas fa-cog"></i>Financeiro</a></li>
-                <li><a routerLink="/dashboard/pedidos" routerLinkActive="active"><i
-                            class="fas fa-newspaper"></i>Pedidos</a></li>
-                <li><a routerLink="/dashboard/orcamento" routerLinkActive="active"><i
-                            class="fas fa-phone-alt"></i>Orçamentos</a></li>
-            </ul>
-        </nav>
+        <nav class="sidebar-nav">
+    <label for="close" class="btn-hide-nav">
+        <i class="fas fa-times"></i>
+    </label>
+    
+    <a href="/dashboard/estoque" class="nav-brand">CODING</a>
+    
+    <h2 class="nav-title">Menu</h2>
+    
+    <ul class="nav-list">
+        <li class="nav-item">
+            <a routerLink="/dashboard/infos" routerLinkActive="active" class="nav-link">
+                <i class="fas fa-home"></i>Informações
+            </a>
+        </li>
+        <li class="nav-item">
+            <a routerLink="/dashboard/estoque" routerLinkActive="active" class="nav-link">
+                <i class="fas fa-user"></i>Estoque
+            </a>
+        </li>
+        <li class="nav-item">
+            <a routerLink="/dashboard/financeiro" routerLinkActive="active" class="nav-link">
+                <i class="fas fa-cog"></i>Financeiro
+            </a>
+        </li>
+        <li class="nav-item">
+            <a routerLink="/dashboard/pedidos" routerLinkActive="active" class="nav-link">
+                <i class="fas fa-newspaper"></i>Pedidos
+            </a>
+        </li>
+        <li class="nav-item">
+            <a routerLink="/dashboard/orcamento" routerLinkActive="active" class="nav-link">
+                <i class="fas fa-phone-alt"></i>Orçamentos
+            </a>
+        </li>
+    </ul>
+    
+</nav>
 
         <div class="sidebar-footer">
             <button class="botaosair">Sair</button>
         </div>
     </aside>
 
-    <main class="dashboard-main">
+    <div class="app-container">
 
-        <header class="dashboard-header">
-            <h1>Dashboard</h1>
 
-            <div class="user-info">
-                <span>Olá, Adriano</span>
-            </div>
-        </header>
+    
 
-        <section class="dashboard-content">
-            <router-outlet></router-outlet>
-        </section>
 
-    </main>
 
-</section>
+
+<section class="dashboard-content">
+    
+      <router-outlet></router-outlet>
+    </section>
+
+
+
+<script defer src="dashboard.component.js"></script>
+

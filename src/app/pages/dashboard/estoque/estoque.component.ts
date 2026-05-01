@@ -95,3 +95,4 @@ export class EstoqueComponent implements OnInit {
         this.produtoService.deletar(id);
     }
 }
+

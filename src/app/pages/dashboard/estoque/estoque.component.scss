@@ -1,8 +1,8 @@
-body {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  overflow-y: auto;
+ 
 }
 
 .container {
@@ -17,22 +17,24 @@ body {
 
 }
 
+
+
 .header {
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
   align-items: center;
   padding: 10px;
   gap: 10px;
   background-color: transparent;
   padding-top: 20px;
   margin: 10px;
-  flex-wrap: wrap;
 
 }
 
 .filtros {
   display: grid;
-  align-items: center;
+  flex-wrap: wrap;
   gap: 15px;
   margin: 20px 0;
   padding: 10px;
@@ -40,16 +42,7 @@ body {
   border-radius: 8px;
 }
 
-.search-field {
-  flex: 2; 
-  
-  width: 500px;
-}
 
-.category-field {
-  flex: 1;
-  width: 300px;
-}
 
 .filtros label i {
   margin-right: 8px;
@@ -206,8 +199,8 @@ body {
   width: 40px;
   height: 40px;
   background-color: #ffffff;
-  box-shadow: rgba(0, 0, 0, 0.368) 3px 3px 6px 0px inset,
-    rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+  box-shadow: rgba(0, 0, 0, 0.368) 3px 3px 6px 0px ,
+    rgba(255, 255, 255, 0.5) -3px -3px 6px 1px ;
   border: none;
   border-radius: 12px;
   display: inline-flex;
@@ -236,25 +229,25 @@ body {
 }
 
 .btn-edit {
-  border-right: 2px solid #CCFF00;
-  border-bottom: 2px solid #CCFF00;
+  border-right: 1px solid #000000;
+  border-bottom: 1px solid #000000;
   border-radius: 6px;
 }
 
 .btn-delete {
-  border-right: 2px solid #FF3131;
-  border-bottom: 2px solid #FF3131;
+  border-right: 1px solid #000000;
+  border-bottom: 1px solid #000000;
   border-radius: 6px;
 }
 
 .btn-edit .fas {
-  -webkit-text-stroke: 1px #CCFF00;
+  -webkit-text-stroke: 1px #000000;
   color: transparent;
 
 }
 
 .btn-delete .fas {
-  -webkit-text-stroke: 1px #FF3131;
+  -webkit-text-stroke: 1px #000000;
   color: transparent;
 
 }
@@ -499,4 +492,110 @@ body {
   opacity: 0.5;
   cursor: not-allowed;
   filter: grayscale(1);
+}
+
+
+.header-banner {
+    background-color: #333;
+    background-image: url('https://37.media.tumblr.com/8b4969985e84b2aa1ac8d3449475f1af/tumblr_n3iftvUesn1snvqtdo1_1280.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 300px;
+}
+
+header h1 {
+    background-color: rgba(18,72,120, 0.8);
+    color: #fff;
+    padding: 0 1rem;
+    position: absolute;
+    top: 2rem; 
+    left: 2rem;
+}
+
+.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; 
+}
+
+nav {
+    width: 100%;
+    height: 60px;
+    background: #292f36;
+    position: fixed;
+    z-index: 10;
+}
+
+nav div {
+    color: white;
+    font-size: 2rem;
+    line-height: 60px;
+    position: absolute;
+    top: 0;
+    left: 2%;
+    visibility: hidden;
+}
+.visible-title {
+    visibility: visible;
+}
+
+nav ul { 
+    list-style-type: none;
+    margin: 0 2% auto 0;
+    padding-left: 0;
+    text-align: right;
+    max-width: 100%;
+}
+nav ul li { 
+    display: inline-block; 
+    line-height: 60px;
+    margin-left: 10px;
+}
+nav ul li a {
+    text-decoration: none; 
+    color: #a9abae;
+}
+
+/* demo content */
+body { 
+    color: #292f36;
+    font-family: helvetica;
+    line-height: 1.6;
+}
+
+article {
+    float: left;
+    width: 720px;
+}
+article p:first-of-type {
+    margin-top: 0;
+}
+aside {
+    float: right;
+    width: 120px;
+}
+p img {
+    max-width: 100%;
+}
+
+@media only screen and (max-width: 960px) {
+    .content{ 
+        padding: 2rem 0;
+    }
+    article {
+        float: none;
+        margin: 0 auto;
+        width: 96%;
+    }
+    article:last-of-type {  
+        margin-bottom: 3rem;
+    }
+    aside {  
+        float: none;
+        text-align: center;
+        width: 100%;
+    }
 }
