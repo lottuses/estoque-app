@@ -1,49 +1,52 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject, combineLatest, map, take } from 'rxjs';
 
 import { CarrinhoService } from 'src/app/services/carrinho.service';
 import { ProdutoService } from 'src/app/services/produto.service';
+import { OrcamentoService } from 'src/app/services/orcamento.service';
 
 import { ItemCarrinho } from 'src/app/models/itemCarrinho.model';
 import { Produto } from 'src/app/models/produto.model';
-
-import { BehaviorSubject, combineLatest, map } from 'rxjs';
-
-import { OrcamentoService } from 'src/app/services/orcamento.service';
 import { Orcamento } from 'src/app/models/orcamento.model';
-
-
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-pedidos',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, FormsModule],
     templateUrl: './pedidos.component.html',
     styleUrls: ['./pedidos.component.scss'],
 })
-export class PedidosComponent implements OnInit {
+export class PedidosComponent {
 
-    itens$!: Observable<ItemCarrinho[]>;
-    produtos$!: Observable<Produto[]>;
+    itens$: Observable<ItemCarrinho[]>;
+    produtosFiltrados$: Observable<Produto[]>;
+    total$: Observable<number>;
+    cliente = {
+        nome: '',
+        telefone: '',
+        endereco: ''
+    };
+
     private buscaSubject = new BehaviorSubject<string>('');
-    produtosFiltrados$!: Observable<Produto[]>;
-
 
     constructor(
         private carrinhoService: CarrinhoService,
         private produtoService: ProdutoService,
         private orcamentoService: OrcamentoService
-    ) { }
-
-    ngOnInit() {
+    ) {
 
         this.itens$ = this.carrinhoService.itens$;
 
-        const produtos$ = this.produtoService.listar();
+        this.total$ = this.itens$.pipe(
+            map(itens =>
+                itens.reduce((acc, item) => acc + (item.preco * item.quantidade), 0)
+            )
+        );
 
         this.produtosFiltrados$ = combineLatest([
-            produtos$,
+            this.produtoService.listar(),
             this.buscaSubject
         ]).pipe(
             map(([produtos, busca]) =>
@@ -69,8 +72,12 @@ export class PedidosComponent implements OnInit {
         });
     }
 
-    alterar(item: ItemCarrinho, event: any) {
-        const quantidade = Number(event.target.value);
+    alterar(item: ItemCarrinho, event: Event) {
+        const input = event.target as HTMLInputElement;
+        const quantidade = Number(input.value);
+
+        if (quantidade < 1) return;
+
         this.carrinhoService.alterarQuantidade(item.produtoId, quantidade);
     }
 
@@ -78,37 +85,71 @@ export class PedidosComponent implements OnInit {
         this.carrinhoService.removerItem(item.produtoId);
     }
 
-    get total() {
-        return this.carrinhoService.getTotal();
+    // 🔥 GERAR ORÇAMENTO CORRIGIDO
+    gerarOrcamento() {
+
+        this.itens$.pipe(take(1)).subscribe(itens => {
+
+            if (itens.length === 0) return;
+
+            const itensFormatados = itens.map(item => ({
+                produtoId: item.produtoId,
+                nome: item.nome,
+                preco: item.preco,
+                quantidade: item.quantidade,
+                imagem: item.imagem || null
+            }));
+
+            const subtotal = itens.reduce(
+                (acc, i) => acc + (i.preco * i.quantidade),
+                0
+            );
+
+            const desconto = 0;
+
+            const orcamento: Orcamento = {
+                cliente: {
+                    nome: this.cliente.nome || 'Sem nome',
+                    telefone: this.cliente.telefone || '',
+                    endereco: this.cliente.endereco || null
+                },
+
+                itens: itensFormatados,
+
+                subtotal,
+                desconto,
+                total: subtotal - desconto,
+
+                tipoPagamento: undefined,
+
+                status: 'rascunho',
+
+                dataCriacao: new Date(),
+                dataAtualizacao: new Date()
+            };
+
+            if (!this.cliente.nome.trim()) {
+                alert('Informe o nome do cliente');
+                return;
+            }
+
+            this.orcamentoService.criar(orcamento)
+                .then(() => {
+                    console.log('✅ Orçamento salvo');
+                    this.carrinhoService.limparCarrinho();
+                })
+                .catch(err => console.error(err));
+
+            this.cliente = {
+                nome: '',
+                telefone: '',
+                endereco: ''
+            };
+
+        });
     }
 
-    gerarOrcamento() {
-        const itensCarrinho = this.carrinhoService.getItens();
-
-        if (itensCarrinho.length === 0) return;
-        
-        console.log(itensCarrinho)
-
-        const itens = itensCarrinho.map(item => ({
-            produtoId: item.produtoId,
-            nome: item.nome,
-            preco: item.preco,
-            quantidade: item.quantidade,
-            imagem: item.imagem || null
-        }));
-
-        const orcamento = {
-            itens,
-            total: this.carrinhoService.getTotal(),
-            status: 'rascunho' as const,
-            data: new Date()
-        };
-
-        this.orcamentoService.criar(orcamento)
-            .then(() => {
-                console.log('✅ Orçamento salvo');
-                this.carrinhoService.limparCarrinho();
-            })
-            .catch(err => console.error(err));
+    trackById(index: number, item: any) {
+        return item.id || item.produtoId;
     }
 }

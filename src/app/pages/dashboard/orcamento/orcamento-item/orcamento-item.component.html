@@ -1,0 +1,62 @@
+<div class="container" *ngIf="!carregando">
+
+    <h1>Orçamento</h1>
+
+    <!-- 🔹 CLIENTE -->
+    <div class="card">
+        <h3>Cliente</h3>
+
+        <input [(ngModel)]="orcamento.cliente.nome" placeholder="Nome" />
+        <input [(ngModel)]="orcamento.cliente.telefone" placeholder="Telefone" />
+        <input [(ngModel)]="orcamento.cliente.endereco" placeholder="Endereço" />
+    </div>
+
+    <!-- 🔹 ITENS -->
+    <div class="card">
+        <h3>Itens</h3>
+
+        <div class="item" *ngFor="let item of orcamento.itens; let i = index">
+
+            <div class="info">
+                <strong>{{ item.nome }}</strong>
+                <span>R$ {{ item.preco | number:'1.2-2' }}</span>
+            </div>
+
+            <input type="number" [value]="item.quantidade" (change)="alterarQuantidade(i, $event)" />
+
+            <span>
+                R$ {{ item.preco * item.quantidade | number:'1.2-2' }}
+            </span>
+
+            <button (click)="removerItem(i)">✕</button>
+
+        </div>
+    </div>
+
+    <!-- 🔹 VALORES -->
+    <div class="card">
+
+        <div class="linha">
+            <span>Subtotal</span>
+            <span>R$ {{ orcamento.subtotal | number:'1.2-2' }}</span>
+        </div>
+
+        <div class="linha">
+            <span>Desconto</span>
+            <input type="number" [(ngModel)]="orcamento.desconto" (input)="calcularTotal()" />
+        </div>
+
+        <div class="linha total">
+            <strong>Total</strong>
+            <strong>R$ {{ orcamento.total | number:'1.2-2' }}</strong>
+        </div>
+
+    </div>
+
+    <!-- 🔹 AÇÕES -->
+    <div class="acoes">
+        <button class="btn-salvar" (click)="salvar()">Salvar</button>
+        <button class="btn-finalizar" (click)="finalizar()">Finalizar Venda</button>
+    </div>
+
+</div>

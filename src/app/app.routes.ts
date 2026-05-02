@@ -47,9 +47,20 @@ export const routes: Routes = [
             },
             {
                 path: 'orcamento',
-                loadComponent: () =>
-                    import('./pages/dashboard/orcamento/orcamento.component')
-                        .then(m => m.OrcamentoComponent)
+                children: [
+                    {
+                        path: '',
+                        loadComponent: () =>
+                            import('./pages/dashboard/orcamento/orcamento.component')
+                                .then(m => m.OrcamentoComponent)
+                    },
+                    {
+                        path: ':id',
+                        loadComponent: () =>
+                            import('./pages/dashboard/orcamento/orcamento-item/orcamento-item.component')
+                                .then(m => m.OrcamentoItemComponent)
+                    }
+                ]
             }
         ]
     }

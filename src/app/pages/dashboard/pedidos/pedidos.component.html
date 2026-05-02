@@ -1,80 +1,135 @@
 <section class="dashboard">
 
-<div class="container">
+    <div class="container">
 
-    <!-- 🔹 PRODUTOS -->
-    <div class="card produtos">
-        <h2>Produtos</h2>
-        <input type="text" placeholder="Buscar produto..." class="input-busca"
-            (input)="onBuscar($event.target.value)" />
+        <!-- 🔹 PRODUTOS -->
+        <div class="card produtos">
+            <h2>Produtos</h2>
 
-        <div class="produto" *ngFor="let produto of produtosFiltrados$ | async">
+            <input type="text" placeholder="Buscar produto..." class="input-busca"
+                (input)="onBuscar($any($event.target).value)" />
 
-            <div class="produto-info">
+            <ng-container *ngIf="produtosFiltrados$ | async as produtos; else loadingProdutos">
 
-                <img *ngIf="produto.imagem; else semImagem" [src]="produto.imagem" alt="produto"
-                    class="imagem-produto" />
+                <div *ngIf="produtos.length > 0; else vazioProdutos">
 
-                <ng-template #semImagem>
-                    <div class="sem-imagem">📦</div>
-                </ng-template>
+                    <div class="produto" *ngFor="let produto of produtos; trackBy: trackById">
 
-                <div class="info">
-                    <strong>{{ produto.nome }}</strong>
-                    <span>Estoque: {{ produto.quantidade }}</span>
-                    <span class="preco">R$ {{ produto.preco }}</span>
+                        <div class="produto-info">
+
+                            <ng-container *ngIf="produto.imagem; else semImagemProduto">
+                                <img [src]="produto.imagem" alt="produto" class="imagem-produto" />
+                            </ng-container>
+
+                            <div class="info">
+                                <strong>{{ produto.nome }}</strong>
+                                <span>Estoque: {{ produto.quantidade }}</span>
+                                <span class="preco">
+                                    R$ {{ produto.preco | number:'1.2-2' }}
+                                </span>
+                            </div>
+
+                        </div>
+
+                        <button class="btn-add" (click)="adicionar(produto)" title="Adicionar ao carrinho">
+                            +
+                        </button>
+
+                    </div>
+
                 </div>
 
-            </div>
+            </ng-container>
 
-            <button class="btn-add" (click)="adicionar(produto)">
-                +
-            </button>
+            <ng-template #loadingProdutos>
+                <p class="estado">Carregando produtos...</p>
+            </ng-template>
+
+            <ng-template #vazioProdutos>
+                <p class="estado">Nenhum produto encontrado</p>
+            </ng-template>
 
         </div>
-    </div>
 
-    <!-- 🔹 CARRINHO -->
-    <div class="card carrinho">
-        <h2>Carrinho</h2>
 
-        <div *ngFor="let item of itens$ | async" class="item">
+        <!-- 🔹 CARRINHO -->
+        <div class="card carrinho">
+            <h2>Carrinho</h2>
 
-            <div class="produto-info">
+            <!-- 🔹 DADOS DO CLIENTE -->
+            <div class="cliente-form">
 
-                <img *ngIf="item.imagem; else semImagem" [src]="item.imagem" class="imagem-produto" />
+                <h3>Dados do Cliente</h3>
 
-                <ng-template #semImagem>
-                    <div class="sem-imagem">📦</div>
-                </ng-template>
+                <input type="text" placeholder="Nome do cliente" [(ngModel)]="cliente.nome" />
 
-                <div class="info">
-                    <span class="nome">{{ item.nome }}</span>
-                    <span class="preco">R$ {{ item.preco }}</span>
+                <input type="text" placeholder="Telefone" [(ngModel)]="cliente.telefone" />
+
+                <input type="text" placeholder="Endereço" [(ngModel)]="cliente.endereco" />
+
+            </div>
+
+            <ng-container *ngIf="itens$ | async as itens">
+
+                <div *ngIf="itens.length > 0; else vazioCarrinho">
+
+                    <div class="item" *ngFor="let item of itens; trackBy: trackById">
+
+                        <div class="produto-info">
+
+                            <ng-container *ngIf="item.imagem; else semImagemProduto">
+                                <img [src]="item.imagem" class="imagem-produto" />
+                            </ng-container>
+
+                            <div class="info">
+                                <span class="nome">{{ item.nome }}</span>
+                                <span class="preco">
+                                    R$ {{ item.preco | number:'1.2-2' }}
+                                </span>
+                            </div>
+
+                        </div>
+
+                        <div class="acoes">
+
+                            <input type="number" min="1" [value]="item.quantidade" (change)="alterar(item, $event)" />
+
+                            <span class="subtotal">
+                                R$ {{ (item.preco * item.quantidade) | number:'1.2-2' }}
+                            </span>
+
+                            <button class="btn-remove" (click)="remover(item)" title="Remover item">
+                                ✕
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="total">
+                        Total:
+                        <strong>R$ {{ total$ | async }}</strong>
+                    </div>
+
+                    <button class="btn-finalizar" (click)="gerarOrcamento()">
+                        Gerar Orçamento
+                    </button>
+
                 </div>
 
-            </div>
+            </ng-container>
 
-            <div class="acoes">
-                <input type="number" [value]="item.quantidade" (change)="alterar(item, $event)" />
-
-                <span class="subtotal">
-                    R$ {{ item.preco * item.quantidade }}
-                </span>
-
-                <button class="btn-remove" (click)="remover(item)">✕</button>
-            </div>
+            <ng-template #vazioCarrinho>
+                <p class="estado">Seu carrinho está vazio</p>
+            </ng-template>
 
         </div>
-
-        <div class="total">
-            Total: <strong>R$ {{ total }}</strong>
-        </div>
-
-        <button class="btn-finalizar" (click)="gerarOrcamento()">
-            Gerar Orçamento
-        </button>
 
     </div>
 
-</div>
+    <!-- 🔹 TEMPLATE GLOBAL (reutilizado) -->
+    <ng-template #semImagemProduto>
+        <div class="sem-imagem">📦</div>
+    </ng-template>
+
+</section>
