@@ -1,89 +1,101 @@
-<div class="container">
-
-    <h1 class="page-title">Central de Informações</h1>
-
-    <!-- 📌 Informações Gerais -->
-    <div class="card info">
-        <div class="card-header">
-            <span>📌</span>
-            <h2>Informações Gerais</h2>
-        </div>
-
-        <p>
-            Este sistema foi desenvolvido para facilitar o controle de estoque, vendas e organização geral da empresa.
-        </p>
-
-        <p>
-            Aqui você pode gerenciar produtos, acompanhar movimentações e manter tudo atualizado de forma simples e
+<body>
+<div class="card">
+  <div class="card-icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-collection" viewBox="0 0 16 16"> <path d="M2.5 3.5a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-11zm2-2a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6v7zm1.5.5A.5.5 0 0 1 1 13V6a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-13z"></path> </svg>
+  </div>
+  <p class="p-body">
+    BASE INFO
+  </p>
+  <span class="card-body">
+    Este sistema foi desenvolvido para facilitar o controle de estoque, vendas e organização geral da empresa.
+  </span>
+  <span class="card-body">
+    Aqui você pode gerenciar produtos, acompanhar movimentações e manter tudo atualizado de forma simples e
             rápida.
-        </p>
-
-        <p>
-            Nosso objetivo é reduzir erros, melhorar a produtividade e garantir que todas as informações estejam sempre
-            acessíveis.
-        </p>
-    </div>
-
-    <!-- 📖 Instruções -->
-    <div class="card instructions">
-        <div class="card-header">
-            <span>📖</span>
-            <h2>Instruções de Uso</h2>
-        </div>
-
-        <ul>
-            <li>Utilize o botão <strong>"Novo Produto"</strong> para cadastrar itens.</li>
-            <li>Preencha todas as informações corretamente antes de salvar.</li>
-            <li>Use a opção de edição para atualizar dados.</li>
-            <li>Evite excluir itens sem necessidade.</li>
-            <li>Mantenha os dados sempre atualizados.</li>
+  </span>
+    <span class="card-body">
+     <ul>
+            <li>Não deixe campos em branco.</li>
+            <li>Evite inserir valores incorretos.</li>
+            <li>Revise sempre antes de salvar.</li>
+            <li>Exclusões não podem ser desfeitas.</li>
         </ul>
-
-        <div class="tip">
-            💡 Quanto mais organizado o cadastro, mais fácil será o controle.
-        </div>
-    </div>
-
-    <!-- ⚠️ Avisos -->
-    <div class="card warning">
-        <div class="card-header">
-            <span>⚠️</span>
-            <h2>Avisos Importantes</h2>
-        </div>
-
         <ul>
             <li>Não deixe campos em branco.</li>
             <li>Evite inserir valores incorretos.</li>
             <li>Revise sempre antes de salvar.</li>
             <li>Exclusões não podem ser desfeitas.</li>
         </ul>
-
-        <div class="alert">
-            Erros de cadastro podem impactar diretamente no estoque e financeiro.
-        </div>
-    </div>
-
-    <!-- 🆘 Ajuda -->
-    <div class="card help">
-        <div class="card-header">
-            <span>🆘</span>
-            <h2>Solicitar Ajuda</h2>
-        </div>
-
-        <p>
-            Encontrou algum problema ou tem dúvidas? Envie uma solicitação.
-        </p>
-
-        <textarea [(ngModel)]="mensagemAjuda" placeholder="Descreva o problema com detalhes...">
-    </textarea>
-
-        <button class="btn-primary" (click)="enviarAjuda()" [disabled]="carregando">
-            {{ carregando ? 'Enviando...' : 'Solicitar Ajuda' }}
-        </button>
-
-        <p class="success" *ngIf="mensagemEnviada">
-            ✅ Solicitação enviada com sucesso!
-        </p>
-    </div>
+        <ul>
+            <li>Não deixe campos em branco.</li>
+            <li>Evite inserir valores incorretos.</li>
+            <li>Revise sempre antes de salvar.</li>
+            <li>Exclusões não podem ser desfeitas.</li>
+        </ul>
+        <ul>
+            <li>Não deixe campos em branco.</li>
+            <li>Evite inserir valores incorretos.</li>
+            <li>Revise sempre antes de salvar.</li>
+            <li>Exclusões não podem ser desfeitas.</li>
+        </ul>
+  </span>
+</div>
+<div class="card">
+  <div class="card-icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-collection" viewBox="0 0 16 16"> <path d="M2.5 3.5a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-11zm2-2a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6v7zm1.5.5A.5.5 0 0 1 1 13V6a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-13z"></path> </svg>
+  </div>
+  <p class="p-body">
+    BASE INFO
+  </p>
+  <span class="card-body">
+    Este sistema foi desenvolvido para facilitar o controle de estoque, vendas e organização geral da empresa.
+  </span>
+  <span class="card-body">
+    Aqui você pode gerenciar produtos, acompanhar movimentações e manter tudo atualizado de forma simples e
+            rápida.
+  </span>
+    <span class="card-body">
+    Nosso objetivo é reduzir erros, melhorar a produtividade e garantir que todas as informações estejam sempre
+            acessíveis.
+  </span>
+</div>
+<div class="card">
+  <div class="card-icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-collection" viewBox="0 0 16 16"> <path d="M2.5 3.5a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-11zm2-2a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6v7zm1.5.5A.5.5 0 0 1 1 13V6a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-13z"></path> </svg>
+  </div>
+  <p class="p-body">
+    BASE INFO
+  </p>
+  <span class="card-body">
+    Este sistema foi desenvolvido para facilitar o controle de estoque, vendas e organização geral da empresa.
+  </span>
+  <span class="card-body">
+    Aqui você pode gerenciar produtos, acompanhar movimentações e manter tudo atualizado de forma simples e
+            rápida.
+  </span>
+    <span class="card-body">
+    Nosso objetivo é reduzir erros, melhorar a produtividade e garantir que todas as informações estejam sempre
+            acessíveis.
+  </span>
+</div>
+<div class="card">
+  <div class="card-icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-collection" viewBox="0 0 16 16"> <path d="M2.5 3.5a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-11zm2-2a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6v7zm1.5.5A.5.5 0 0 1 1 13V6a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-13z"></path> </svg>
+  </div>
+  <p class="p-body">
+    BASE INFO
+  </p>
+  <span class="card-body">
+    Este sistema foi desenvolvido para facilitar o controle de estoque, vendas e organização geral da empresa.
+  </span>
+  <span class="card-body">
+    Aqui você pode gerenciar produtos, acompanhar movimentações e manter tudo atualizado de forma simples e
+            rápida.
+  </span>
+    <span class="card-body">
+    Nosso objetivo é reduzir erros, melhorar a produtividade e garantir que todas as informações estejam sempre
+            acessíveis.
+  </span>
 
 </div>
+</body>
