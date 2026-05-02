@@ -109,12 +109,13 @@ label {
 
 .card-item {
 
-  background-color: #161616;
+  
   color: rgb(214, 214, 214);
   box-sizing: border-box;
-  box-shadow: rgba(0, 0, 0, 0.368) 3px 3px 6px 0px inset, rgba(0, 0, 0, 0.5) -3px -3px 6px 1px inset;
-  border-right: 4px solid rgba(0, 0, 0, 0.876);
-  border-bottom: 4px solid rgba(0, 0, 0, 0.876);
+  background-color: #212121;
+  box-shadow: 5px 5px 15px rgb(8, 8, 8),
+             -5px -5px 15px rgb(35, 35, 35);
+  
   width: 250px;
   min-height: 320px;
   border-radius: 5px;
@@ -135,7 +136,8 @@ label {
   align-items: center;
   position: relative;
   border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 18px, rgba(0, 0, 0, 0.22) 0px 10px 8px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.417),
+             -5px -5px 15px rgba(0, 0, 0, 0.419);
   overflow: hidden;
 }
 
@@ -245,18 +247,20 @@ label {
 .btn-edit {
 
   border: none;
-  box-shadow: rgba(0, 0, 0, 0.368) 3px 3px 6px 0px inset, rgba(0, 0, 0, 0.5) -3px -3px 6px 1px inset;
-  border-right: 3px solid rgba(0, 0, 0, 0.876);
-  border-bottom: 3px solid rgba(0, 0, 0, 0.876);
+  z-index: 100;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.628),
+             -5px -5px 15px rgba(0, 0, 0, 0.628);
+  
 
 }
 
 .btn-delete {
 
   border: none;
-  box-shadow: rgba(0, 0, 0, 0.368) 3px 3px 6px 0px inset, rgba(0, 0, 0, 0.5) -3px -3px 6px 1px inset;
-  border-right: 3px solid rgba(0, 0, 0, 0.876);
-  border-bottom: 3px solid rgba(0, 0, 0, 0.876);
+  z-index: 100;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.628),
+             -5px -5px 15px rgba(0, 0, 0, 0.628);
+  
 }
 
 .btn-edit .fas {
