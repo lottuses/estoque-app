@@ -93,12 +93,17 @@
 }
 
 .headline {
+    display: flex;
     position: relative;
-    height: 200px;
+    height: 400px;
+    position: relative;
     color: #fff;
     font-family: arial;
     text-align: center;
-    background: url('https://farm9.staticflickr.com/8088/8363737128_b76782c7a2_b.jpg') no-repeat center center;
+    background-image: url(src/assets/images/mountain.jpg);
+    background-position: 50% 100%;
+    background-repeat: no repeat;
+    background-attachment: fixed;
     background-size: cover;
     display: flex;
     align-items: center;
@@ -113,6 +118,14 @@
         inset: 0;
         background: rgba(17, 17, 17, 0.5);
         z-index: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .headline {
+        
+        background-attachment: scroll;
+        background-position: 50% 100%; 
     }
 }
 
