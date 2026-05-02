@@ -28,7 +28,7 @@ export class ProdutoService {
     adicionar(produto: Produto) {
         const novoProduto = {
             ...produto,
-            quantidade: produto.quantidade ?? 0, // 🔥 garante valor inicial
+            quantidade: produto.quantidade ?? 0,
             criadoEm: new Date(),
             atualizadoEm: new Date()
         };
@@ -50,31 +50,42 @@ export class ProdutoService {
         return deleteDoc(docRef);
     }
 
-    // 🚀 NOVA FUNÇÃO — atualização segura de estoque
-    atualizarEstoque(id: string, quantidadeDelta: number) {
+    // 🔥 FUNÇÃO BASE (privada)
+    private async atualizarEstoque(id: string, delta: number) {
         const docRef = doc(this.firestore, `produtos/${id}`);
 
         return runTransaction(this.firestore, async (transaction) => {
-            const docSnap = await transaction.get(docRef);
+            const snap = await transaction.get(docRef);
 
-            if (!docSnap.exists()) {
+            if (!snap.exists()) {
                 throw new Error('Produto não encontrado');
             }
 
-            const data = docSnap.data() as Produto;
+            const data = snap.data() as Produto;
 
-            const quantidadeAtual = data.quantidade ?? 0;
-            const novaQuantidade = quantidadeAtual + quantidadeDelta;
+            const atual = data.quantidade ?? 0;
+            const novo = atual + delta;
 
-            // 🔥 REGRA DE NEGÓCIO
-            if (novaQuantidade < 0) {
-                throw new Error('Estoque não pode ficar negativo');
+            if (novo < 0) {
+                throw new Error(`Estoque insuficiente para ${data.nome}`);
             }
 
             transaction.update(docRef, {
-                quantidade: novaQuantidade,
+                quantidade: novo,
                 atualizadoEm: new Date()
             });
         });
+    }
+
+    // ✅ ENTRADA DE ESTOQUE
+    adicionarEstoque(id: string, quantidade: number) {
+        if (quantidade <= 0) return;
+        return this.atualizarEstoque(id, quantidade);
+    }
+
+    // 🔥 SAÍDA DE ESTOQUE (VENDA)
+    baixarEstoque(id: string, quantidade: number) {
+        if (quantidade <= 0) return;
+        return this.atualizarEstoque(id, -quantidade);
     }
 }

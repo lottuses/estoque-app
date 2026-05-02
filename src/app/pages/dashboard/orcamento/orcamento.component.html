@@ -2,59 +2,121 @@
 
     <h1>Orçamentos</h1>
 
-    <div *ngIf="(orcamentos$ | async)?.length === 0" class="vazio">
-        Nenhum orçamento encontrado
-    </div>
+    <ng-container *ngIf="orcamentos$ | async as orcamentos">
 
-    <div class="orcamento-card" *ngFor="let orc of orcamentos$ | async">
-
-        <!-- HEADER -->
-        <div class="header">
-            <span class="data">
-                {{ orc.data | date:'dd/MM/yyyy HH:mm' }}
-            </span>
-
-            <span class="status" [ngClass]="orc.status">
-                {{ orc.status }}
-            </span>
+        <!-- VAZIO -->
+        <div *ngIf="orcamentos.length === 0" class="vazio">
+            Nenhum orçamento encontrado
         </div>
 
-        <!-- ITENS -->
-        <div class="itens">
-            <div class="item" *ngFor="let item of orc.itens">
+        <!-- LISTA -->
+        <div class="orcamento-card" *ngFor="let orc of orcamentos; trackBy: trackByOrcamento"
+            (click)="abrirOrcamento(orc)">
 
-                <img *ngIf="item.imagem" [src]="item.imagem" />
+            <!-- 🔹 HEADER -->
+            <div class="header">
 
-                <div class="info">
-                    <strong>{{ item.nome }}</strong>
-                    <span>{{ item.quantidade }} x R$ {{ item.preco }}</span>
+                <div class="cliente">
+                    <strong>{{ orc.cliente.nome || 'Sem cliente' }}</strong>
+
+                    <span class="data">
+                        {{ orc.dataCriacao | date:'dd/MM/yyyy HH:mm' }}
+                    </span>
                 </div>
 
-                <div class="subtotal">
-                    R$ {{ item.preco * item.quantidade }}
+                <span class="status" [ngClass]="orc.status">
+                    {{ orc.status }}
+                </span>
+
+            </div>
+
+            <!-- 🔹 INFO EXTRA -->
+            <div class="info-extra">
+
+                <span *ngIf="orc.tipoPagamento">
+                    💳 {{ orc.tipoPagamento }}
+                </span>
+
+                <span *ngIf="orc.desconto">
+                    🔻 Desconto:
+                    R$ {{ orc.desconto | number:'1.2-2' }}
+                </span>
+
+            </div>
+
+            <!-- 🔹 ITENS -->
+            <div class="itens">
+
+                <div class="item" *ngFor="let item of orc.itens; trackBy: trackByItem">
+
+                    <ng-container *ngIf="item.imagem; else semImagem">
+                        <img [src]="item.imagem" />
+                    </ng-container>
+
+                    <div class="info">
+                        <strong>{{ item.nome }}</strong>
+
+                        <span>
+                            {{ item.quantidade }} x
+                            R$ {{ item.preco | number:'1.2-2' }}
+                        </span>
+                    </div>
+
+                    <div class="subtotal">
+                        R$ {{ (item.preco * item.quantidade) | number:'1.2-2' }}
+                    </div>
+
                 </div>
 
             </div>
+
+            <!-- 🔹 TOTAL -->
+            <div class="total">
+
+                <div class="linha" *ngIf="orc.desconto">
+                    <span>Subtotal</span>
+                    <span>
+                        R$ {{ (orc.total + orc.desconto) | number:'1.2-2' }}
+                    </span>
+                </div>
+
+                <div class="linha" *ngIf="orc.desconto">
+                    <span>Desconto</span>
+                    <span class="desconto">
+                        - R$ {{ orc.desconto | number:'1.2-2' }}
+                    </span>
+                </div>
+
+                <div class="linha final">
+                    <span>Total</span>
+                    <strong>
+                        R$ {{ orc.total | number:'1.2-2' }}
+                    </strong>
+                </div>
+
+            </div>
+
+            <!-- 🔹 AÇÕES -->
+            <div class="acoes">
+
+                <button class="btn-aprovar" *ngIf="orc.status !== 'aprovado'"
+                    (click)="aprovar(orc); $event.stopPropagation()">
+                    Aprovar
+                </button>
+
+                <button class="btn-excluir" (click)="excluir(orc.id); $event.stopPropagation()">
+                    Excluir
+                </button>
+
+            </div>
+
         </div>
 
-        <!-- TOTAL -->
-        <div class="total">
-            Total: <strong>R$ {{ orc.total }}</strong>
-        </div>
+    </ng-container>
 
-        <!-- AÇÕES -->
-        <div class="acoes">
-
-            <button class="btn-aprovar" *ngIf="orc.status !== 'aprovado'" (click)="aprovar(orc)">
-                Aprovar
-            </button>
-
-            <button class="btn-excluir" (click)="excluir(orc.id)">
-                Excluir
-            </button>
-
-        </div>
-
-    </div>
+    <!-- 🔹 TEMPLATE GLOBAL -->
+    <ng-template #semImagem>
+        <div class="sem-imagem">📦</div>
+    </ng-template>
 
 </div>

@@ -1,0 +1,66 @@
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #e2e8f0;
+}
+
+.card {
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 16px;
+    margin-bottom: 15px;
+}
+
+input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    background: #0f172a;
+    color: white;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.info {
+    flex: 1;
+}
+
+.linha {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.total {
+    font-size: 18px;
+}
+
+.acoes {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn-salvar {
+    background: #3b82f6;
+    color: white;
+}
+
+.btn-finalizar {
+    background: #22c55e;
+    color: white;
+}

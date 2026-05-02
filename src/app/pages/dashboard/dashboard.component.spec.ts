@@ -24,11 +24,14 @@ describe('DashboardComponent', () => {
 });
 
 import { Component, HostListener, Renderer2 } from '@angular/core';
+import { RouterOutlet } from "@angular/router";
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'] // Certifique-se de que o CSS está aqui ou no styles.global.css
+  ,
+  imports: [RouterOutlet]
 })
 export class DashboardComponent {
 
