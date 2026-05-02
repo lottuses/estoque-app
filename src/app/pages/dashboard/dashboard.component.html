@@ -5,28 +5,45 @@
 
 <section class="dashboard">
 
+   
+   
+
+    <header class="headertop">
+
+
+        <div class="headline">
+
+
+            <div class="inner">
+
+
+                <h1>DASHBOARD</h1>
+                <p>Olá</p>
+            </div>
+        </div>
+
+
+    </header>
 <nav class="navtop">
   <div class="logos"></div>
-  <ul class="ultop">
-    <li class="litop"><a href="#">Item 1</a></li>
-    <li class="litop"><a href="#">Item 2</a></li>
-    <li class="litop"><a href="#">Item 3</a></li>
-    <li class="litop"><a href="#">Item 4</a></li>
-  </ul>
+  
+  <a href="#" class="cta">
+    <span class="hover-underline-animation"> Página 1 </span>
+    <svg id="arrow-horizontal" xmlns="http://www.w3.org/2000/svg" width="30" height="10" viewBox="0 0 46 16">
+      <path id="Path_10" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" transform="translate(30)"></path>
+    </svg>
+  </a>
+
+  <a href="#" class="cta">
+    <span class="hover-underline-animation"> Página 2 </span>
+    <svg id="arrow-horizontal" xmlns="http://www.w3.org/2000/svg" width="30" height="10" viewBox="0 0 46 16">
+      <path id="Path_10" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" transform="translate(30)"></path>
+    </svg>
+  </a>
 </nav>
 
-<header class="headertop">
-  <div class="headline">
-    <div class="inner">
-      <h1>DASHBOARD</h1>
-      <p>Olá</p>
-    </div>
-  </div>
-</header>
-    
-
     <aside class="dashboard-sidebar">
-        
+
         <input type="checkbox" id="close">
 
         <label for="close" class="btn-show-nav">
@@ -34,43 +51,43 @@
         </label>
 
         <nav class="sidebar-nav">
-    <label for="close" class="btn-hide-nav">
-        <i class="fas fa-times"></i>
-    </label>
-    
-    <a href="/dashboard/estoque" class="nav-brand">CODING</a>
-    
-    <h2 class="nav-title">Menu</h2>
-    
-    <ul class="nav-list">
-        <li class="nav-item">
-            <a routerLink="/dashboard/infos" routerLinkActive="active" class="nav-link">
-                <i class="fas fa-home"></i>Informações
-            </a>
-        </li>
-        <li class="nav-item">
-            <a routerLink="/dashboard/estoque" routerLinkActive="active" class="nav-link">
-                <i class="fas fa-user"></i>Estoque
-            </a>
-        </li>
-        <li class="nav-item">
-            <a routerLink="/dashboard/financeiro" routerLinkActive="active" class="nav-link">
-                <i class="fas fa-cog"></i>Financeiro
-            </a>
-        </li>
-        <li class="nav-item">
-            <a routerLink="/dashboard/pedidos" routerLinkActive="active" class="nav-link">
-                <i class="fas fa-newspaper"></i>Pedidos
-            </a>
-        </li>
-        <li class="nav-item">
-            <a routerLink="/dashboard/orcamento" routerLinkActive="active" class="nav-link">
-                <i class="fas fa-phone-alt"></i>Orçamentos
-            </a>
-        </li>
-    </ul>
-    
-</nav>
+            <label for="close" class="btn-hide-nav">
+                <i class="fas fa-times"></i>
+            </label>
+
+            <a href="/dashboard/estoque" class="nav-brand">Gerenciamento de estoque.</a>
+
+            <h2 class="nav-title">Menu</h2>
+
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a routerLink="/dashboard/infos" routerLinkActive="active" class="nav-link">
+                        <i class="fas fa-home"></i>Informações
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a routerLink="/dashboard/estoque" routerLinkActive="active" class="nav-link">
+                        <i class="fas fa-user"></i>Estoque
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a routerLink="/dashboard/financeiro" routerLinkActive="active" class="nav-link">
+                        <i class="fas fa-cog"></i>Financeiro
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a routerLink="/dashboard/pedidos" routerLinkActive="active" class="nav-link">
+                        <i class="fas fa-newspaper"></i>Pedidos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a routerLink="/dashboard/orcamento" routerLinkActive="active" class="nav-link">
+                        <i class="fas fa-phone-alt"></i>Orçamentos
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
 
         <div class="sidebar-footer">
             <button class="botaosair">Sair</button>
@@ -78,19 +95,11 @@
     </aside>
 
     <div class="app-container">
-
-
     
 
-
-
-
-<section class="dashboard-content">
-    
-      <router-outlet></router-outlet>
-    </section>
-
-
-
-<script defer src="dashboard.component.js"></script>
-
+        <div class="dashboard-content">
+            
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</section>
