@@ -28,7 +28,9 @@ export class OrcamentoComponent {
                 orcamentos
                     .map(o => ({
                         ...o,
-                        dataCriacao: this.converterData(o.dataCriacao)
+                        dataCriacao: this.converterData(o.dataCriacao),
+                        dataAtualizacao: this.converterData(o.dataAtualizacao),
+                        dataFinalizacao: this.converterData(o.dataFinalizacao)
                     }))
                     .sort((a, b) => this.ordenarPorData(a, b))
             )
@@ -56,17 +58,19 @@ export class OrcamentoComponent {
         if (!data) return new Date();
 
         // Firestore Timestamp
-        if (typeof data.toDate === 'function') {
+        if (data?.toDate) {
             return data.toDate();
         }
 
-        // Já é Date
-        if (data instanceof Date) {
+        // Já é Date válida
+        if (data instanceof Date && !isNaN(data.getTime())) {
             return data;
         }
 
         // String ou número
-        return new Date(data);
+        const parsed = new Date(data);
+
+        return isNaN(parsed.getTime()) ? new Date() : parsed;
     }
 
     // 🔹 Aprovar
