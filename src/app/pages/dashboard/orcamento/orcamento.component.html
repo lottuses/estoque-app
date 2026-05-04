@@ -15,20 +15,21 @@
 
             <!-- 🔹 HEADER -->
             <div class="header">
+    <div class="cliente">
+        <!-- Nome do Cliente -->
+        <strong>{{ orc.cliente?.nome || 'Sem cliente' }}</strong>
 
-                <div class="cliente">
-                    <strong>{{ orc.cliente.nome || 'Sem cliente' }}</strong>
+        <!-- Data logo abaixo do nome -->
+        <span class="data">
+            {{ orc.dataCriacao | date:'dd/MM/yyyy HH:mm' }}
+        </span>
 
-                    <span class="data">
-                        {{ orc.dataCriacao | date:'dd/MM/yyyy HH:mm' }}
-                    </span>
-                </div>
-
-                <span class="status" [ngClass]="orc.status">
-                    {{ orc.status }}
-                </span>
-
-            </div>
+        <!-- Status dentro do fluxo centralizado -->
+        <span class="status" [ngClass]="orc.status">
+            {{ orc.status }}
+        </span>
+    </div>
+</div>
 
             <!-- 🔹 INFO EXTRA -->
             <div class="info-extra">
@@ -97,22 +98,24 @@
             </div>
 
             <!-- 🔹 AÇÕES -->
-            <div class="acoes">
+           <div class="acoes">
 
-                <button class="btn-aprovar" *ngIf="orc.status !== 'aprovado'"
-                    (click)="aprovar(orc); $event.stopPropagation()">
-                    Aprovar
-                </button>
+    <button class="aprovar" *ngIf="orc.status !== 'aprovado'"
+    (click)="aprovar(orc); $event.stopPropagation()">
+    <svg viewBox="0 0 24 24" class="svgaprovar">
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path>
+</svg>
+</button>
 
-                <button class="btn-excluir" (click)="excluir(orc.id); $event.stopPropagation()">
-                    Excluir
-                </button>
+    <button class="excluir" (click)="excluir(orc.id); $event.stopPropagation()">
+    <svg viewBox="0 0 448 512" class="svgexcluir">
+        <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path>
+    </svg>
+</button>
 
-            </div>
+</div>
 
-        </div>
 
-    </ng-container>
 
     <!-- 🔹 TEMPLATE GLOBAL -->
     <ng-template #semImagem>
