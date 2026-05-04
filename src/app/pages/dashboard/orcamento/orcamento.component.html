@@ -33,69 +33,68 @@
 
             <!-- 🔹 INFO EXTRA -->
             <div class="info-extra">
+    <span *ngIf="orc.tipoPagamento" class="pagamento">
+        💳 {{ orc.tipoPagamento }}
+    </span>
 
-                <span *ngIf="orc.tipoPagamento">
-                    💳 {{ orc.tipoPagamento }}
-                </span>
-
-                <span *ngIf="orc.desconto">
-                    🔻 Desconto:
-                    R$ {{ orc.desconto | number:'1.2-2' }}
-                </span>
-
-            </div>
+    <span *ngIf="orc.desconto" class="valor-desconto">
+        🔻 Desconto:
+        <strong class="preco-extra">
+            <span class="moeda">R$</span> {{ orc.desconto | number:'1.2-2' }}
+        </strong>
+    </span>
+</div>
 
             <!-- 🔹 ITENS -->
             <div class="itens">
+    <div class="item" *ngFor="let item of orc.itens; trackBy: trackByItem">
 
-                <div class="item" *ngFor="let item of orc.itens; trackBy: trackByItem">
+        <ng-container *ngIf="item.imagem; else semImagem">
+            <img [src]="item.imagem" />
+        </ng-container>
 
-                    <ng-container *ngIf="item.imagem; else semImagem">
-                        <img [src]="item.imagem" />
-                    </ng-container>
+        <div class="info">
+            <strong>{{ item.nome }}</strong>
 
-                    <div class="info">
-                        <strong>{{ item.nome }}</strong>
+            <span>
+                {{ item.quantidade }} x 
+                <span class="moeda">R$</span> {{ item.preco | number:'1.2-2' }}
+            </span>
+        </div>
 
-                        <span>
-                            {{ item.quantidade }} x
-                            R$ {{ item.preco | number:'1.2-2' }}
-                        </span>
-                    </div>
+        <div class="subtotal">
+            <span class="moeda">R$</span> {{ (item.preco * item.quantidade) | number:'1.2-2' }}
+        </div>
 
-                    <div class="subtotal">
-                        R$ {{ (item.preco * item.quantidade) | number:'1.2-2' }}
-                    </div>
-
-                </div>
-
-            </div>
+    </div>
+</div>
 
             <!-- 🔹 TOTAL -->
             <div class="total">
+    <!-- Subtotal -->
+    <div class="linha" *ngIf="orc.desconto">
+        <span>Subtotal</span>
+        <span class="valor-secundario">
+            <span class="moeda">R$</span> {{ (orc.total + orc.desconto) | number:'1.2-2' }}
+        </span>
+    </div>
 
-                <div class="linha" *ngIf="orc.desconto">
-                    <span>Subtotal</span>
-                    <span>
-                        R$ {{ (orc.total + orc.desconto) | number:'1.2-2' }}
-                    </span>
-                </div>
+    <!-- Desconto -->
+    <div class="linha" *ngIf="orc.desconto">
+        <span>Desconto</span>
+        <span class="valor-secundario desconto">
+            - <span class="moeda">R$</span> {{ orc.desconto | number:'1.2-2' }}
+        </span>
+    </div>
 
-                <div class="linha" *ngIf="orc.desconto">
-                    <span>Desconto</span>
-                    <span class="desconto">
-                        - R$ {{ orc.desconto | number:'1.2-2' }}
-                    </span>
-                </div>
-
-                <div class="linha final">
-                    <span>Total</span>
-                    <strong>
-                        R$ {{ orc.total | number:'1.2-2' }}
-                    </strong>
-                </div>
-
-            </div>
+    <!-- Total Final -->
+    <div class="linha final">
+        <span>Total</span>
+        <strong>
+            <span class="moeda-total">R$</span> {{ orc.total | number:'1.2-2' }}
+        </strong>
+    </div>
+</div>
 
             <!-- 🔹 AÇÕES -->
            <div class="acoes">

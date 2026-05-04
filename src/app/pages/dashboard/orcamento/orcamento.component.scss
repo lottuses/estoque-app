@@ -10,7 +10,6 @@
         margin-bottom: 30px;
         text-transform: uppercase;
         letter-spacing: 1px;
-        border-left: 4px solid rgb(241, 255, 150);
         padding-left: 15px;
     }
 }
@@ -21,70 +20,73 @@
     padding: 50px;
     background: #1a1a1a;
     border-radius: 8px;
-    border: 1px dashed #333;
+
 }
 
 .orcamento-card {
     background: #0c0c0c;
-    border: 1px solid #222;
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
+    color: rgb(212, 207, 176);
 
     &:hover {
 
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        box-shadow: 10px 10px 30px rgb(8, 8, 8),
+            -10px -10px 30px rgb(23, 23, 23);
+
     }
 
     .header {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    width: 100%;
-    padding-bottom: 20px;
-
-    .cliente {
         display: flex;
-        flex-direction: column;
+        justify-content: center;
         align-items: center;
-        text-align: center;
+        width: 100%;
+        padding: 10px 0 30px;
+        position: relative;
+        min-height: 80px;
 
-        strong {
-            color: #cacaca;
-            font-size: 2.0rem;
-            margin-bottom: 4px;
+        .cliente {
+            strong {
+                color: #cacaca;
+                font-size: 2.0rem;
+                text-align: center;
+                text-transform: capitalize;
+            }
         }
 
         .data {
+            position: absolute;
+            left: 0;
+            top: 0;
             color: #fff86f;
-            font-size: 0.85rem;
-            display: block;
-            margin-bottom: 12px;
+            font-size: 1.0rem;
+            font-weight: 500;
         }
 
         .status {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 1.0rem;
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 1.05rem;
             font-weight: bold;
             text-transform: uppercase;
-            background: rgb(11, 11, 11);
-            
+
             &.aprovado {
-                background: rgba(46, 204, 113, 0.15);
-                color: #2ecc71;
-                border: 1px solid #2ecc71;
+
+                color: #00ffae;
+
             }
-            
-            &.pendente {
-                background: rgba(241, 196, 15, 0.1);
-                color: #f1c40f;
-                border: 1px solid #f1c40f;
+
+            &.pendente,
+            &.rascunho {
+
+                color: #ffe787;
+
             }
         }
-    }
     }
 
     .info-extra {
@@ -92,17 +94,42 @@
         gap: 20px;
         margin-bottom: 15px;
         font-size: 0.9rem;
-        color: #aaa;
+        color: #b9b9b9;
+        align-items: center;
 
-        span {
+        .valor-desconto {
             display: flex;
             align-items: center;
             gap: 5px;
+
+            span {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+
+                span.moeda {
+                    color: rgba(255, 69, 69, 0.6);
+                    font-size: 0.65rem;
+                    font-weight: 600;
+                    margin-top: 2px;
+                }
+
+            }
         }
     }
 
+    .preco-extra {
+        display: inline-flex;
+        align-items: flex-start;
+        gap: 2px;
+        color: #ff4545;
+        font-weight: bold;
+        font-size: 1.2rem;
+        line-height: 1;
+    }
+
     .itens {
-        background: #0a0a0a;
+        background: #050505;
         border-radius: 6px;
         padding: 10px;
         margin-bottom: 15px;
@@ -134,65 +161,114 @@
                 flex: 1;
                 display: flex;
                 flex-direction: column;
+                align-items: flex-start;
+                gap: 2px;
 
                 strong {
-                    color: #ddd;
-                    font-size: 0.95rem;
+                    color: #dddcdd;
+                    font-size: 0.8rem;
                 }
 
                 span {
-                    color: #666;
-                    font-size: 0.85rem;
+                    color: #d0d0d0;
+                    font-size: 0.8rem;
+
+                    span.moeda {
+
+                        color: rgb(241, 255, 150);
+                        font-size: 0.8rem;
+                        font-weight: bold;
+
+                    }
+
                 }
             }
 
             .subtotal {
-                color: #fff;
+                color: #c1c2be;
                 font-weight: bold;
-                font-size: 0.95rem;
+                font-size: 1.3rem;
+                line-height: 1;
+                display: flex;
+                align-items: flex-start;
+                gap: 2px;
+
+                .moeda {
+                    color: rgb(241, 255, 150);
+                    font-size: 0.7rem;
+                    font-weight: normal;
+                    margin-top: 1px;
+                }
             }
         }
     }
 
-    // --- TOTAL ---
     .total {
-
-        padding-top: 15px;
         display: flex;
         flex-direction: column;
         align-items: flex-end;
-        gap: 5px;
+        gap: 8px;
+        padding-top: 20px;
 
         .linha {
             display: flex;
             justify-content: space-between;
-            width: 250px;
+            width: 100%;
             color: #888;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
 
-            &.final {
-                margin-top: 10px;
-                color: #fff;
-                font-size: 1.1rem;
+            .valor-secundario {
+                display: inline-flex;
+                align-items: flex-start;
+                gap: 2px;
+                color: #ddd;
+                font-weight: 600;
 
-                strong {
-                    color: rgb(241, 255, 150);
-                    font-size: 1.3rem;
+                .moeda {
+                    color: #555;
+                    font-size: 0.7rem;
+                    margin-top: 2px;
+                }
+
+                &.desconto {
+                    color: #ff4545;
+
+                    .moeda {
+                        color: rgba(255, 69, 69, 0.5);
+                    }
                 }
             }
 
-            .desconto {
-                color: #ff4545;
+            &.final {
+                margin-top: 15px;
+                padding-top: 15px;
+                border-top: 1px solid #333;
+
+                strong {
+                    color: #cfd3d3;
+                    font-size: 2.2rem;
+                    font-weight: 800;
+                    line-height: 1;
+                    display: inline-flex;
+                    align-items: flex-start;
+                    gap: 3px;
+
+                    .moeda-total {
+                        color: rgb(241, 255, 150);
+                        font-size: 1rem;
+                        font-weight: 700;
+                        margin-top: 6px;
+                    }
+                }
             }
         }
     }
 
-    // --- AÇÕES ---
     .acoes {
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-        gap: 20px !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
         margin-top: 25px;
         padding-top: 20px;
         width: 100%;
@@ -228,7 +304,7 @@
             width: 140px;
             border-radius: 50px;
             transition-duration: .3s;
-            background-color: rgb(255, 69, 69);
+            background-color: rgba(147, 255, 143, 0.738);
             align-items: center;
         }
 
@@ -287,7 +363,7 @@
     width: 140px;
     border-radius: 50px;
     transition-duration: .3s;
-    background-color: rgb(255, 69, 69);
+    background-color: rgba(255, 50, 50, 0.738);
     align-items: center;
 }
 

@@ -56,15 +56,15 @@ export class OrcamentoItemComponent implements OnInit {
         this.orcamento.total = subtotal - (this.orcamento.desconto || 0);
     }
 
-    alterarQuantidade(index: number, event: Event) {
-        const input = event.target as HTMLInputElement;
-        const quantidade = Number(input.value);
+    alterarQuantidade(index: number, mudanca: number) {
+    const item = this.orcamento.itens[index];
+    const novaQuantidade = item.quantidade + mudanca;
 
-        if (quantidade < 1) return;
-
-        this.orcamento.itens[index].quantidade = quantidade;
-        this.calcularTotal();
+    // Garante que a quantidade não seja menor que 1
+    if (novaQuantidade >= 1) {
+        item.quantidade = novaQuantidade;
     }
+}
 
     removerItem(index: number) {
         this.orcamento.itens.splice(index, 1);

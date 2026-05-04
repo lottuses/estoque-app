@@ -96,6 +96,7 @@ p {
     background-color: rgba(255, 255, 255, 0.07);
     border-color: rgb(241, 255, 150);
     border-bottom-width: 4px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     
 }
 
@@ -364,18 +365,6 @@ button {
         flex-shrink: 0;
         margin-left: 5px;
         color: rgb(210, 210, 210);
-    }
-}
-
-.mat-input {
-    position: relative;
-    margin-top: 20px;
-    background-color: rgba(255, 255, 255, 0.04);
-    border-radius: 4px 4px 0 0;
-    transition: background-color 0.2s;
-
-    &:hover {
-        background-color: rgba(255, 255, 255, 0.07);
     }
 }
 
