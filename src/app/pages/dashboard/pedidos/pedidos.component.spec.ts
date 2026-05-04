@@ -22,3 +22,4 @@ describe('PedidosComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

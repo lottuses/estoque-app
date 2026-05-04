@@ -20,6 +20,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class PedidosComponent {
 
+    
+
     itens$: Observable<ItemCarrinho[]>;
     produtosFiltrados$: Observable<Produto[]>;
     total$: Observable<number>;
@@ -35,7 +37,12 @@ export class PedidosComponent {
         private carrinhoService: CarrinhoService,
         private produtoService: ProdutoService,
         private orcamentoService: OrcamentoService
+
+        
     ) {
+
+
+        
 
         this.itens$ = this.carrinhoService.itens$;
 
@@ -55,6 +62,23 @@ export class PedidosComponent {
                 )
             )
         );
+
+    }
+
+    aumentar(item: ItemCarrinho) {
+        const novaQuantidade = item.quantidade + 1;
+        this.carrinhoService.alterarQuantidade(item.produtoId, novaQuantidade);
+    }
+
+    /**
+     * Decrementa a quantidade de um item no carrinho, 
+     * respeitando o limite mínimo de 1 unidade
+     */
+    diminuir(item: ItemCarrinho) {
+        if (item.quantidade > 1) {
+            const novaQuantidade = item.quantidade - 1;
+            this.carrinhoService.alterarQuantidade(item.produtoId, novaQuantidade);
+        }
     }
 
     onBuscar(valor: string) {
@@ -153,3 +177,4 @@ export class PedidosComponent {
         return item.id || item.produtoId;
     }
 }
+
