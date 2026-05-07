@@ -11,6 +11,11 @@ import {
     enableIndexedDbPersistence
 } from '@angular/fire/firestore';
 
+import {
+    provideAuth,
+    getAuth
+} from '@angular/fire/auth';
+
 import { environment } from './environments/environment';
 
 import { provideIonicAngular } from '@ionic/angular/standalone';
@@ -19,6 +24,7 @@ bootstrapApplication(AppComponent, {
     providers: [
         provideIonicAngular(),
         provideRouter(routes),
+        provideAuth(() => getAuth()),
 
         provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
 

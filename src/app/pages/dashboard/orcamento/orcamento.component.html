@@ -10,115 +10,130 @@
         </div>
 
         <!-- LISTA -->
-        <div class="orcamento-card" *ngFor="let orc of orcamentos; trackBy: trackByOrcamento"
+        <div class="orcamento-card" *ngFor="let orc of orcamentos; trackBy: trackByOrcamento " [ngClass]="{ finalizado: orc.status === 'finalizado' }"
             (click)="abrirOrcamento(orc)">
 
             <!-- 🔹 HEADER -->
             <div class="header">
-    <div class="cliente">
-        <!-- Nome do Cliente -->
-        <strong>{{ orc.cliente.nome || 'Sem cliente' }}</strong>
+                <div class="cliente">
+                    <!-- Nome do Cliente -->
+                    <strong>{{ orc.cliente.nome || 'Sem cliente' }}</strong>
 
-        <!-- Data logo abaixo do nome -->
-        <span class="data">
-            {{ orc.dataCriacao | date:'dd/MM/yyyy HH:mm' }}
-        </span>
+                    <!-- Data logo abaixo do nome -->
+                    <span class="data">
+                        {{ orc.dataCriacao | date:'dd/MM/yyyy HH:mm' }}
+                    </span>
 
-        <!-- Status dentro do fluxo centralizado -->
-        <span class="status" [ngClass]="orc.status">
-            {{ orc.status }}
-        </span>
-    </div>
-</div>
+                    <!-- Status dentro do fluxo centralizado -->
+                    <span class="status" [ngClass]="orc.status">
+                        {{ orc.status }}
+                    </span>
+                </div>
+            </div>
 
             <!-- 🔹 INFO EXTRA -->
             <div class="info-extra">
-    <span *ngIf="orc.tipoPagamento" class="pagamento">
-        💳 {{ orc.tipoPagamento }}
-    </span>
+                <span *ngIf="orc.tipoPagamento" class="pagamento">
+                    💳 {{ orc.tipoPagamento }}
+                </span>
 
-    <span *ngIf="orc.desconto" class="valor-desconto">
-        🔻 Desconto:
-        <strong class="preco-extra">
-            <span class="moeda">R$</span> {{ orc.desconto | number:'1.2-2' }}
-        </strong>
-    </span>
-</div>
+                <span *ngIf="orc.desconto" class="valor-desconto">
+                    🔻 Desconto:
+                    <strong class="preco-extra">
+                        <span class="moeda">R$</span> {{ orc.desconto | number:'1.2-2' }}
+                    </strong>
+                </span>
+            </div>
 
             <!-- 🔹 ITENS -->
             <div class="itens">
-    <div class="item" *ngFor="let item of orc.itens; trackBy: trackByItem">
+                <div class="item" *ngFor="let item of orc.itens; trackBy: trackByItem">
 
-        <ng-container *ngIf="item.imagem; else semImagem">
-            <img [src]="item.imagem" />
-        </ng-container>
+                    <ng-container *ngIf="item.imagem; else semImagem">
+                        <img [src]="item.imagem" />
+                    </ng-container>
 
-        <div class="info">
-            <strong>{{ item.nome }}</strong>
+                    <div class="info">
+                        <strong>{{ item.nome }}</strong>
 
-            <span>
-                {{ item.quantidade }} x 
-                <span class="moeda">R$</span> {{ item.preco | number:'1.2-2' }}
-            </span>
-        </div>
+                        <span>
+                            {{ item.quantidade }} x
+                            <span class="moeda">R$</span> {{ item.preco | number:'1.2-2' }}
+                        </span>
+                    </div>
 
-        <div class="subtotal">
-            <span class="moeda">R$</span> {{ (item.preco * item.quantidade) | number:'1.2-2' }}
-        </div>
+                    <div class="subtotal">
+                        <span class="moeda">R$</span> {{ (item.preco * item.quantidade) | number:'1.2-2' }}
+                    </div>
 
-    </div>
-</div>
+                </div>
+            </div>
 
             <!-- 🔹 TOTAL -->
             <div class="total">
-    <!-- Subtotal -->
-    <div class="linha" *ngIf="orc.desconto">
-        <span>Subtotal</span>
-        <span class="valor-secundario">
-            <span class="moeda">R$</span> {{ (orc.total + orc.desconto) | number:'1.2-2' }}
-        </span>
-    </div>
+                <!-- Subtotal -->
+                <div class="linha" *ngIf="orc.desconto">
+                    <span>Subtotal</span>
+                    <span class="valor-secundario">
+                        <span class="moeda">R$</span> {{ (orc.total + orc.desconto) | number:'1.2-2' }}
+                    </span>
+                </div>
 
-    <!-- Desconto -->
-    <div class="linha" *ngIf="orc.desconto">
-        <span>Desconto</span>
-        <span class="valor-secundario desconto">
-            - <span class="moeda">R$</span> {{ orc.desconto | number:'1.2-2' }}
-        </span>
-    </div>
+                <!-- Desconto -->
+                <div class="linha" *ngIf="orc.desconto">
+                    <span>Desconto</span>
+                    <span class="valor-secundario desconto">
+                        - <span class="moeda">R$</span> {{ orc.desconto | number:'1.2-2' }}
+                    </span>
+                </div>
 
-    <!-- Total Final -->
-    <div class="linha final">
-        <span>Total</span>
-        <strong>
-            <span class="moeda-total">R$</span> {{ orc.total | number:'1.2-2' }}
-        </strong>
-    </div>
-</div>
+                <!-- Total Final -->
+                <div class="linha final">
+                    <span>Total</span>
+                    <strong>
+                        <span class="moeda-total">R$</span> {{ orc.total | number:'1.2-2' }}
+                    </strong>
+                </div>
+            </div>
 
             <!-- 🔹 AÇÕES -->
-           <div class="acoes">
+            <div class="acoes">
 
-    <button class="aprovar" *ngIf="orc.status !== 'aprovado'"
-    (click)="aprovar(orc); $event.stopPropagation()">
-    <svg viewBox="0 0 24 24" class="svgaprovar">
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path>
-</svg>
-</button>
+                <button class="aprovar" *ngIf="orc.status !== 'aprovado'"
+                    (click)="finalizarVenda(orc); $event.stopPropagation()">
+                    <svg viewBox="0 0 24 24" class="svgaprovar">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z">
+                        </path>
+                    </svg>
+                </button>
 
-    <button class="excluir" (click)="excluir(orc.id); $event.stopPropagation()">
-    <svg viewBox="0 0 448 512" class="svgexcluir">
-        <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path>
-    </svg>
-</button>
+                <button class="nota-fiscal" *ngIf="orc.status === 'finalizado'"
+                    (click)="abrirNotaFiscal(orc.id); $event.stopPropagation()">
 
-</div>
+                    <svg viewBox="0 0 384 512" class="svgnota">
+                        <path
+                            d="M224 136V0H24C10.7 0 0 10.7 0 24V488c0 13.3 10.7 24 24 24H360c13.3 0 24-10.7 24-24V160H248c-13.3 0-24-10.7-24-24zM384 121.9V128H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 97.9c4.5 4.5 7 10.6 7 17z">
+                        </path>
+                    </svg>
+
+                </button>
+
+                <button class="excluir" (click)="excluir(orc.id); $event.stopPropagation()">
+                    <svg viewBox="0 0 448 512" class="svgexcluir">
+                        <path
+                            d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
+                        </path>
+                    </svg>
+                </button>
+
+            </div>
 
 
 
-    <!-- 🔹 TEMPLATE GLOBAL -->
-    <ng-template #semImagem>
-        <div class="sem-imagem">📦</div>
-    </ng-template>
+            <!-- 🔹 TEMPLATE GLOBAL -->
+            <ng-template #semImagem>
+                <div class="sem-imagem">📦</div>
+            </ng-template>
 
-</div>
+        </div>

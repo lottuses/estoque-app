@@ -39,9 +39,10 @@ export class EstoqueComponent implements OnInit {
     getProdutoVazio(): Produto {
         return {
             nome: '',
-            tipo: 'ferragem',
+            categoria: 'ferragem',
+            marca: '',
             quantidade: 0,
-            preco: 0 // 👈 OBRIGATÓRIO AGORA
+            preco: 0
         };
     }
 

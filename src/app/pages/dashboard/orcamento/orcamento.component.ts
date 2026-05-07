@@ -42,6 +42,13 @@ export class OrcamentoComponent {
         return b.dataCriacao.getTime() - a.dataCriacao.getTime();
     }
 
+    abrirNotaFiscal(id?: string) {
+
+        if (!id) return;
+
+        this.router.navigate(['nota-fiscal', id]);
+    }
+
     //PRECISA CRIAR LOGICA PARA NUMERO NOTA. 
     gerarNumeroNota(): string {
         return 'NF-' + Date.now();
@@ -73,34 +80,50 @@ export class OrcamentoComponent {
         return isNaN(parsed.getTime()) ? new Date() : parsed;
     }
 
-    // 🔹 Aprovar
-    async aprovar(orcamento: Orcamento) {
+    async finalizarVenda(orcamento: Orcamento) {
 
         if (!orcamento.id) return;
 
+        // 🔥 evita finalizar duas vezes
         if (orcamento.status === 'finalizado') return;
 
         try {
 
-            // 🔹 1. Atualizar estoque
+            // 🔹 1. Baixar estoque
             for (const item of orcamento.itens) {
+
                 await this.produtoService.baixarEstoque(
                     item.produtoId,
                     item.quantidade
                 );
+
             }
 
-            // 🔹 2. Atualizar orçamento
-            await this.orcamentoService.atualizar(orcamento.id, {
-                status: 'finalizado',
-                dataFinalizacao: new Date(),
-                numeroNota: this.gerarNumeroNota()
-            });
+            // 🔹 2. Finalizar orçamento
+            await this.orcamentoService.atualizar(
+                orcamento.id,
+                {
+                    status: 'finalizado',
+                    dataFinalizacao: new Date(),
+                    numeroNota: this.gerarNumeroNota()
+                }
+            );
 
             console.log('✅ Venda finalizada');
 
+            // 🔥 3. Abrir nota fiscal
+            this.router.navigate([
+                'nota-fiscal',
+                orcamento.id
+            ]);
+
         } catch (err) {
-            console.error('❌ Erro ao finalizar venda:', err);
+
+            console.error(
+                '❌ Erro ao finalizar venda:',
+                err
+            );
+
         }
     }
 

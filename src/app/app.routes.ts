@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {
@@ -15,7 +16,15 @@ export const routes: Routes = [
         path: 'login',
     },
     {
+        path: 'nota-fiscal/:id',
+        canActivate: [authGuard],
+        loadComponent: () =>
+            import('./pages/nota-fiscal/nota-fiscal.component')
+                .then(m => m.NotaFiscalComponent)
+    },
+    {
         path: 'dashboard',
+        canActivate: [authGuard],
         loadComponent: () =>
             import('./pages/dashboard/dashboard.component')
                 .then(m => m.DashboardComponent),
@@ -61,7 +70,7 @@ export const routes: Routes = [
                                 .then(m => m.OrcamentoItemComponent)
                     }
                 ]
-            }
+            },
         ]
     }
 ];

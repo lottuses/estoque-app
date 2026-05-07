@@ -36,7 +36,7 @@ export interface Orcamento {
     status: 'rascunho' | 'aprovado' | 'recusado' | 'finalizado';
 
     // 🔹 CONTROLE DE TEMPO
-    dataCriacao: Date;     // 🔥 mais correto que "data"
+    dataCriacao: Date;
     dataAtualizacao?: Date;
 
     // 🔹 VENDA (quando virar venda)

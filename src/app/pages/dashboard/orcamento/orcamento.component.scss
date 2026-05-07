@@ -74,7 +74,7 @@
             font-weight: bold;
             text-transform: uppercase;
 
-            &.aprovado {
+            &.finalizado {
 
                 color: #00ffae;
 
@@ -387,4 +387,36 @@
     opacity: 1;
     transform: translateY(30px);
     transition-duration: .3s;
+}
+
+.orcamento-card.finalizado {
+
+    border: 1px solid rgba(74, 222, 128, 0.25);
+
+    .data {
+        color: #86efac !important;
+    }
+
+    .total {
+
+        .linha.final strong {
+            color: #4ade80;
+        }
+
+        .moeda-total {
+            color: #86efac !important;
+        }
+    }
+
+    .status.finalizado {
+        color: #4ade80;
+        text-shadow: 0 0 10px rgba(74, 222, 128, 0.4);
+    }
+
+    &:hover {
+        box-shadow:
+            0 0 25px rgba(74, 222, 128, 0.08),
+            10px 10px 30px rgb(8, 8, 8),
+            -10px -10px 30px rgb(23, 23, 23);
+    }
 }

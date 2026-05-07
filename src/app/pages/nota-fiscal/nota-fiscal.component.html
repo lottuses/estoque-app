@@ -1,0 +1,160 @@
+<div class="nota-container" *ngIf="!carregando">
+
+    <!-- TOPO -->
+    <div class="topo">
+
+        <h1>Vilela Planejados</h1>
+
+        <p>CNPJ: 00.000.000/0001-00</p>
+
+        <p>Telefone: (61) 99999-9999</p>
+
+        <p>Cruzeiro - DF</p>
+
+    </div>
+
+    <div class="linha"></div>
+
+    <!-- DADOS -->
+    <div class="bloco">
+
+        <h3>Cliente</h3>
+
+        <p>
+            <strong>Nome:</strong>
+            {{ orcamento.cliente.nome }}
+        </p>
+
+        <p *ngIf="orcamento.cliente.telefone">
+            <strong>Telefone:</strong>
+            {{ orcamento.cliente.telefone }}
+        </p>
+
+        <p *ngIf="orcamento.cliente.endereco">
+            <strong>Endereço:</strong>
+            {{ orcamento.cliente.endereco }}
+        </p>
+
+    </div>
+
+    <div class="linha"></div>
+
+    <!-- ITENS -->
+    <div class="itens">
+
+        <div class="item header-item">
+
+            <span>Item</span>
+
+            <span>Qtd</span>
+
+            <span>Total</span>
+
+        </div>
+
+        <div class="item" *ngFor="let item of orcamento.itens">
+
+            <div class="item-nome">
+                {{ item.nome }}
+            </div>
+
+            <div>
+                {{ item.quantidade }}
+            </div>
+
+            <div>
+                R$
+                {{
+                item.preco * item.quantidade
+                | number:'1.2-2'
+                }}
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="linha"></div>
+
+    <!-- TOTAIS -->
+    <div class="totais">
+
+        <div class="total-linha">
+            <span>Subtotal</span>
+
+            <span>
+                R$
+                {{ orcamento.subtotal | number:'1.2-2' }}
+            </span>
+        </div>
+
+        <div class="total-linha" *ngIf="orcamento.desconto">
+
+            <span>Desconto</span>
+
+            <span>
+                - R$
+                {{ orcamento.desconto | number:'1.2-2' }}
+            </span>
+        </div>
+
+        <div class="total-linha total-final">
+
+            <span>TOTAL</span>
+
+            <span>
+                R$
+                {{ orcamento.total | number:'1.2-2' }}
+            </span>
+
+        </div>
+
+    </div>
+
+    <div class="linha"></div>
+
+    <!-- PAGAMENTO -->
+    <div class="bloco">
+
+        <p>
+            <strong>Pagamento:</strong>
+            {{ orcamento.tipoPagamento }}
+        </p>
+
+        <p *ngIf="orcamento.numeroNota">
+            <strong>Nota:</strong>
+            {{ orcamento.numeroNota }}
+        </p>
+
+        <p>
+            <strong>Data:</strong>
+
+            {{
+            dataFinalizacaoFormatada
+            | date:'dd/MM/yyyy HH:mm'
+            }}
+        </p>
+
+    </div>
+
+    <div class="linha"></div>
+
+    <!-- RODAPÉ -->
+    <div class="rodape">
+
+        <p>Obrigado pela preferência!</p>
+
+        <p>Volte sempre ❤️</p>
+
+    </div>
+
+    <!-- AÇÕES -->
+    <div class="acoes no-print">
+
+        <button (click)="imprimir()">
+            Imprimir
+        </button>
+
+    </div>
+
+</div>
