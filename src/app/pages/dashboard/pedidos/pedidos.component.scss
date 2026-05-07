@@ -55,7 +55,7 @@ p {
 
 .card h2 {
     color: rgb(195, 195, 195);
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     margin-bottom: 20px;
     font-size: 1.5rem;
@@ -404,7 +404,7 @@ button {
         left: 12px;
         top: 18px;
         color: rgb(195, 195, 195);
-        text-transform: uppercase;
+        text-transform: capitalize;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         pointer-events: none;
         transition: all 0.2s ease;
