@@ -1,118 +1,172 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<ion-content [fullscreen]="true">
 
+    <section class="dashboard">
 
+        <!-- HEADER -->
+        <header class="headertop">
 
+            <div class="headline">
 
-<section class="dashboard">
+                <div class="inner">
 
-   
-    <header class="headertop">
+                    <h1>DASHBOARD</h1>
+                    <p>Olá</p>
 
+                </div>
 
-        <div class="headline">
-
-
-            <div class="inner">
-
-
-                <h1>DASHBOARD</h1>
-                <p>Olá</p>
             </div>
-        </div>
+
+        </header>
 
 
-    </header>
-<nav class="navtop">
-  <div class="logos"></div>
-  
-  <a href="#" class="cta">
-    <span class="hover-underline-animation"> Página 1 </span>
-    <svg id="arrow-horizontal" xmlns="http://www.w3.org/2000/svg" width="30" height="10" viewBox="0 0 46 16">
-      <path id="Path_10" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" transform="translate(30)"></path>
-    </svg>
-  </a>
+        <!-- SIDEBAR -->
+        <aside class="dashboard-sidebar">
 
-  <a href="#" class="cta">
-    <span class="hover-underline-animation"> Página 2 </span>
-    <svg id="arrow-horizontal" xmlns="http://www.w3.org/2000/svg" width="30" height="10" viewBox="0 0 46 16">
-      <path id="Path_10" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" transform="translate(30)"></path>
-    </svg>
-  </a>
+            <!-- BOTÃO ABRIR -->
+            <button class="btn-show-nav" *ngIf="!menuAberto" (click)="toggleMenu()">
 
-  <a href="#" class="cta">
-    <span class="hover-underline-animation"> Página 3 </span>
-    <svg id="arrow-horizontal" xmlns="http://www.w3.org/2000/svg" width="30" height="10" viewBox="0 0 46 16">
-      <path id="Path_10" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" transform="translate(30)"></path>
-    </svg>
-  </a>
+                <i class="fas fa-bars"></i>
 
-  <a href="#" class="cta">
-    <span class="hover-underline-animation"> Página 2 </span>
-    <svg id="arrow-horizontal" xmlns="http://www.w3.org/2000/svg" width="30" height="10" viewBox="0 0 46 16">
-      <path id="Path_10" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" transform="translate(30)"></path>
-    </svg>
-  </a>
-</nav>
+            </button>
 
-    <aside class="dashboard-sidebar">
+            <!-- OVERLAY -->
+            <div class="sidebar-overlay" *ngIf="menuAberto" (click)="toggleMenu()">
+            </div>
 
-        <input type="checkbox" id="close">
+            <!-- MENU -->
+            <nav class="sidebar-nav" [class.open]="menuAberto">
 
-        <label for="close" class="btn-show-nav">
-            <i class="fas fa-bars"></i>
-        </label>
+                <!-- TOPO -->
+                <div class="sidebar-header">
 
-        <nav class="sidebar-nav">
-            <label for="close" class="btn-hide-nav">
-                <i class="fas fa-times"></i>
-            </label>
+                    <div class="sidebar-logo">
+                        FG
+                    </div>
 
-                <h2 class="nav-title">Menu</h2>
-                
-            <a href="/dashboard/estoque" class="nav-brand">Gerenciamento de estoque.</a>
+                    <div class="sidebar-user">
 
-            <ul class="nav-list">
-                <li class="nav-item">
-                    <a routerLink="/dashboard/infos" routerLinkActive="active" class="nav-link">
-                        <i class="fas fa-home"></i>Informações
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a routerLink="/dashboard/estoque" routerLinkActive="active" class="nav-link">
-                        <i class="fas fa-user"></i>Estoque
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a routerLink="/dashboard/financeiro" routerLinkActive="active" class="nav-link">
-                        <i class="fas fa-cog"></i>Financeiro
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a routerLink="/dashboard/pedidos" routerLinkActive="active" class="nav-link">
-                        <i class="fas fa-newspaper"></i>Pedidos
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a routerLink="/dashboard/orcamento" routerLinkActive="active" class="nav-link">
-                        <i class="fas fa-phone-alt"></i>Orçamentos
-                    </a>
-                </li>
+                        <h2>
+                            Ferragens Gener
+                        </h2>
 
-            </ul>
- <div class="sidebar-footer">
-            <button class="botaosair" (click)="logout()">Sair</button>
-        </div>
-        </nav>
+                        <p>
+                            Painel administrativo
+                        </p>
 
-       
-    </aside>
+                    </div>
 
-    <div class="app-container">
-    
+                    <button class="btn-hide-nav" (click)="toggleMenu()">
 
+                        <i class="fas fa-times"></i>
+
+                    </button>
+
+                </div>
+
+                <!-- LINKS -->
+                <ul class="nav-list">
+
+                    <li class="nav-item">
+
+                        <a routerLink="/dashboard/infos" routerLinkActive="active" class="nav-link"
+                            (click)="toggleMenu()">
+
+                            <i class="fas fa-home"></i>
+
+                            <span>
+                                Informações
+                            </span>
+
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a routerLink="/dashboard/estoque" routerLinkActive="active" class="nav-link"
+                            (click)="toggleMenu()">
+
+                            <i class="fas fa-box"></i>
+
+                            <span>
+                                Estoque
+                            </span>
+
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a routerLink="/dashboard/financeiro" routerLinkActive="active" class="nav-link"
+                            (click)="toggleMenu()">
+
+                            <i class="fas fa-dollar-sign"></i>
+
+                            <span>
+                                Financeiro
+                            </span>
+
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a routerLink="/dashboard/pedidos" routerLinkActive="active" class="nav-link"
+                            (click)="toggleMenu()">
+
+                            <i class="fas fa-newspaper"></i>
+
+                            <span>
+                                Pedidos
+                            </span>
+
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a routerLink="/dashboard/orcamento" routerLinkActive="active" class="nav-link"
+                            (click)="toggleMenu()">
+
+                            <i class="fas fa-file-invoice"></i>
+
+                            <span>
+                                Orçamentos
+                            </span>
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+                <!-- FOOTER -->
+                <div class="sidebar-footer">
+
+                    <button class="botaosair" (click)="logout()">
+
+                        <i class="fas fa-sign-out-alt"></i>
+
+                        Sair
+
+                    </button>
+
+                </div>
+
+            </nav>
+
+        </aside>
+
+        <!-- CONTEÚDO -->
         <div class="dashboard-content">
-            
+
             <router-outlet></router-outlet>
+
         </div>
-    </div>
-</section>
+
+    </section>
+
+</ion-content>

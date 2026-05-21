@@ -1,73 +1,83 @@
-<div class="page">
-    <div class="main">
+<ion-content [fullscreen]="true">
 
-        <input type="checkbox" id="chk" aria-hidden="true">
 
-        <!-- LOGIN -->
-        <div class="login">
+    <div class="page">
+        <div class="main">
 
-            <form (ngSubmit)="login()">
+            <input type="checkbox" id="chk" aria-hidden="true">
 
-                <label class="title" for="chk">
-                    Login
-                </label>
+            <!-- LOGIN -->
+            <div class="login">
 
-                <div class="input-field">
+                <form (ngSubmit)="login()">
 
-                    <input type="email" name="loginEmail" required placeholder=" " [(ngModel)]="loginEmail">
+                    <label class="title" for="chk">
+                        Login
+                    </label>
 
-                    <label>Email</label>
+                    <div class="input-field">
 
-                </div>
+                        <input type="email" autocomplete="email" name="loginEmail" required placeholder=" " [(ngModel)]="loginEmail">
 
-                <div class="input-field">
+                        <label>Email</label>
 
-                    <input type="password" name="loginSenha" required placeholder=" " [(ngModel)]="loginSenha">
+                    </div>
 
-                    <label>Senha</label>
+                    <div class="input-field">
 
-                </div>
+                        <input type="password" autocomplete="current-password" name="loginSenha" required placeholder=" " [(ngModel)]="loginSenha">
 
-                <button type="submit" [disabled]="carregando">
-                    Login
-                </button>
+                        <label>Senha</label>
 
-            </form>
+                    </div>
+
+                    <button type="submit" [disabled]="carregando">
+
+                        {{ carregando ? 'Carregando...' : 'Login' }}
+
+                    </button>
+
+                </form>
+
+            </div>
+
+            <!-- CADASTRO -->
+            <div class="signup">
+
+                <form (ngSubmit)="cadastrar()">
+
+                    <label class="title" for="chk">
+                        Cadastro
+                    </label>
+
+                    <div class="input-field">
+
+                        <input type="email" name="cadastroEmail" required placeholder=" " [(ngModel)]="cadastroEmail">
+
+                        <label>Email</label>
+
+                    </div>
+
+                    <div class="input-field">
+
+                        <input type="password" autocomplete="new-password" name="cadastroSenha" required placeholder=" "
+                            [(ngModel)]="cadastroSenha">
+
+                        <label>Senha</label>
+
+                    </div>
+
+                    <button type="submit" [disabled]="carregando">
+
+                        {{ carregando ? 'Criando conta...' : 'Cadastrar' }}
+
+                    </button>
+
+                </form>
+
+            </div>
 
         </div>
-
-        <!-- CADASTRO -->
-        <div class="signup">
-
-            <form (ngSubmit)="cadastrar()">
-
-                <label class="title" for="chk">
-                    Cadastro
-                </label>
-
-                <div class="input-field">
-
-                    <input type="email" name="cadastroEmail" required placeholder=" " [(ngModel)]="cadastroEmail">
-
-                    <label>Email</label>
-
-                </div>
-
-                <div class="input-field">
-
-                    <input type="password" name="cadastroSenha" required placeholder=" " [(ngModel)]="cadastroSenha">
-
-                    <label>Senha</label>
-
-                </div>
-
-                <button type="submit" [disabled]="carregando">
-                    Cadastrar
-                </button>
-
-            </form>
-
-        </div>
-
     </div>
-</div>
+
+</ion-content>

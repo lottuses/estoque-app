@@ -1,11 +1,16 @@
+ion-content {
+    --background: #1a1a1a;
+}
+
 .page {
 
     margin: 0;
-    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: 100%;
+    padding:
+        env(safe-area-inset-top) 20px env(safe-area-inset-bottom);
     font-family: 'Jost', sans-serif;
     background: #1a1a1a;
 
@@ -18,7 +23,6 @@
     width: 350px;
     height: 500px;
     overflow: hidden;
-    background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38") no-repeat center/cover;
     border-radius: 10px;
     box-shadow: 5px 20px 50px #000;
     position: relative;
@@ -63,11 +67,11 @@
 
 
 .input-field input,
-             select {
+select {
 
     width: 100%;
     padding: 12px;
-    background: #b7b7b7;
+    background: rgba(255, 255, 255, .92);
     color: #2f2f2f;
     border: none;
     outline: none;
@@ -145,6 +149,8 @@ button:hover {
     transform: translateY(60px);
     transition: .8s ease-in-out;
 
+    
+
 }
 
 
@@ -157,6 +163,7 @@ button:hover {
     justify-content: center;
     display: flex;
     margin: 50px auto;
+    padding: 20px;
     font-weight: bold;
     cursor: pointer;
     transition: .5s ease-in-out;

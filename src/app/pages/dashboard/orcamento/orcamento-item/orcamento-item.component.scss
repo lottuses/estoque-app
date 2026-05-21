@@ -1,508 +1,453 @@
 .page {
-    margin: 0;
-    padding: 5% 0;
-    min-height: 100vh;
-    font-family: 'Trebuchet MS', sans-serif;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    color: #eaeaea;
 }
+
+/* =========================
+   CONTAINER
+========================= */
 
 .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
 
-    max-width: 1100px;
-    margin: 50px auto;
-    padding: 0 20px;
     display: flex;
     flex-direction: column;
-    gap: 25px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-
+    gap: 24px;
 }
+
+/* =========================
+   TOPO LAYOUT
+========================= */
 
 .topo-container {
-    display: flex;
-    gap: 30px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
     align-items: stretch;
-
 }
 
-.full-width {
-    width: 100%;
-}
-
-.dados-cliente .mat-input:last-child {
-    grid-column: 1 / span 2;
-}
-
-.dashboard-layout {
+.topo-container>* {
     display: flex;
-    gap: 24px;
-    align-items: flex-start;
 }
 
-.coluna-itens {
-    flex: 1;
+/* =========================
+   CARDS BASE
+========================= */
+
+.dados-cliente,
+.summary-card,
+.card-dark {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 18px;
+
+    padding: 18px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 }
 
-.coluna-resumo {
-
-    flex: 1;
-    min-width: 320px;
-
-}
+/* =========================
+   CLIENTE
+========================= */
 
 .dados-cliente {
-
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-    flex: 1.5;
-    background: #121212;
-    min-width: 250px;
-
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
 }
+
+/* =========================
+   INPUT
+========================= */
 
 .mat-input {
     position: relative;
-    margin: 15px;
-    background-color: rgba(255, 255, 255, 0.04);
-    border-radius: 4px 4px 0 0;
     width: 100%;
-    transition: all 0.4s;
-
-    &:hover {
-        background-color: rgba(255, 255, 255, 0.07);
-    }
-
-    input {
-        width: 100%;
-        box-sizing: border-box;
-        padding: 24px 12px 10px;
-        background: transparent;
-        border: none;
-        border-bottom: transparent;
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        color: rgb(195, 195, 195);
-        outline: none;
-        font-size: 1rem;
-        font-family: inherit;
-        transition: all 0.4s ease;
-
-        &:focus {
-            border-bottom: 3px solid rgb(241, 255, 150);
-        }
-    }
-
-    label {
-        position: absolute;
-        left: 12px;
-        top: 18px;
-        color: rgb(195, 195, 195);
-        text-transform: capitalize;
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        pointer-events: none;
-        transition: all 0.2s ease;
-    }
-
-    &:has(input:focus) label,
-    &:not(:has(input:placeholder-shown)) label {
-        top: 6px;
-        font-size: 0.75rem;
-        color: rgb(104, 104, 104);
-        font-weight: bold;
-    }
 }
 
-.card-dark {
-    background-color: #121212;
-    border-radius: 12px;
-    padding: 20px;
-    color: rgb(195, 195, 195);
-    font-family: sans-serif;
-    border: 1px solid #1e1e1e;
+.mat-input input {
+    width: 100%;
+    height: 56px;
+
+    box-sizing: border-box;
+
+    padding: 22px 16px 8px;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.04);
+    color: #fff;
+
+    outline: none;
+
+    transition: 0.2s ease;
 }
 
-.card-dark h3 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    color: rgb(195, 195, 195);
-    font-size: 1.2rem;
+.mat-input input:focus {
+    border-color: #60a5fa;
+    background: rgba(255, 255, 255, 0.06);
 }
 
-.item {
-    display: flex;
-    align-items: center;
-    padding: 15px 10px;
-    gap: 15px;
+.mat-input label {
+    position: absolute;
+    left: 14px;
+    top: 16px;
 
+    color: #888;
+    font-size: 14px;
+    transition: 0.2s;
 }
 
-.item:last-child {
-    border-bottom: none;
-
+.mat-input input:focus+label,
+.mat-input input:not(:placeholder-shown)+label {
+    top: 6px;
+    font-size: 11px;
+    color: #60a5fa;
 }
 
-.info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
+/* =========================
+   RESUMO CARD (MELHORADO)
+========================= */
 
-.item-name {
-    color: rgb(195, 195, 195);
-    font-weight: 600;
-    font-size: 1rem;
-    margin-bottom: 4px;
-}
-
-.item-unit-price {
-    color: #a0a0a0;
-    font-size: 0.85rem;
-    
-}
-
-.quantity-selector {
-    display: flex;
-    align-items: center;
-    background-color: #101010;
-    border: 1px solid #333;
-    border-radius: 6px;
-    padding: 2px;
-    transition: all 0.3s;
-    margin-right: 40px;
-
-    &:hover {
-
-        border: 1px solid #daff7d;
-    }
-
-}
-
-.qty-btn {
-    background: transparent;
-    border: none;
-    color: rgb(166, 166, 166);
-    font-size: 1.1rem;
-    cursor: pointer;
-    padding: 5px 12px;
-    transition: all 0.2s;
-    
-
-    &:hover {
-        background: rgba(255, 255, 255, 0.1);
-        color: rgb(241, 255, 150);
-
-    }
-
-    &:active {
-        background: rgba(255, 236, 61, 0.188);
-        border-radius: 9px;
-        transform: scale(0.9);
-    }
-}
-
-.qty-value {
-    color: rgb(227, 227, 227);
-    font-weight: bold;
-    min-width: 25px;
-    text-align: center;
-    font-size: 0.9rem;
-
-}
-
-.total-item {
-    display: inline-flex;
-    align-items: baseline;
-    font-weight: bold;
-    font-size: 1.6rem;
-    gap: 0;
-    margin-left: 25px;
-    
-}
-
-.moeda-item {
-    font-size: 0.5em;
-    align-self: flex-start;
-    position: relative;
-    top: 0.2rem;
-    color: #daff7d;
-    margin-right: 6px;
-}
-
-.btn-remove {
-    background: transparent;
-    border: none;
-    color: #555555;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: color 0.2s;
-    margin-left: 10px;
-}
-
-.btn-remove:hover {
-    color: #ef5350;
+.coluna-resumo {
+    position: sticky;
+    top: 20px;
 }
 
 .summary-card {
+    position: relative;
+    overflow: hidden;
 
-    background-color: #121212;
-    padding: 25px;
-    border-radius: 8px;
-    color: rgb(195, 195, 195);
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, Roboto, sans-serif;
+    width: 100%;
+
+    gap: 16px;
+
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.04),
+            rgba(255, 255, 255, 0.02));
 }
+
+/* glow sutil */
+.summary-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right,
+            rgba(96, 165, 250, 0.08),
+            transparent 60%);
+    pointer-events: none;
+}
+
+/* =========================
+   LINHAS
+========================= */
 
 .linha {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
-    font-size: 1.45rem;
+
+    font-size: 14px;
+    color: #b8b8b8;
 }
+
+/* =========================
+   SUBTOTAL
+========================= */
 
 .valor-subtotal {
-    display: inline-flex;
-    align-items: baseline;
-    font-weight: bold;
-    color: #bfbfbf;
-
+    font-variant-numeric: tabular-nums;
+    color: #cfd3d8;
+    font-weight: 600;
 }
 
-.moeda {
-    font-size: 0.55em;      /* Deixa o R$ menor que o número */
-    vertical-align: super;   /* Empurra para cima */
-    margin-right: 4px;       /* Espaço entre a moeda e o valor */
-    position: relative;
-    top: -0.8em;
-    color: rgb(241, 255, 150);
-
-}
-
-.numero {
-    font-size: 1.7rem;
-}
+/* =========================
+   DESCONTO
+========================= */
 
 .desconto-container {
     display: flex;
     align-items: center;
-}
+    gap: 6px;
 
-.sinal-menos {
-    color: #ff5252;
-    font-weight: bold;
-    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 6px 10px;
+    border-radius: 10px;
+
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .input-desconto {
     background: transparent;
     border: none;
-    color: #ff5252;
-    width: 60px;
-    text-align: right;
-    font-weight: bold;
-    font-size: 0.95rem;
     outline: none;
+
+    width: 70px;
+
+    color: #ff6b6b;
+    font-weight: 700;
+
+    font-variant-numeric: tabular-nums;
 }
+
+.sinal-menos {
+    color: #ff6b6b;
+    font-weight: 700;
+}
+
+/* =========================
+   DIVISOR
+========================= */
 
 .divisor {
-    border: 0;
-    border-top: 1px solid #5e5e5e;
-    border-radius: 24px;
-    margin: 20px 0;
+    border: none;
+    height: 1px;
+
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.08),
+            transparent);
+
+    margin: 6px 0;
 }
 
+/* =========================
+   TOTAL (HERO VISUAL)
+========================= */
+
 .total-container {
-    margin-top: 10px;
+    padding-top: 6px;
 }
 
 .label-total {
-    color: rgb(195, 195, 195);
+    font-size: 11px;
+    letter-spacing: 1.2px;
     text-transform: uppercase;
-    font-size: 0.8rem;
-    letter-spacing: 1px;
+    color: #8a8a8a;
 }
 
 .valor-total-final {
     display: flex;
     align-items: baseline;
-    color: #daff7d;
-    font-weight: bold;
+    gap: 6px;
+
+    font-variant-numeric: tabular-nums;
 }
 
 .moeda-total {
-    font-size: 0.7em;
-    align-self: flex-start;
-    position: relative;
-    top: 0.1em;
-    margin-right: 5px;
+    font-size: 12px;
+    color: #8fa3ff;
+    font-weight: 600;
 }
 
 .numero-total {
-    font-size: 2.5rem;
-    line-height: 1;
-    color: rgb(195, 195, 195);
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: #d6ff8a;
+    letter-spacing: -1px;
 }
+
+/* =========================
+   ITENS
+========================= */
+
+.card-dark {
+    gap: 12px;
+}
+
+.item {
+    display: grid;
+    grid-template-columns: 1fr 90px 140px 40px;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px 14px;
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.item:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+/* INFO */
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.item-name {
+    color: #eaeaea;
+    font-weight: 600;
+}
+
+.item-unit-price {
+    font-size: 12px;
+    color: #8f8f8f;
+}
+
+/* =========================
+   QUANTIDADE
+========================= */
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 90px;
+
+    gap: 6px;
+
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+}
+
+.qty-btn {
+    width: 30px;
+    height: 30px;
+
+    border: none;
+    background: transparent;
+    color: #aaa;
+    cursor: pointer;
+    border-radius: 8px;
+
+    transition: 0.2s;
+}
+
+.qty-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+
+.qty-value {
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    color: #fff;
+}
+
+/* =========================
+   VALORES DOS ITENS
+========================= */
+
+.total-item {
+    font-variant-numeric: tabular-nums;
+
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    font-size: 1.1rem;
+    font-weight: 700;
+
+    color: #d6ff8a;
+}
+
+.moeda-item {
+    color: #8affc1;
+    font-size: 0.75rem;
+    margin-right: 4px;
+}
+
+/* =========================
+   REMOVE
+========================= */
+
+.btn-remove {
+    border: none;
+    background: transparent;
+    color: #777;
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.btn-remove:hover {
+    color: #ff5a5a;
+}
+
+/* =========================
+   BOTÕES AÇÕES
+========================= */
 
 .acoes {
     display: flex;
+    gap: 12px;
     justify-content: center;
-    align-items: center;
-    gap: 20px;
-    margin-top: 25px;
-    padding-top: 20px;
-    width: 100%;
-
-    .salvar {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background-color: rgb(21, 21, 21);
-        border: none;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
-        cursor: pointer;
-        transition-duration: .3s;
-        overflow: hidden;
-        position: relative;
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    }
-
-    .svgsalvar {
-        width: 16px;
-        transition-duration: .3s;
-    }
-
-    .svgsalvar path {
-        fill: rgb(195, 195, 195);
-    }
-
-    .salvar:hover {
-        width: 140px;
-        border-radius: 50px;
-        transition-duration: .3s;
-        background-color: rgb(30, 30, 30);
-        align-items: center;
-        box-shadow: 10px 10px 30px rgb(8, 8, 8),
-            -10px -10px 30px rgb(23, 23, 23);
-    }
-
-    .salvar:hover .svgsalvar {
-        width: 50px;
-        transition-duration: .3s;
-        transform: translateY(60%);
-        
-    }
-
-    .salvar::before {
-        position: absolute;
-        top: -20px;
-        content: "Salvar";
-        color: rgb(195, 195, 195);
-        transition-duration: .3s;
-        font-size: 2px;
-    }
-
-    .salvar:hover::before {
-        font-size: 16px;
-        opacity: 1;
-        transform: translateY(30px);
-        transition-duration: .3s;
-    }
 }
 
+.acoes button {
+    width: 52px;
+    height: 52px;
 
-.finalizar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: rgb(21, 21, 21);
-    border: none;
-    font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.03);
+    color: #dcdcdc;
+
     cursor: pointer;
-    transition-duration: .3s;
-    overflow: hidden;
-    position: relative;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+    transition: 0.2s ease;
 }
 
-.svgfinalizar {
-    width: 12px;
-    transition-duration: .3s;
+.acoes button:hover {
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateY(-2px);
 }
 
-.finalizar path {
-    fill: rgb(195, 195, 195);
+.acoes .salvar:hover {
+    color: #60a5fa;
+    border-color: rgba(96, 165, 250, 0.4);
 }
 
-.finalizar:hover {
-    width: 140px;
-    border-radius: 50px;
-    transition-duration: .3s;
-    background-color: rgb(30, 30, 30);
-    align-items: center;
-    box-shadow: 10px 10px 30px rgb(8, 8, 8),
-            -10px -10px 30px rgb(23, 23, 23);
-
+.acoes .finalizar:hover {
+    color: #d6ff8a;
+    border-color: rgba(214, 255, 138, 0.4);
 }
 
-.finalizar:hover .svgfinalizar {
-    width: 50px;
-    transition-duration: .3s;
-    transform: translateY(60%);
+.acoes svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
 }
 
-.finalizar::before {
-    position: absolute;
-    top: -20px;
-    content: "Finalizar";
-    color: rgb(195, 195, 195);
-    transition-duration: .3s;
-    font-size: 2px;
-}
+/* =========================
+   RESPONSIVO
+========================= */
 
-.finalizar:hover::before {
-    font-size: 16px;
-    opacity: 1;
-    transform: translateY(30px);
-    transition-duration: .3s;
-}
+@media (max-width: 900px) {
 
-.desconto-container {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 0;
-}
+    .topo-container {
+        grid-template-columns: 1fr;
+    }
 
-.sinal-menos {
-    font-size: 0.6em;
-    color: #ff6363;
-    font-weight: bold;
-    align-self: flex-start;
-    position: relative;
-    top: 0.3rem;
-    margin-right: -2px;
-}
+    .dados-cliente {
+        grid-template-columns: 1fr;
+    }
 
-.input-desconto {
-    background: transparent;
-    border: none;
-    color: #ff6363;
-    font-size: 1.8rem;
-    font-weight: bold;
-    width: 50px;
-    outline: none;
-    padding: 0;
-    margin: 0;
+    .item {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
 
-}
+    .quantity-selector {
+        width: 100%;
+        justify-content: space-between;
+    }
 
-.input-desconto::-webkit-outer-spin-button,
-.input-desconto::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+    .total-item {
+        text-align: right;
+    }
 }

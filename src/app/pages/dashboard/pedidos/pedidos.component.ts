@@ -91,7 +91,7 @@ export class PedidosComponent {
         this.carrinhoService.adicionarItem({
             produtoId: produto.id!,
             nome: produto.nome,
-            preco: produto.preco,
+            preco: produto.precoVenda,
             quantidade: 1,
             estoqueDisponivel: produto.quantidade,
             imagem: produto.imagem

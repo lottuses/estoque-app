@@ -1,10 +1,8 @@
 <div class="page">
 
-
     <div class="container" *ngIf="!carregando">
 
         <div class="topo-container">
-
 
             <div class="dados-cliente">
                 <div class="mat-input">
@@ -24,7 +22,8 @@
             </div>
 
             <div class="coluna-resumo">
-                <div class="card summary-card">
+                <div class="summary-card">
+
                     <div class="linha">
                         <span>Subtotal</span>
                         <span class="valor-subtotal">
@@ -34,16 +33,19 @@
                     </div>
 
                     <div class="linha">
-    <span>Desconto</span>
-    <div class="desconto-container">
-        <span class="sinal-menos">- R$</span><input type="number" [(ngModel)]="orcamento.desconto" (input)="calcularTotal()" class="input-desconto" />
-    </div>
-</div>
+                        <span>Desconto</span>
+                        <div class="desconto-container">
+                            <span class="sinal-menos">- R$</span>
+                            <input type="number" [(ngModel)]="orcamento.desconto" (input)="calcularTotal()"
+                                class="input-desconto" />
+                        </div>
+                    </div>
 
                     <hr class="divisor">
 
                     <div class="linha total-container">
                         <span class="label-total">Total</span>
+
                         <div class="valor-total-final">
                             <span class="moeda-total">R$</span>
                             <span class="numero-total">{{ orcamento.total | number:'1.2-2' }}</span>
@@ -52,53 +54,61 @@
 
                     <div class="acoes">
                         <button class="salvar" (click)="salvar()" title="Salvar">
-                            <svg viewBox="0 0 448 512" class="svgsalvar">
+                            <svg viewBox="0 0 448 512">
                                 <path
-                                    d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V173.3c0-17-6.7-33.3-18.7-45.3L352 50.7C340 38.7 323.7 32 306.7 32H64zm192 0L256 160H128V32H256zM64 288c0-17.7 14.3-32 32-32H352c17.7 0 32 14.3 32 32V448H64V288z">
+                                    d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V173.3c0-17-6.7-33.3-18.7-45.3L352 50.7C340 38.7 323.7 32 306.7 32H64z">
                                 </path>
                             </svg>
-
                         </button>
+
                         <button class="finalizar" (click)="finalizar()" title="Finalizar">
-                            <svg viewBox="0 0 448 512" class="svgfinalizar">
+                            <svg viewBox="0 0 448 512">
                                 <path
-                                    d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1.5-7.8 4.2-10.7L330.6 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 20.2 323.2c-14.1-6.2-23.2-20.2-23.1-35.6s9.1-29.3 23.1-35.6l448-200c10.7-4.8 23.2-2.5 31.4 5.6z">
+                                    d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7z">
                                 </path>
                             </svg>
-
-
                         </button>
                     </div>
+
                 </div>
             </div>
-        </div>
 
+        </div>
 
         <div class="dashboard-layout">
             <div class="coluna-itens full-width">
-                <div class="coluna-itens">
-                    <div class="card card-dark">
-                        <h3>Itens</h3>
-                        <div class="item" *ngFor="let item of orcamento.itens; let i = index">
-                            <div class="info">
-                                <strong class="item-name">{{ item.nome }}</strong>
-                                <span class="item-unit-price">R$ {{ item.preco | number:'1.2-2' }}</span>
-                            </div>
 
-                            <div class="quantity-selector">
-                                <button class="qty-btn" (click)="alterarQuantidade(i, -1)">–</button>
-                                <span class="qty-value">{{ item.quantidade }}</span>
-                                <button class="qty-btn" (click)="alterarQuantidade(i, 1)">+</button>
-                            </div>
+                <div class="card-dark">
 
-                           <span class="total-item"><small class="moeda-item">R$</small>{{ item.preco * item.quantidade | number:'1.2-2' }}</span>
+                    <h3>Itens</h3>
 
-                            <button class="btn-remove" (click)="removerItem(i)">✕</button>
+                    <div class="item" *ngFor="let item of orcamento.itens; let i = index">
+
+                        <div class="info">
+                            <strong class="item-name">{{ item.nome }}</strong>
+                            <span class="item-unit-price">R$ {{ item.preco | number:'1.2-2' }}</span>
                         </div>
+
+                        <div class="quantity-selector">
+                            <button class="qty-btn" (click)="alterarQuantidade(i, -1)">–</button>
+                            <span class="qty-value">{{ item.quantidade }}</span>
+                            <button class="qty-btn" (click)="alterarQuantidade(i, 1)">+</button>
+                        </div>
+
+                        <span class="total-item">
+                            <small class="moeda-item">R$</small>
+                            {{ item.preco * item.quantidade | number:'1.2-2' }}
+                        </span>
+
+                        <button class="btn-remove" (click)="removerItem(i)">✕</button>
+
                     </div>
+
                 </div>
+
             </div>
         </div>
+
     </div>
 
 </div>

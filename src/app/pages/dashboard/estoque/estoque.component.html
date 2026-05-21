@@ -1,176 +1,502 @@
 <div class="container">
-  <header class="header">
 
-    <div class="filtros">
-      <div class="mat-input search-fields">
-        <input type="text" id="busca" [(ngModel)]="busca" (ngModelChange)="aplicarFiltros()" placeholder="Buscar" />
-        <label for="busca">
-          <i class="fas fa-magnifying-glass"></i> Buscar produto...
-        </label>
-      </div>
+    <!-- =========================
+         HEADER
+    ========================== -->
 
-      <div class="mat-input select-fields">
-        <select id="filtroTipo" [(ngModel)]="filtroTipo" (change)="aplicarFiltros()" required>
-          <option value="">Todos</option>
-          <option value="ferragem">Ferragem</option>
-          <option value="ferramenta">Ferramenta</option>
-        </select>
-        <label for="filtroTipo">Categoria</label>
-      </div>
+    <header class="header">
+
+        <div class="filtros">
+
+            <!-- BUSCA -->
+            <div class="mat-input search-fields">
+
+                <input type="text" id="busca" [(ngModel)]="busca" (ngModelChange)="aplicarFiltros()"
+                    placeholder="Buscar produto..." />
+
+                <label for="busca">
+                    <i class="fas fa-magnifying-glass"></i>
+                    Buscar produto...
+                </label>
+
+            </div>
+
+            <!-- CATEGORIA -->
+            <div class="mat-input select-fields">
+
+                <select id="filtroCategoria" [(ngModel)]="filtroCategoria" (change)="aplicarFiltros()">
+
+                    <option value="">Todas</option>
+
+                    <option value="ferragem">
+                        Ferragem
+                    </option>
+
+                    <option value="ferramenta">
+                        Ferramenta
+                    </option>
+
+                    <option value="material de construcao">
+                        Material de Construção
+                    </option>
+
+                    <option value="eletrica">
+                        Elétrica
+                    </option>
+
+                </select>
+
+                <label for="filtroCategoria">
+                    Categoria
+                </label>
+
+            </div>
+
+        </div>
+
+        <!-- AÇÕES -->
+        <div class="actions-container">
+
+            <button class="bookmarkBtn saveBtn" (click)="abrirModal()">
+
+                <span class="IconContainer">
+                    <i class="fas fa-plus"></i>
+                </span>
+
+                <p class="text">
+                    Novo
+                </p>
+
+            </button>
+
+            <button class="bookmarkBtn xmlBtn" disabled title="Funcionalidade em breve">
+
+                <span class="IconContainer">
+                    <i class="fas fa-file-code"></i>
+                </span>
+
+                <p class="text">
+                    XML
+                </p>
+
+            </button>
+
+        </div>
+
+    </header>
+
+    <!-- =========================
+         CARDS
+    ========================== -->
+
+    <div class="cards-grid">
+
+        <div class="card-item" *ngFor="let produto of produtosFiltrados">
+
+            <!-- IMAGEM -->
+            <div class="card-img">
+
+                <img *ngIf="produto.imagem && !produto.erroImagem" [src]="produto.imagem" class="img-real"
+                    (error)="produto.erroImagem = true" />
+
+                <div *ngIf="!produto.imagem || produto.erroImagem" class="img-placeholder">
+
+                    <i class="fas fa-image"></i>
+
+                    <span>
+                        Sem Foto
+                    </span>
+
+                </div>
+
+                <!-- BADGE -->
+                <span class="badge" [ngClass]="produto.categoria">
+
+                    {{ produto.categoria }}
+
+                </span>
+
+                <!-- ALERTA ESTOQUE -->
+                <span class="badge-alerta" *ngIf="estoqueBaixo(produto)">
+
+                    Estoque Baixo
+
+                </span>
+
+            </div>
+
+            <!-- TÍTULO -->
+            <div class="card-title">
+
+                {{ produto.nome }}
+
+            </div>
+
+            <!-- CÓDIGOS -->
+            <div class="card-codigos">
+
+                <span>
+                    <strong>Sistema:</strong>
+                    {{ produto.codigo }}
+                </span>
+
+                <span *ngIf="produto.codigoFornecedor">
+
+                    <strong>Fornecedor:</strong>
+                    {{ produto.codigoFornecedor }}
+
+                </span>
+
+            </div>
+
+            <!-- INFO -->
+            <div class="card-subtitle">
+
+                <div class="info-detalhe">
+
+                    <span class="label">
+                        Especificação:
+                    </span>
+
+                    <span>
+                        {{ produto.especificacao || '-' }}
+                    </span>
+
+                </div>
+
+                <div class="info-detalhe">
+
+                    <span class="label">
+                        Marca:
+                    </span>
+
+                    <span>
+                        {{ produto.marca || '-' }}
+                    </span>
+
+                </div>
+
+                <div class="info-detalhe">
+
+                    <span class="label">
+                        Quantidade:
+                    </span>
+
+                    <span>
+
+                        {{ produto.quantidade }}
+
+                        {{ produto.unidade }}
+
+                    </span>
+
+                </div>
+
+                <div class="info-detalhe">
+
+                    <span class="label">
+                        Estoque mínimo:
+                    </span>
+
+                    <span>
+                        {{ produto.estoqueMinimo || 0 }}
+                    </span>
+
+                </div>
+
+                <div class="info-detalhe">
+
+                    <span class="label">
+                        Local:
+                    </span>
+
+                    <span>
+                        {{ produto.localizacao || '-' }}
+                    </span>
+
+                </div>
+
+            </div>
+
+            <hr class="card-divider">
+
+            <!-- FOOTER -->
+            <div class="card-footer">
+
+                <div class="card-prices">
+
+                    <div class="card-price">
+
+                        <span>
+                            Compra:
+                        </span>
+
+                        {{ formatarPreco(produto.precoCompra) }}
+
+                    </div>
+
+                    <div class="card-price venda">
+
+                        <span>
+                            Venda:
+                        </span>
+
+                        {{ formatarPreco(produto.precoVenda) }}
+
+                    </div>
+
+                </div>
+
+                <!-- AÇÕES -->
+                <div class="acoes">
+
+                    <button class="card-btn btn-edit" (click)="editar(produto)">
+
+                        <i class="fas fa-pen"></i>
+
+                    </button>
+
+                    <button class="card-btn btn-delete" (click)="excluir(produto.id)">
+
+                        <i class="fas fa-trash"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
+    <!-- =========================
+         MODAL
+    ========================== -->
 
+    <div class="modal-backdrop" *ngIf="mostrarModal">
 
+        <div class="modal">
 
-    <div class="actions-container">
-      <button class="bookmarkBtn saveBtn" (click)="abrirModal()">
-        <span class="IconContainer">
-          <i class="fas fa-plus"></i>
-        </span>
-        <p class="text">Novo</p>
-      </button>
+            <h2 class="modal-title">
 
+                {{ editando ? 'Editar Produto' : 'Novo Produto' }}
 
-      <button class="bookmarkBtn xmlBtn" disabled title="Funcionalidade em breve">
-        <span class="IconContainer">
-          <i class="fas fa-file-code"></i>
-        </span>
-        <p class="text">XML</p>
-      </button>
+            </h2>
+
+            <div class="form-grid">
+
+                <!-- NOME -->
+                <div class="mat-input">
+
+                    <input id="nome" [(ngModel)]="produto.nome" type="text" placeholder="Ex: Parafuso Sextavado"
+                        required>
+
+                    <label for="nome">
+                        Nome do Produto
+                    </label>
+
+                </div>
+
+                <!-- CATEGORIA -->
+                <div class="mat-input">
+
+                    <select id="categoria" [(ngModel)]="produto.categoria" class="mat-select">
+
+                        <option value="ferragem">
+                            Ferragem
+                        </option>
+
+                        <option value="ferramenta">
+                            Ferramenta
+                        </option>
+
+                        <option value="material de construcao">
+                            Material de Construção
+                        </option>
+
+                        <option value="eletrica">
+                            Elétrica
+                        </option>
+
+                    </select>
+
+                    <label for="categoria">
+                        Categoria
+                    </label>
+
+                </div>
+
+                <!-- CÓDIGO FORNECEDOR -->
+                <div class="mat-input">
+
+                    <input id="codigoFornecedor" [(ngModel)]="produto.codigoFornecedor" type="text"
+                        placeholder="Ex: ROMA-001">
+
+                    <label for="codigoFornecedor">
+                        Código do Fornecedor
+                    </label>
+
+                </div>
+
+                <!-- CÓDIGO DE BARRAS -->
+                <div class="mat-input">
+
+                    <input id="codigoBarras" [(ngModel)]="produto.codigoBarras" type="text" placeholder="7890000000000">
+
+                    <label for="codigoBarras">
+                        Código de Barras
+                    </label>
+
+                </div>
+
+                <!-- MARCA -->
+                <div class="mat-input">
+
+                    <input id="marca" [(ngModel)]="produto.marca" type="text" placeholder="Ex: Bosch">
+
+                    <label for="marca">
+                        Marca
+                    </label>
+
+                </div>
+
+                <!-- ESPECIFICAÇÃO -->
+                <div class="mat-input">
+
+                    <input id="espec" [(ngModel)]="produto.especificacao" type="text" placeholder="Ex: Aço Carbono">
+
+                    <label for="espec">
+                        Especificação
+                    </label>
+
+                </div>
+
+                <!-- QUANTIDADE -->
+                <div class="mat-input">
+
+                    <input id="qtd" [(ngModel)]="produto.quantidade" type="number" placeholder="0">
+
+                    <label for="qtd">
+                        Quantidade
+                    </label>
+
+                </div>
+
+                <!-- ESTOQUE MÍNIMO -->
+                <div class="mat-input">
+
+                    <input id="estoqueMinimo" [(ngModel)]="produto.estoqueMinimo" type="number" placeholder="0">
+
+                    <label for="estoqueMinimo">
+                        Estoque Mínimo
+                    </label>
+
+                </div>
+
+                <!-- UNIDADE -->
+                <div class="mat-input">
+
+                    <input id="unid" [(ngModel)]="produto.unidade" type="text" placeholder="Ex: un">
+
+                    <label for="unid">
+                        Unidade
+                    </label>
+
+                </div>
+
+                <!-- PREÇO COMPRA -->
+                <div class="mat-input">
+
+                    <input id="precoCompra" [(ngModel)]="produto.precoCompra" type="number" placeholder="0.00">
+
+                    <label for="precoCompra">
+                        Preço Compra
+                    </label>
+
+                </div>
+
+                <!-- PREÇO VENDA -->
+                <div class="mat-input">
+
+                    <input id="precoVenda" [(ngModel)]="produto.precoVenda" type="number" placeholder="0.00">
+
+                    <label for="precoVenda">
+                        Preço Venda
+                    </label>
+
+                </div>
+
+                <!-- LOCALIZAÇÃO -->
+                <div class="mat-input">
+
+                    <input id="local" [(ngModel)]="produto.localizacao" type="text" placeholder="Ex: A1">
+
+                    <label for="local">
+                        Localização
+                    </label>
+
+                </div>
+
+                <!-- IMAGEM -->
+                <div class="mat-input">
+
+                    <input id="img" [(ngModel)]="produto.imagem" type="text" placeholder="https://...">
+
+                    <label for="img">
+                        URL da Imagem
+                    </label>
+
+                </div>
+
+            </div>
+
+            <!-- AÇÕES -->
+            <div class="modal-actions">
+
+                <button class="bookmarkBtn saveBtn" (click)="salvar()">
+
+                    <span class="IconContainer">
+                        <i class="fas fa-floppy-disk"></i>
+                    </span>
+
+                    <p class="text">
+                        Salvar
+                    </p>
+
+                </button>
+
+                <button class="bookmarkBtn cancelBtn" (click)="fecharModal()">
+
+                    <span class="IconContainer">
+                        <i class="fas fa-xmark"></i>
+                    </span>
+
+                    <p class="text">
+                        Sair
+                    </p>
+
+                </button>
+
+            </div>
+
+        </div>
 
     </div>
 
-  </header>
+</div>
 
+<!-- <button
+    class="bookmarkBtn xmlBtn"
+    (click)="importarMock()"
+>
 
-  <div class="tabela-container cards-grid">
+    <span class="IconContainer">
+        <i class="fas fa-database"></i>
+    </span>
 
-    <div class="card-item" *ngFor="let produto of produtosFiltrados">
+    <p class="text">
+        Mock
+    </p>
 
-
-      <div class="card-img">
-        <img *ngIf="produto.imagem" [src]="produto.imagem" class="img-real" />
-        <div *ngIf="!produto.imagem" class="img-placeholder">Sem Foto</div>
-
-        <span class="badge" [ngClass]="produto.tipo">{{ produto.tipo }}</span>
-      </div>
-
-
-      <div class="card-title">{{ produto.nome }}</div>
-
-
-      <div class="card-subtitle">
-        <p>{{ produto.especificacao }}</p>
-
-        <div class="info-detalhe">
-          <span class="label">Qtd:</span>
-          <span>{{ produto.quantidade }} {{ produto.unidade }}</span>
-        </div>
-
-        <div class="info-detalhe">
-          <span class="label">Local:</span>
-          <span>{{ produto.localizacao || '-' }}</span>
-        </div>
-      </div>
-
-      <hr class="card-divider">
-      <div class="card-footer">
-        <div class="card-price">
-          <span>R$</span> {{ produto.preco }}
-        </div>
-
-        <div class="acoes">
-          <button class="card-btn btn-edit" (click)="editar(produto)">
-            <i class="fas fa-pen"></i>
-          </button>
-
-          <button class="card-btn btn-delete" (click)="excluir(produto.id)">
-            <i class="fas fa-trash"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-backdrop" *ngIf="mostrarModal">
-    <div class="modal">
-      <h2 class="modal-title">{{ editando ? 'Editar Produto' : 'Novo Produto' }}</h2>
-
-      <div class="form-grid">
-
-
-        <div class="mat-input">
-          <input id="nome" [(ngModel)]="produto.nome" placeholder="Ex: Martelo" type="text" required>
-          <label for="nome">Nome do Produto</label>
-        </div>
-
-
-        <div class="mat-input">
-          <select id="tipo" [(ngModel)]="produto.tipo" class="mat-select" required>
-            <option value="" disabled selected hidden></option>
-            <option value="ferragem">Ferragem</option>
-            <option value="ferramenta">Ferramenta</option>
-          </select>
-          <label for="tipo">Categoria</label>
-        </div>
-
-
-        <div class="mat-input">
-          <input id="espec" [(ngModel)]="produto.especificacao" placeholder="Ex: Aço carbono" type="text">
-          <label for="espec">Especificação</label>
-        </div>
-
-
-        <div class="mat-input">
-          <input id="qtd" [(ngModel)]="produto.quantidade" placeholder="0" type="number">
-          <label for="qtd">Quantidade</label>
-        </div>
-
-
-        <div class="mat-input">
-          <input id="unid" [(ngModel)]="produto.unidade" placeholder="un" type="text">
-          <label for="unid">Unidade</label>
-        </div>
-
-
-        <div class="mat-input">
-          <input id="preco" [(ngModel)]="produto.preco" placeholder="0.00" type="number">
-          <label for="preco">Preço (R$)</label>
-        </div>
-
-
-        <div class="mat-input">
-          <input id="local" [(ngModel)]="produto.localizacao" placeholder="A1" type="text">
-          <label for="local">Localização</label>
-        </div>
-
-
-        <div class="mat-input">
-          <input id="img" [(ngModel)]="produto.imagem" placeholder="https://..." type="text">
-          <label for="img">URL da Imagem</label>
-        </div>
-
-      </div>
-
-      <div class="modal-actions">
-
-
-        <button class="bookmarkBtn saveBtn" (click)="salvar()">
-          <span class="IconContainer">
-            <i class="fas fa-floppy-disk"></i>
-          </span>
-          <p class="text">Salvar</p>
-        </button>
-
-
-        <button class="bookmarkBtn cancelBtn" (click)="fecharModal()">
-          <span class="IconContainer">
-            <i class="fas fa-xmark"></i>
-          </span>
-          <p class="text">Sair</p>
-        </button>
-
-      </div>
-    </div>
-  </div>
+</button> -->

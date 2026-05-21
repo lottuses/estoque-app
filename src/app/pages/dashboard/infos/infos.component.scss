@@ -1,49 +1,324 @@
-.page {
+* {
     margin: 0;
-    padding: 5% 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; 
-    align-items: center; 
-    gap: 30px;
-    background-color: #121212;
-    min-height: 100vh;
+    padding: 0;
+    box-sizing: border-box;
 }
+
+:host {
+
+    display: block;
+
+    width: 100%;
+}
+
+/* =========================
+   PAGE
+========================= */
+
+.page {
+
+    width: 100%;
+
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    padding: 32px;
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+
+    gap: 24px;
+}
+
+/* =========================
+   CARD
+========================= */
 
 .card {
 
-    width: 80%;
-    max-width: 95%;
-    height: auto;
-    background: #191919da;
-    border-radius: 1em;
+    position: relative;
+
     display: flex;
+
     flex-direction: column;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    padding: 1em 1.5em;
-    transition: all 0.5s ease;
-    box-shadow: 15px 15px 30px rgb(8, 8, 8),
-               -15px -15px 30px rgb(23, 23, 23);
+
+    gap: 22px;
+
+    padding: 28px;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(180deg,
+            rgba(255, 255, 255, 0.05),
+            rgba(255, 255, 255, 0.025));
+
+    border: 1px solid rgba(255, 255, 255, 0.06);
+
+    backdrop-filter: blur(14px);
+
+    transition: 0.3s ease;
+
+    overflow: hidden;
+}
+
+.card:hover {
+
+    transform: translateY(-5px);
+
+    border-color: rgba(96, 165, 250, 0.25);
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.35),
+        0 0 0 1px rgba(96, 165, 250, 0.06);
+}
+
+/* =========================
+   ICON
+========================= */
+
+.card-icon {
+
+    width: 70px;
+
+    height: 70px;
+
+    border-radius: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        linear-gradient(135deg,
+            rgba(37, 99, 235, 0.2),
+            rgba(59, 130, 246, 0.08));
+
+    border: 1px solid rgba(96, 165, 250, 0.15);
 }
 
 .card-icon svg {
-    height: 4rem;
-    width: 4rem;
-    color: rgb(207, 207, 207);
+
+    width: 34px;
+
+    height: 34px;
+
+    color: #60a5fa;
 }
+
+/* =========================
+   TITLE
+========================= */
 
 .p-body {
-    font-size: 34px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    text-align: justify;
-    color: rgb(180, 180, 180);
 
+    font-size: 26px;
+
+    font-weight: 700;
+
+    color: #ffffff;
+
+    line-height: 1.2;
 }
 
+/* =========================
+   TEXT
+========================= */
+
 .card-body {
-    font-size: 20px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    text-align: justify;
-    color: rgb(180, 180, 180);
+
+    color: #b5b5b5;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+
+    font-weight: 400;
+}
+
+/* =========================
+   LIST
+========================= */
+
+.card-body ul {
+
+    margin-top: 10px;
+
+    padding-left: 18px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.card-body li {
+
+    color: #cfcfcf;
+
+    line-height: 1.5;
+}
+
+/* =========================
+   SUPPORT BOX
+========================= */
+
+.support-box {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+
+    margin-top: 10px;
+}
+
+/* =========================
+   TEXTAREA
+========================= */
+
+.support-box textarea {
+
+    width: 100%;
+
+    min-height: 140px;
+
+    resize: vertical;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 18px;
+
+    background: rgba(255, 255, 255, 0.04);
+
+    color: white;
+
+    padding: 18px;
+
+    outline: none;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    transition: 0.25s ease;
+}
+
+.support-box textarea:focus {
+
+    border-color: #2563eb;
+
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.support-box textarea::placeholder {
+
+    color: #7d7d7d;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.btn-support {
+
+    height: 54px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(135deg,
+            #2563eb,
+            #3b82f6);
+
+    color: white;
+
+    font-weight: 700;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+.btn-support:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(37, 99, 235, 0.35);
+}
+
+.btn-support:disabled {
+
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+/* =========================
+   SUCCESS
+========================= */
+
+.success-message {
+
+    color: #4ade80;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 768px) {
+
+    .page {
+
+        grid-template-columns: 1fr;
+
+        padding: 18px;
+    }
+
+    .card {
+
+        padding: 22px;
+    }
+
+    .p-body {
+
+        font-size: 22px;
+    }
+
+    .card-body {
+
+        font-size: 14px;
+    }
+
+    .card-icon {
+
+        width: 58px;
+
+        height: 58px;
+    }
+
+    .card-icon svg {
+
+        width: 28px;
+
+        height: 28px;
+    }
 }

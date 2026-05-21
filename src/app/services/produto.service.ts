@@ -24,18 +24,24 @@ export class ProdutoService {
     listar(): Observable<Produto[]> {
         return collectionData(this.colecao, { idField: 'id' }) as Observable<Produto[]>;
     }
+    async adicionar(produto: Produto) {
 
-    adicionar(produto: Produto) {
+        const codigo = await this.gerarCodigoProduto(produto.categoria);
+
         const novoProduto = {
             ...produto,
+
+            codigo,
+
             quantidade: produto.quantidade ?? 0,
+
             criadoEm: new Date(),
             atualizadoEm: new Date()
         };
 
         return addDoc(this.colecao, novoProduto);
     }
-
+    
     atualizar(id: string, produto: Produto) {
         const docRef = doc(this.firestore, `produtos/${id}`);
 
@@ -48,6 +54,43 @@ export class ProdutoService {
     deletar(id: string) {
         const docRef = doc(this.firestore, `produtos/${id}`);
         return deleteDoc(docRef);
+    }
+
+    private async gerarCodigoProduto(categoria: string): Promise<string> {
+
+        const contadorRef = doc(this.firestore, 'contadores/produtos');
+
+        return runTransaction(this.firestore, async (transaction) => {
+
+            const snap = await transaction.get(contadorRef);
+
+            let ultimoNumero = 0;
+
+            if (snap.exists()) {
+                ultimoNumero = snap.data()['ultimoNumero'] || 0;
+            }
+
+            ultimoNumero++;
+
+            transaction.set(contadorRef, {
+                ultimoNumero
+            });
+
+            const numeroFormatado = ultimoNumero
+                .toString()
+                .padStart(4, '0');
+
+            const prefixos: any = {
+                ferragem: 'FER',
+                ferramenta: 'FEA',
+                'material de construcao': 'MAT',
+                eletrica: 'ELE'
+            };
+
+            const prefixo = prefixos[categoria] || 'PRO';
+
+            return `${prefixo}-${numeroFormatado}`;
+        });
     }
 
     // 🔥 FUNÇÃO BASE (privada)

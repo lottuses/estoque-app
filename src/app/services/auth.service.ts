@@ -25,7 +25,6 @@ export class AuthService {
     usuario$ = user(this.auth);
 
     async cadastrar(
-        nome: string,
         email: string,
         senha: string
     ) {
@@ -40,7 +39,6 @@ export class AuthService {
 
         await setDoc(doc(this.firestore, 'usuarios', uid), {
             uid,
-            nome,
             email,
             criadoEm: new Date()
         });

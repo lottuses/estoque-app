@@ -2,16 +2,20 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
+import { IonContent } from "@ionic/angular/standalone";
+
 
 @Component({
     selector: 'app-login',
     standalone: true,
-    imports: [
+    imports: [IonContent,
         CommonModule,
-        FormsModule
+        FormsModule,
+        RouterModule
     ],
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss']
@@ -23,7 +27,6 @@ export class LoginComponent {
     loginSenha = '';
 
     // CADASTRO
-    cadastroNome = '';
     cadastroEmail = '';
     cadastroSenha = '';
 
@@ -45,13 +48,9 @@ export class LoginComponent {
                 this.loginSenha
             );
 
-            alert('Login realizado');
-
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/dashboard/infos']);
 
         } catch (erro: any) {
-
-            alert('Email ou senha inválidos');
 
             console.error(erro);
 
@@ -70,7 +69,6 @@ export class LoginComponent {
             this.carregando = true;
 
             await this.authService.cadastrar(
-                this.cadastroNome,
                 this.cadastroEmail,
                 this.cadastroSenha
             );
