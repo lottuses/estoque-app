@@ -408,29 +408,50 @@ button {
 /* ADD */
 
 .btn-add {
-
     width: 44px;
-
     height: 44px;
-
     border-radius: 14px;
-
     background: #2563eb;
-
-    color: white;
-
-    font-size: 24px;
-
-    font-weight: 600;
-
+    color: transparent; /* Esconde o texto "+" caso ele ainda esteja no HTML */
     flex-shrink: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    
+    // Força o navegador a renderizar as bordas perfeitamente estáticas
+    isolation: isolate;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+
+    // Linha Horizontal do "+"
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        background-color: white;
+        border-radius: 2px;
+        transition: background-color 0.2s ease;
+    }
+
+    // Linha Horizontal
+    &::before {
+        width: 16px;
+        height: 2px; /* Valor inteiro limpo */
+    }
+
+    // Linha Vertical
+    &::after {
+        width: 2px;  /* Valor inteiro limpo */
+        height: 16px;
+    }
 }
 
 .btn-add:hover {
-
-    transform: scale(1.05);
-
+    // Trocamos o 'scale' (que quebra pixels no zoom) por uma transição suave de cor ou sombra
     background: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
 }
 
 /* REMOVE */

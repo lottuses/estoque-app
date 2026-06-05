@@ -1,16 +1,20 @@
+/* =========================
+   CONFIGURAÇÕES GERAIS / CONTAINER
+========================= */
 .container {
-    padding: 20px;
-    max-width: 1200px;
+    width: 100%;
+    max-width: 1600px; // Alinhado com o design premium
     margin: 0 auto;
-    font-family: 'Trebuchet MS', sans-serif;
+    padding: 24px;
+    color: white;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
     h1 {
-        color: #c4c4c4;
-        font-size: 2.6rem;
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: 700;
         margin-bottom: 30px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        padding-left: 15px;
+        letter-spacing: -0.5px;
     }
 }
 
@@ -19,76 +23,95 @@
 ========================= */
 .vazio {
     text-align: center;
-    color: #ff4d4d;
+    color: #f87171;
     padding: 50px;
-    background: #1a1a1a;
-    border-radius: 10px;
+    background: rgba(239, 68, 68, 0.05);
+    border: 1px solid rgba(248, 113, 113, 0.15);
+    border-radius: 24px;
+    backdrop-filter: blur(10px);
+    font-size: 14px;
+    font-weight: 600;
 }
 
 /* =========================
-   CARD PRINCIPAL
+   CARD PRINCIPAL (ORÇAMENTO)
 ========================= */
 .orcamento-card {
-    background: #0c0c0c;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.025));
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 24px;
+    padding: 24px;
+    margin-bottom: 24px;
     cursor: pointer;
-    transition: 0.25s ease;
-    color: rgb(212, 207, 176);
-    border: 1px solid transparent;
+    transition: 0.3s ease;
+    color: #ffffff;
+    backdrop-filter: blur(10px);
+    position: relative;
 
     &:hover {
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-        transform: translateY(-2px);
+        transform: translateY(-5px);
+        border-color: rgba(96, 165, 250, 0.35);
+        box-shadow: 
+            0 10px 30px rgba(0, 0, 0, 0.35),
+            0 0 0 1px rgba(96, 165, 250, 0.1);
     }
 }
 
 /* =========================
-   HEADER
+   HEADER DO CARD
 ========================= */
 .header {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     position: relative;
-    padding: 10px 0 25px;
-    min-height: 70px;
+    padding-bottom: 18px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    min-height: auto;
+    gap: 16px;
 
     .cliente {
-        text-align: center;
+        text-align: left;
 
         strong {
             display: block;
-            color: #e0e0e0;
-            font-size: 1.8rem;
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 700;
             text-transform: capitalize;
+            line-height: 1.3;
         }
     }
 
     .data {
-        position: absolute;
-        left: 0;
-        top: 0;
-        color: #fff86f;
-        font-size: 0.9rem;
+        position: static; // Removido absolute para melhor controle flexbox
+        color: #8f8f8f;
+        font-size: 12px;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 6px 12px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.03);
     }
 
     .status {
-        position: absolute;
-        right: 0;
-        top: 0;
-        font-size: 0.95rem;
-        font-weight: bold;
-        text-transform: uppercase;
+        position: static; // Removido absolute para alinhar com o design moderno de badges
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: capitalize;
+        padding: 6px 12px;
+        border-radius: 999px;
+        backdrop-filter: blur(10px);
 
         &.finalizado {
-            color: #00ffae;
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
         }
 
         &.pendente,
         &.rascunho {
-            color: #ffe787;
+            background: rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
         }
     }
 }
@@ -98,74 +121,91 @@
 ========================= */
 .info-extra {
     display: flex;
-    gap: 20px;
-    margin-bottom: 15px;
-    font-size: 0.9rem;
-    color: #b9b9b9;
+    gap: 12px;
+    margin-bottom: 18px;
+    font-size: 13px;
+    color: #b8b8b8;
     align-items: center;
+    flex-wrap: wrap;
 
     .valor-desconto {
         display: flex;
         align-items: center;
-        gap: 5px;
+        gap: 6px;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 8px 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.03);
     }
 }
 
 .preco-extra {
-    color: #ff4d4d;
-    font-weight: bold;
-    font-size: 1.1rem;
+    color: #f87171;
+    font-weight: 700;
+    font-size: 14px;
 }
 
 /* =========================
-   ITENS
+   ITENS DO ORÇAMENTO
 ========================= */
 .itens {
-    background: #050505;
-    border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 15px;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 16px;
+    padding: 12px;
+    margin-bottom: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.02);
 
     .item {
         display: flex;
         align-items: center;
-        gap: 15px;
-        padding: 10px 0;
+        gap: 16px;
+        padding: 12px 6px;
 
         &:not(:last-child) {
-            border-bottom: 1px solid #111;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         img,
         .sem-imagem {
-            width: 45px;
-            height: 45px;
-            border-radius: 6px;
-            background: #222;
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #171717, #0f0f0f);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 18px;
+            color: #666;
+            object-fit: cover;
         }
 
         .info {
             flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
 
             strong {
-                color: #ddd;
-                font-size: 0.85rem;
+                color: #ffffff;
+                font-size: 14px;
+                font-weight: 600;
             }
 
             span {
-                color: #cfcfcf;
-                font-size: 0.8rem;
+                color: #8f8f8f;
+                font-size: 12px;
             }
         }
 
         .subtotal {
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: #ddd;
+            font-weight: 700;
+            font-size: 15px;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 8px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
         }
     }
 }
@@ -177,235 +217,197 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 6px;
-    padding-top: 15px;
+    gap: 8px;
+    padding-top: 6px;
 
     .linha {
         display: flex;
         justify-content: space-between;
         width: 100%;
-        color: #888;
+        color: #8f8f8f;
+        font-size: 13px;
 
         &.final {
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid #333;
+            margin-top: 12px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            align-items: center;
 
             strong {
-                font-size: 2rem;
-                color: #cfd3d3;
+                font-size: 22px;
+                font-weight: 700;
+                color: #ffffff;
             }
+            
+            // Se houver uma classe específica para o container do preço final
+            border-color: rgba(16, 185, 129, 0.12);
+            background: rgba(16, 185, 129, 0.04);
+            padding: 12px;
+            border-radius: 16px;
+            border: 1px solid rgba(16, 185, 129, 0.15);
         }
     }
 }
 
 /* =========================
-   AÇÕES (PADRONIZADO)
+   AÇÕES DO CARD (BOTOES)
 ========================= */
 .acoes {
     display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 18px;
 }
 
-/* BOTÕES BASE */
+/* BOTÕES BASE REESTRUTURADOS PARA O DESIGN MODERNO */
 .acoes button {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
     border: none;
-    background: rgb(20, 20, 20);
+    background: rgba(255, 255, 255, 0.06);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: 0.3s ease;
-    overflow: hidden;
+    transition: 0.25s ease;
     position: relative;
+    color: white;
+
+    &:hover {
+        transform: scale(1.05);
+        background: rgba(255, 255, 255, 0.1);
+    }
 }
 
-/* SVG */
+/* SVG Interno */
 .acoes svg {
     width: 16px;
-    transition: 0.3s ease;
+    height: 16px;
+    transition: 0.25s ease;
 }
 
 .acoes path {
-    fill: white;
+    fill: currentColor;
+}
+
+/* Comportamento limpo baseado no primeiro design (Removido o efeito de esticar antigo) */
+.aprovar {
+    &:hover {
+        background: rgba(16, 185, 129, 0.2) !important;
+        color: #34d399;
+    }
+}
+
+.excluir {
+    &:hover {
+        background: rgba(255, 77, 77, 0.2) !important;
+        color: #ff6b6b;
+    }
 }
 
 /* =========================
-   APROVAR
+   RESPONSIVO (MOBILE)
 ========================= */
-.aprovar:hover {
-    width: 140px;
-    border-radius: 50px;
-    background: rgba(147, 255, 143, 0.7);
-}
-
-.aprovar:hover svg {
-    transform: translateY(60%);
-}
-
-.aprovar::before {
-    content: "Aprovar";
-    position: absolute;
-    top: -20px;
-    color: white;
-    font-size: 2px;
-    transition: 0.3s ease;
-}
-
-.aprovar:hover::before {
-    font-size: 14px;
-    transform: translateY(30px);
-}
-
-/* =========================
-   EXCLUIR
-========================= */
-.excluir:hover {
-    width: 140px;
-    border-radius: 50px;
-    background: rgba(255, 50, 50, 0.7);
-}
-
-.excluir::before {
-    content: "Deletar";
-    position: absolute;
-    top: -20px;
-    color: white;
-    font-size: 2px;
-}
-
-.excluir:hover::before {
-    font-size: 14px;
-    transform: translateY(30px);
-}
-
 @media (max-width: 768px) {
-
     .container {
-        padding: 12px;
-    }
-
-    /* =========================
-       CARD
-    ========================= */
-    .orcamento-card {
         padding: 16px;
+        
+        h1 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
     }
 
-    /* =========================
-       HEADER (CORRIGIDO)
-    ========================= */
+    .orcamento-card {
+        padding: 18px;
+        border-radius: 20px;
+    }
+
     .header {
         flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 10px;
-        padding-bottom: 15px;
+        align-items: stretch;
+        gap: 12px;
+        padding-bottom: 14px;
 
-        min-height: auto;
-
-        .cliente strong {
-            font-size: 1.4rem;
-            line-height: 1.2;
-            width: 100%;
+        .cliente {
+            text-align: left;
+            
+            strong {
+                font-size: 18px;
+            }
         }
 
         .data,
         .status {
-            position: static;
-            /* tira o absolute no mobile */
-            display: inline-block;
-            margin: 5px 5px;
+            align-self: flex-start;
+            width: auto;
         }
     }
 
-    /* =========================
-       INFO EXTRA
-    ========================= */
     .info-extra {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
         gap: 8px;
-        font-size: 0.85rem;
     }
 
-    /* =========================
-       ITENS
-    ========================= */
     .itens {
         padding: 8px;
 
         .item {
-            flex-direction: row;
-            align-items: center;
-            gap: 10px;
+            gap: 12px;
 
             img,
             .sem-imagem {
-                width: 38px;
-                height: 38px;
-                font-size: 1rem;
+                width: 44px;
+                height: 44px;
+                border-radius: 10px;
+                font-size: 14px;
             }
 
             .info {
                 strong {
-                    font-size: 0.8rem;
+                    font-size: 13px;
                 }
-
                 span {
-                    font-size: 0.75rem;
+                    font-size: 11px;
                 }
             }
 
             .subtotal {
-                font-size: 1rem;
+                font-size: 13px;
+                padding: 6px 10px;
             }
         }
     }
 
-    /* =========================
-       TOTAL
-    ========================= */
     .total {
         align-items: stretch;
 
         .linha {
-            font-size: 0.85rem;
+            font-size: 12px;
 
-            &.final strong {
-                font-size: 1.6rem;
+            &.final {
+                padding: 10px;
+                
+                strong {
+                    font-size: 18px;
+                }
             }
         }
     }
 
-    /* =========================
-       AÇÕES (CORRIGIDO MOBILE)
-    ========================= */
     .acoes {
-        flex-wrap: wrap;
+        justify-content: flex-end;
         gap: 12px;
-        justify-content: center;
-    }
-
-    .acoes button {
-        width: 48px;
-        height: 48px;
-    }
-
-    /* impede hover estranho no mobile */
-    .aprovar:hover,
-    .excluir:hover {
-        width: 48px;
-        border-radius: 50%;
-    }
-
-    .aprovar:hover::before,
-    .excluir:hover::before {
-        display: none;
+        
+        button {
+            width: 44px;
+            height: 44px;
+            
+            &:hover {
+                transform: none; // Evita bugs visuais de escala em touch screens
+            }
+        }
     }
 }
