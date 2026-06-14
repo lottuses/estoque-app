@@ -2,7 +2,6 @@
 
     <div class="container">
 
-        <!-- 🔹 PRODUTOS -->
         <div class="card produtos">
             <h2>Produtos</h2>
 
@@ -13,7 +12,7 @@
 
             <ng-container *ngIf="produtosFiltrados$ | async as produtos; else loadingProdutos">
 
-                <div *ngIf="produtos.length > 0; else vazioProdutos">
+                <div class="lista-produtos" *ngIf="produtos.length > 0; else vazioProdutos">
 
                     <div class="produto" *ngFor="let produto of produtos; trackBy: trackById">
 
@@ -54,64 +53,51 @@
         </div>
 
 
-        <!-- 🔹 CARRINHO -->
         <div class="card carrinho">
             <h2>Dados do cliente</h2>
 
-            <!-- 🔹 DADOS DO CLIENTE -->
             <div class="cliente-form">
 
-                <!-- NOME -->
                 <div class="mat-input">
                     <input type="text" id="nome" name="nome" placeholder=" " [(ngModel)]="cliente.nome" />
                     <label for="nome">Nome do cliente</label>
                 </div>
 
-                <!-- TELEFONE -->
                 <div class="mat-input">
                     <input type="text" id="telefone" name="telefone" placeholder=" " [(ngModel)]="cliente.telefone" />
                     <label for="telefone">Telefone</label>
                 </div>
 
-                <!-- ENDEREÇO -->
                 <div class="mat-input">
                     <input type="text" id="endereco" name="endereco" placeholder=" " [(ngModel)]="cliente.endereco" />
                     <label for="endereco">Endereço</label>
                 </div>
 
-                <!-- PAGAMENTO -->
                 <div class="mat-input">
                     <select id="pagamento" name="pagamento" [(ngModel)]="tipoPagamento">
-
                         <option value="pix">PIX</option>
                         <option value="dinheiro">Dinheiro</option>
                         <option value="cartao">Cartão</option>
-
                     </select>
-
                     <label for="pagamento">Tipo de pagamento</label>
                 </div>
 
-                <!-- PARCELAS -->
                 <div class="mat-input">
-                    <input type="number" id="parcelas" name="parcelas" placeholder=" " [(ngModel)]="parcelas" min="1" />
-                    <label for="parcelas">Parcelas</label>
-                </div>
-
-                <!-- DESCONTO -->
-                <div class="mat-input">
-                    <input type="number" id="desconto" name="desconto" placeholder=" " [(ngModel)]="desconto" min="0" />
-                    <label for="desconto">Desconto (R$)</label>
+                    <label class="label-fixa" for="parcelas">Parcelas</label>
+                    <div class="stepper-parcelas">
+                        <button type="button" class="btn-menos" (click)="parcelas = (parcelas > 1 ? parcelas - 1 : 1)">—</button>
+                        <input type="number" id="parcelas" name="parcelas" [value]="parcelas" readonly />
+                        <button type="button" class="btn-mais" (click)="parcelas = parcelas + 1">+</button>
+                    </div>
                 </div>
 
             </div>
 
             <h2>Carrinho</h2>
 
-
             <ng-container *ngIf="itens$ | async as itens">
 
-                <div *ngIf="itens.length > 0; else vazioCarrinho">
+                <div class="lista-carrinho" *ngIf="itens.length > 0; else vazioCarrinho">
 
                     <div class="item" *ngFor="let item of itens; trackBy: trackById">
 
@@ -138,8 +124,6 @@
                                 <button type="button" (click)="aumentar(item)">+</button>
                             </div>
 
-
-
                             <span class="subtotal">
                                 R$ {{ (item.preco * item.quantidade) | number:'1.2-2' }}
                             </span>
@@ -152,27 +136,24 @@
 
                     </div>
 
-                    <div class="total">
-                        Total:
-                        <strong>R$ {{ total$ | async }}</strong>
-                    </div>
+                </div> <div *ngIf="itens.length > 0" class="total">
+                    Total:
+                    <strong>R$ {{ total$ | async }}</strong>
+                </div>
 
-                    <div class="finalizar-container">
-                        <button class="btn-finalizar" (click)="gerarOrcamento()">
-                            <span class="texto-botao">Gerar Orçamento</span>
-                            <div class="fundo-icone">
-                                <!-- Ícone de Carrinho Clássico -->
-                                <svg class="seta-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="9" cy="21" r="1"></circle>
-                                    <circle cx="20" cy="21" r="1"></circle>
-                                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                                </svg>
-                            </div>
-                        </button>
-                    </div>
-
+                <div *ngIf="itens.length > 0" class="finalizar-container">
+                    <button class="btn-finalizar" (click)="gerarOrcamento()">
+                        <span class="texto-botao">Gerar Orçamento</span>
+                        <div class="fundo-icone">
+                            <svg class="seta-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="9" cy="21" r="1"></circle>
+                                <circle cx="20" cy="21" r="1"></circle>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                            </svg>
+                        </div>
+                    </button>
                 </div>
 
             </ng-container>
@@ -185,9 +166,6 @@
 
     </div>
 
-
-
-    <!-- 🔹 TEMPLATE GLOBAL (reutilizado) -->
     <ng-template #semImagemProduto>
         <div class="sem-imagem">📦</div>
     </ng-template>

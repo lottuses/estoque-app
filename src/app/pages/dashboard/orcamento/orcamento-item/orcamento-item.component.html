@@ -32,14 +32,20 @@
                         </span>
                     </div>
 
-                    <div class="linha">
-                        <span>Desconto</span>
-                        <div class="desconto-container">
-                            <span class="sinal-menos">- R$</span>
-                            <input type="number" [(ngModel)]="orcamento.desconto" (input)="calcularTotal()"
-                                class="input-desconto" />
-                        </div>
-                    </div>
+                   <div class="linha">
+    <span>Desconto</span>
+    <div class="desconto-container">
+        <button type="button" class="btn-desconto-menor" 
+                (click)="orcamento.desconto = ((orcamento.desconto || 0) > 0 ? (orcamento.desconto || 0) - 1 : 0); calcularTotal()">—</button>
+        
+        <span class="sinal-menos">R$</span>
+        
+        <input type="number" [(ngModel)]="orcamento.desconto" (input)="calcularTotal()" class="input-desconto" />
+        
+        <button type="button" class="btn-desconto-maior" 
+                (click)="orcamento.desconto = (orcamento.desconto || 0) + 1; calcularTotal()">+</button>
+    </div>
+</div>
 
                     <hr class="divisor">
 
@@ -52,22 +58,23 @@
                         </div>
                     </div>
 
-                    <div class="acoes">
+                   <div class="acoes">
+                        
                         <button class="salvar" (click)="salvar()" title="Salvar">
-                            <svg viewBox="0 0 448 512">
-                                <path
-                                    d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V173.3c0-17-6.7-33.3-18.7-45.3L352 50.7C340 38.7 323.7 32 306.7 32H64z">
-                                </path>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                                <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                                <polyline points="7 3 7 8 15 8"></polyline>
                             </svg>
                         </button>
 
                         <button class="finalizar" (click)="finalizar()" title="Finalizar">
-                            <svg viewBox="0 0 448 512">
-                                <path
-                                    d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7z">
-                                </path>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                             </svg>
                         </button>
+                        
                     </div>
 
                 </div>

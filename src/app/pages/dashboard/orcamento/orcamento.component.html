@@ -99,31 +99,31 @@
             <!-- 🔹 AÇÕES -->
             <div class="acoes">
 
-                <button class="aprovar" *ngIf="orc.status !== 'aprovado'"
-                    (click)="finalizarVenda(orc); $event.stopPropagation()">
-                    <svg viewBox="0 0 24 24" class="svgaprovar">
-                        <path
-                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z">
-                        </path>
+                <button class="finalizar" *ngIf="orc.status !== 'aprovado'"
+                    (click)="finalizarVenda(orc); $event.stopPropagation()" title="Finalizar Venda">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                     </svg>
                 </button>
 
-                <button class="nota-fiscal" *ngIf="orc.status === 'finalizado'"
-                    (click)="abrirNotaFiscal(orc.id); $event.stopPropagation()">
-
-                    <svg viewBox="0 0 384 512" class="svgnota">
-                        <path
-                            d="M224 136V0H24C10.7 0 0 10.7 0 24V488c0 13.3 10.7 24 24 24H360c13.3 0 24-10.7 24-24V160H248c-13.3 0-24-10.7-24-24zM384 121.9V128H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 97.9c4.5 4.5 7 10.6 7 17z">
-                        </path>
+                <button class="salvar" *ngIf="orc.status === 'finalizado'"
+                    (click)="abrirNotaFiscal(orc.id); $event.stopPropagation()" title="Ver Nota Fiscal">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
                     </svg>
-
                 </button>
 
-                <button class="excluir" (click)="excluir(orc.id); $event.stopPropagation()">
-                    <svg viewBox="0 0 448 512" class="svgexcluir">
-                        <path
-                            d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
-                        </path>
+                <button class="excluir" (click)="excluir(orc.id); $event.stopPropagation()" title="Excluir Orçamento">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                        <line x1="14" y1="11" x2="14" y2="17"></line>
                     </svg>
                 </button>
 

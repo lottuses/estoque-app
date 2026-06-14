@@ -3,9 +3,10 @@
 ========================= */
 .container {
     width: 100%;
-    max-width: 1600px; // Alinhado com o design premium
+    max-width: 1600px;
     margin: 0 auto;
     padding: 24px;
+    box-sizing: border-box; /* Adicionado como garantia global */
     color: white;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
@@ -43,17 +44,17 @@
     padding: 24px;
     margin-bottom: 24px;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: background 0.15s ease, box-shadow 0.15s ease;
     color: #ffffff;
     backdrop-filter: blur(10px);
     position: relative;
+    box-sizing: border-box;
 
     &:hover {
-        transform: translateY(-5px);
-        border-color: rgba(96, 165, 250, 0.35);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.035));
         box-shadow: 
             0 10px 30px rgba(0, 0, 0, 0.35),
-            0 0 0 1px rgba(96, 165, 250, 0.1);
+            0 0 0 1px rgba(255, 255, 255, 0.05);
     }
 }
 
@@ -85,7 +86,7 @@
     }
 
     .data {
-        position: static; // Removido absolute para melhor controle flexbox
+        position: static;
         color: #8f8f8f;
         font-size: 12px;
         background: rgba(255, 255, 255, 0.03);
@@ -95,7 +96,7 @@
     }
 
     .status {
-        position: static; // Removido absolute para alinhar com o design moderno de badges
+        position: static;
         font-size: 12px;
         font-weight: 600;
         text-transform: capitalize;
@@ -154,16 +155,18 @@
     padding: 12px;
     margin-bottom: 18px;
     border: 1px solid rgba(255, 255, 255, 0.02);
+    box-sizing: border-box;
 
     .item {
         display: flex;
         align-items: center;
         gap: 16px;
-        padding: 12px 6px;
+        padding: 12px;
+        box-sizing: border-box;
 
         &:not(:last-child) {
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-        }
+        } 
 
         img,
         .sem-imagem {
@@ -219,18 +222,26 @@
     align-items: flex-end;
     gap: 8px;
     padding-top: 6px;
+    width: 100%;
+    box-sizing: border-box;
 
     .linha {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         width: 100%;
-        color: #8f8f8f;
+        box-sizing: border-box;
         font-size: 13px;
+        color: #8f8f8f;
 
         &.final {
             margin-top: 12px;
-            padding-top: 16px;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 12px;
+            border-radius: 16px;
+            background: rgba(16, 185, 129, 0.04);
+            border: 1px solid rgba(16, 185, 129, 0.15);
+            width: 100%;
+            box-sizing: border-box;
             align-items: center;
 
             strong {
@@ -238,19 +249,12 @@
                 font-weight: 700;
                 color: #ffffff;
             }
-            
-            // Se houver uma classe específica para o container do preço final
-            border-color: rgba(16, 185, 129, 0.12);
-            background: rgba(16, 185, 129, 0.04);
-            padding: 12px;
-            border-radius: 16px;
-            border: 1px solid rgba(16, 185, 129, 0.15);
         }
     }
 }
 
 /* =========================
-   AÇÕES DO CARD (BOTOES)
+   AÇÕES DO CARD (BOTÕES DE CONTROLE)
 ========================= */
 .acoes {
     display: flex;
@@ -259,8 +263,8 @@
     margin-top: 18px;
 }
 
-/* BOTÕES BASE REESTRUTURADOS PARA O DESIGN MODERNO */
 .acoes button {
+    box-sizing: border-box;
     width: 42px;
     height: 42px;
     border-radius: 14px;
@@ -270,48 +274,73 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: 0.25s ease;
-    position: relative;
     color: white;
+    position: relative;
+    transition: background 0.15s ease, transform 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
 
     &:hover {
-        transform: scale(1.05);
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.12);
+    }
+
+    &:active {
+        transform: scale(0.92);
+        background: rgba(255, 255, 255, 0.16);
     }
 }
 
-/* SVG Interno */
 .acoes svg {
     width: 16px;
     height: 16px;
-    transition: 0.25s ease;
+    display: block;
+    pointer-events: none;
 }
 
 .acoes path {
     fill: currentColor;
 }
 
-/* Comportamento limpo baseado no primeiro design (Removido o efeito de esticar antigo) */
 .aprovar {
     &:hover {
-        background: rgba(16, 185, 129, 0.2) !important;
-        color: #34d399;
+        background: rgba(16, 185, 129, 0.15) !important;
+        color: #34d399 !important;
+        box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
+    }
+    &:active {
+        background: rgba(16, 185, 129, 0.25) !important;
     }
 }
 
 .excluir {
     &:hover {
-        background: rgba(255, 77, 77, 0.2) !important;
-        color: #ff6b6b;
+        background: rgba(255, 77, 77, 0.15) !important;
+        color: #ff6b6b !important;
+        box-shadow: 0 0 12px rgba(255, 77, 77, 0.3);
+    }
+    &:active {
+        background: rgba(255, 77, 77, 0.25) !important;
     }
 }
 
-/* =========================
-   RESPONSIVO (MOBILE)
-========================= */
-@media (max-width: 768px) {
+/* ==========================================================================
+   ADAPTAÇÃO PARA DISPOSITIVOS MÓVEIS (RESPONSIVO)
+   ========================================================================== */
+
+/* 🔹 1. TABLETS e TELAS MÉDIAS (Telas de até 1024px) */
+@media (max-width: 1024px) {
     .container {
-        padding: 16px;
+        padding: 20px;
+        /* margin-right: 20px; ⛔ REMOVIDO: Isso quebrava o alinhamento centralizado lateral */
+    }
+
+    .orcamento-card {
+        padding: 20px;
+    }
+}
+
+/* 🔹 2. SMARTPHONES GRANDES (Telas de até 600px) */
+@media (max-width: 600px) {
+    .container {
+        padding: 16px; /* Garante margem uniforme de 16px nas bordas da tela */
         
         h1 {
             font-size: 20px;
@@ -320,19 +349,23 @@
     }
 
     .orcamento-card {
-        padding: 18px;
         border-radius: 20px;
+        margin-bottom: 16px;
+        padding: 16px; /* Reduzido o padding interno para liberar mais espaço horizontal */
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .header {
         flex-direction: column;
-        align-items: stretch;
+        align-items: flex-start;
         gap: 12px;
         padding-bottom: 14px;
+        margin-bottom: 14px;
+        width: 100%;
 
         .cliente {
-            text-align: left;
-            
+            width: 100%;
             strong {
                 font-size: 18px;
             }
@@ -349,13 +382,23 @@
         flex-direction: column;
         align-items: stretch;
         gap: 8px;
+        margin-bottom: 14px;
+        width: 100%;
+
+        .valor-desconto {
+            justify-content: space-between;
+            width: 100%;
+            box-sizing: border-box;
+        }
     }
 
     .itens {
-        padding: 8px;
+        padding: 4px; /* Ajustado para dar mais vazão horizontal aos itens internos */
+        width: 100%;
 
         .item {
-            gap: 12px;
+            gap: 10px;
+            padding: 12px 8px; /* Alinhamento simétrico nas laterais internas */
 
             img,
             .sem-imagem {
@@ -377,18 +420,25 @@
             .subtotal {
                 font-size: 13px;
                 padding: 6px 10px;
+                border-radius: 10px;
             }
         }
     }
 
     .total {
         align-items: stretch;
+        width: 100%;
+        box-sizing: border-box;
 
         .linha {
-            font-size: 12px;
+            width: 100%;
+            box-sizing: border-box;
 
             &.final {
-                padding: 10px;
+                margin-top: 12px;
+                padding: 12px;
+                width: 100%;
+                box-sizing: border-box;
                 
                 strong {
                     font-size: 18px;
@@ -398,16 +448,56 @@
     }
 
     .acoes {
-        justify-content: flex-end;
+        margin-top: 16px;
         gap: 12px;
+        width: 100%;
         
         button {
             width: 44px;
             height: 44px;
+            border-radius: 12px;
             
             &:hover {
-                transform: none; // Evita bugs visuais de escala em touch screens
+                transform: none;
+                box-shadow: none;
             }
+            &:active {
+                transform: scale(0.92);
+            }
+        }
+    }
+}
+
+/* 🔹 3. SMARTPHONES PEQUENOS (Telas de até 380px) */
+@media (max-width: 380px) {
+    .container {
+        padding: 12px; /* Margem de segurança menor para telas bem estreitas */
+    }
+
+    .orcamento-card {
+        padding: 12px;
+        border-radius: 16px;
+    }
+
+    .header .cliente strong {
+        font-size: 16px;
+    }
+
+    .itens .item {
+        gap: 8px;
+        padding: 10px 4px; /* Evita que o subtotal quebre de linha */
+        
+        .subtotal {
+            font-size: 12px;
+            padding: 4px 8px;
+        }
+    }
+
+    .total .linha.final {
+        padding: 8px 10px;
+        
+        strong {
+            font-size: 16px;
         }
     }
 }

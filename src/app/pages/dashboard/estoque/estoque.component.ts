@@ -145,10 +145,19 @@ export class EstoqueComponent implements OnInit {
         this.idEditando = null;
     }
 
-    fecharModal() {
+    // 1. Crie essa nova variável no topo do seu componente
+fechandoModal = false;
 
-        this.mostrarModal = false;
-    }
+// 2. Substitua a sua função fecharModal por esta:
+fecharModal() {
+  this.fechandoModal = true; // Ativa a animação de saída no CSS
+
+  // Espera 200 milissegundos (o tempo da animação) antes de destruir o modal do DOM
+  setTimeout(() => {
+    this.mostrarModal = false;
+    this.fechandoModal = false; // Reseta o estado para a próxima vez que abrir
+  }, 200);
+}
 
     async salvar() {
 

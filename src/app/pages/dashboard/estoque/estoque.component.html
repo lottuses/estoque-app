@@ -274,9 +274,8 @@
          MODAL
     ========================== -->
 
-    <div class="modal-backdrop" *ngIf="mostrarModal">
-
-        <div class="modal">
+    <div class="modal-backdrop" *ngIf="mostrarModal" [class.modal-saindo]="fechandoModal">
+    <div class="modal">
 
             <h2 class="modal-title">
 
@@ -373,26 +372,24 @@
                 </div>
 
                 <!-- QUANTIDADE -->
-                <div class="mat-input">
-
-                    <input id="qtd" [(ngModel)]="produto.quantidade" type="number" placeholder="0">
-
-                    <label for="qtd">
-                        Quantidade
-                    </label>
-
-                </div>
+                <div class="mat-input input-numérico-container">
+    <input id="qtd" [(ngModel)]="produto.quantidade" type="number" placeholder=" " readonly>
+    <label for="qtd">Quantidade</label>
+    <div class="botoes-controle-wrapper">
+        <button type="button" class="btn-modal-menos" (click)="produto.quantidade = ((produto.quantidade || 0) > 0 ? (produto.quantidade || 0) - 1 : 0)">—</button>
+        <button type="button" class="btn-modal-mais" (click)="produto.quantidade = (produto.quantidade || 0) + 1">+</button>
+    </div>
+</div>
 
                 <!-- ESTOQUE MÍNIMO -->
-                <div class="mat-input">
-
-                    <input id="estoqueMinimo" [(ngModel)]="produto.estoqueMinimo" type="number" placeholder="0">
-
-                    <label for="estoqueMinimo">
-                        Estoque Mínimo
-                    </label>
-
-                </div>
+                <div class="mat-input input-numérico-container">
+    <input id="estoqueMinimo" [(ngModel)]="produto.estoqueMinimo" type="number" placeholder=" " readonly>
+    <label for="estoqueMinimo">Estoque Mínimo</label>
+    <div class="botoes-controle-wrapper">
+        <button type="button" class="btn-modal-menos" (click)="produto.estoqueMinimo = ((produto.estoqueMinimo || 0) > 0 ? (produto.estoqueMinimo || 0) - 1 : 0)">—</button>
+        <button type="button" class="btn-modal-mais" (click)="produto.estoqueMinimo = (produto.estoqueMinimo || 0) + 1">+</button>
+    </div>
+</div>
 
                 <!-- UNIDADE -->
                 <div class="mat-input">
@@ -406,26 +403,25 @@
                 </div>
 
                 <!-- PREÇO COMPRA -->
-                <div class="mat-input">
-
-                    <input id="precoCompra" [(ngModel)]="produto.precoCompra" type="number" placeholder="0.00">
-
-                    <label for="precoCompra">
-                        Preço Compra
-                    </label>
-
-                </div>
+                <div class="mat-input input-numérico-container">
+    <input id="precoCompra" [(ngModel)]="produto.precoCompra" type="number" placeholder=" " readonly>
+    <label for="precoCompra">Preço Compra</label>
+    <div class="botoes-controle-wrapper">
+        <button type="button" class="btn-modal-menos" (click)="produto.precoCompra = ((produto.precoCompra || 0) > 0 ? (produto.precoCompra || 0) - 1 : 0)">—</button>
+        <button type="button" class="btn-modal-mais" (click)="produto.precoCompra = (produto.precoCompra || 0) + 1">+</button>
+    </div>
+</div>
 
                 <!-- PREÇO VENDA -->
-                <div class="mat-input">
+                <div class="mat-input input-numérico-container">
+    <input id="precoVenda" [(ngModel)]="produto.precoVenda" type="number" placeholder=" " readonly>
+    <label for="precoVenda">Preço Venda</label>
+    <div class="botoes-controle-wrapper">
+        <button type="button" class="btn-modal-menos" (click)="produto.precoVenda = ((produto.precoVenda || 0) > 0 ? (produto.precoVenda || 0) - 1 : 0)">—</button>
+        <button type="button" class="btn-modal-mais" (click)="produto.precoVenda = (produto.precoVenda || 0) + 1">+</button>
+    </div>
+</div>
 
-                    <input id="precoVenda" [(ngModel)]="produto.precoVenda" type="number" placeholder="0.00">
-
-                    <label for="precoVenda">
-                        Preço Venda
-                    </label>
-
-                </div>
 
                 <!-- LOCALIZAÇÃO -->
                 <div class="mat-input">

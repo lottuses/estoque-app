@@ -14,17 +14,12 @@
 ========================= */
 
 .dashboard {
-
     width: 100%;
-
     height: 100vh;
-
-    overflow: hidden;
-
+    height: 100dvh; /* Garante a altura correta em navegadores móveis */
+    box-sizing: border-box; /* Garante que o padding não aumente o tamanho da página */
     padding: 20px;
-
     display: flex;
-
     justify-content: center;
 }
 
@@ -33,18 +28,13 @@
 ========================= */
 
 .container {
-
     width: 100%;
-
     max-width: 1700px;
-
-    height: 100%;
-
+    height: 100%; /* Vai respeitar os 100vh já descontados pelo padding do pai */
     display: grid;
-
     grid-template-columns: 1.4fr 1fr;
-
     gap: 20px;
+    min-height: 0; /* Crucial para o grid não estourar a tela com conteúdos grandes */
 }
 
 /* =========================
@@ -52,34 +42,19 @@
 ========================= */
 
 .card {
-
     background:
         linear-gradient(180deg,
             rgba(255, 255, 255, 0.04),
             rgba(255, 255, 255, 0.02));
 
-    border: 1px solid rgba(255, 255, 255, 0.06);
-
-    border-radius: 26px;
-
+    border-radius: 13px;
     backdrop-filter: blur(14px);
-
     padding: 24px;
-
     display: flex;
-
     flex-direction: column;
-
     min-height: 0;
-
     overflow: hidden;
-
     transition: 0.25s ease;
-}
-
-.card:hover {
-
-    border-color: rgba(96, 165, 250, 0.18);
 }
 
 /* =========================
@@ -88,8 +63,8 @@
 
 .card.produtos,
 .card.carrinho {
-
-    height: 100%;
+    height: auto;
+    max-height: unset;
 }
 
 /* =========================
@@ -97,121 +72,102 @@
 ========================= */
 
 .card h2 {
-
     color: white;
-
     font-size: 22px;
-
     font-weight: 700;
-
     margin-bottom: 20px;
-
     flex-shrink: 0;
 }
 
 /* =========================
    SCROLL AREAS
 ========================= */
-
-.lista-produtos,
-.lista-carrinho {
-
-    flex: 1;
-
+.lista-produtos {
+    flex: 1; /* A lista de produtos continua ocupando a tela toda */
     overflow-y: auto;
-
     overflow-x: hidden;
-
     padding-right: 6px;
-
+    padding-bottom: 24px;
     margin-top: 10px;
 }
 
-/* SCROLLBAR */
-
-.lista-produtos::-webkit-scrollbar,
-.lista-carrinho::-webkit-scrollbar {
-
-    width: 8px;
+.lista-carrinho {
+    /* flex: 1; <--- REMOVA OU COMENTE ESSA LINHA */
+    flex-shrink: 0; /* Impede a lista de esmagar os outros elementos */
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 6px;
+    padding-bottom: 14px; /* Diminuído para aproximar do total */
+    margin-top: 10px;
 }
 
-.lista-produtos::-webkit-scrollbar-thumb,
-.lista-carrinho::-webkit-scrollbar-thumb {
+/* =========================
+   TOTAL
+========================= */
 
-    background: rgba(255, 255, 255, 0.12);
-
-    border-radius: 20px;
+.total {
+    margin-top: 14px; /* Reduzido de 18px para aproximar do último item */
+    padding-top: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    flex-shrink: 0;
 }
 
-.lista-produtos::-webkit-scrollbar-track,
-.lista-carrinho::-webkit-scrollbar-track {
-
-    background: transparent;
+.total strong {
+    color: #4ade80;
+    font-size: 28px;
 }
 
+/* =========================
+   FINALIZAR
+========================= */
+
+.finalizar-container {
+    margin-top: 14px; /* Reduzido para o botão subir junto com o total */
+    flex-shrink: 0;
+}
 /* =========================
    INPUTS
 ========================= */
 
 .mat-input {
-
     position: relative;
-
     width: 100%;
-
     margin-bottom: 16px;
-
     flex-shrink: 0;
 }
 
 .mat-input input,
 .mat-input select {
-
     width: 100%;
-
     height: 58px;
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
     border-radius: 18px;
-
+    border: none;
     background: rgba(255, 255, 255, 0.04);
-
     color: white;
-
     padding: 22px 16px 8px;
-
     outline: none;
-
     font-size: 14px;
-
     transition: 0.25s ease;
-
     appearance: none;
 }
 
 .mat-input input:focus,
 .mat-input select:focus {
-
-    border-color: #2563eb;
-
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(95, 95, 95, 0.326);
 }
 
 .mat-input label {
-
     position: absolute;
-
     left: 16px;
-
     top: 18px;
-
     color: #8a8a8a;
-
     pointer-events: none;
-
     transition: 0.2s ease;
-
     font-size: 14px;
 }
 
@@ -219,24 +175,113 @@
 .mat-input input:not(:placeholder-shown)+label,
 .mat-input select:focus+label,
 .mat-input select:not([value=""])+label {
-
     top: 8px;
-
     font-size: 11px;
-
-    color: #60a5fa;
+    color: #dcdcdc;
 }
 
 .mat-input input::placeholder {
-
     opacity: 0;
 }
 
 .mat-input select option {
-
     background: #161616;
-
     color: white;
+}
+
+/* =========================
+   STEPPER PARCELAS
+========================= */
+
+.stepper-parcelas input::-webkit-outer-spin-button,
+.stepper-parcelas input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.stepper-parcelas input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+/* Alinha a label e os botões no mesmo eixo vertical */
+.mat-input:has(.stepper-parcelas) {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    width: 100%;
+    position: relative;
+}
+
+/* Container dos botões compacto */
+.stepper-parcelas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; 
+    width: 160px; 
+    margin: 0 auto; 
+    height: 58px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 20px 8px 0px; 
+    overflow: hidden;
+    border: none;
+}
+
+/* Input do número */
+.stepper-parcelas input {
+    width: 35px; 
+    background: transparent !important;
+    border: none !important;
+    outline: none;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    height: 100% !important;
+    padding: 0 !important; 
+}
+
+/* Botões de + e - */
+.stepper-parcelas button {
+    width: 32px; 
+    height: 30px; 
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.15s ease;
+}
+
+.stepper-parcelas button:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.stepper-parcelas button:active {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(0.95);
+}
+
+/* CORREÇÃO DO ALINHAMENTO: Força o reset do recuo à esquerda herdado */
+.mat-input:has(.stepper-parcelas) label {
+    top: 8px !important;
+    font-size: 11px !important;
+    color: #dcdcdc !important;
+    
+    /* Zera a herança antiga que prendia o texto na esquerda */
+    left: 50% !important;
+    right: auto !important;
+    
+    /* Aplica a centralização matemática exata */
+    transform: translateX(-50%) !important; 
+    
+    text-align: center !important;
+    white-space: nowrap;
+    width: 100% !important;
 }
 
 /* =========================
@@ -244,25 +289,18 @@
 ========================= */
 
 .cliente-form {
-
     display: grid;
-
     grid-template-columns: 1fr 1fr;
-
     gap: 14px;
-
     margin-bottom: 10px;
-
     flex-shrink: 0;
 }
 
 .cliente-form .mat-input:first-child {
-
     grid-column: span 2;
 }
 
 .cliente-form .mat-input:nth-child(3) {
-
     grid-column: span 2;
 }
 
@@ -272,34 +310,20 @@
 
 .produto,
 .item {
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
     gap: 16px;
-
     padding: 16px;
-
     margin-bottom: 14px;
-
     border-radius: 22px;
-
     background: rgba(255, 255, 255, 0.035);
-
-    border: 1px solid rgba(255, 255, 255, 0.04);
-
     transition: 0.25s ease;
 }
 
 .produto:hover,
 .item:hover {
-
     background: rgba(255, 255, 255, 0.055);
-
-    transform: translateY(-2px);
 }
 
 /* =========================
@@ -307,57 +331,38 @@
 ========================= */
 
 .produto-info {
-
     display: flex;
-
     align-items: center;
-
     gap: 14px;
-
     flex: 1;
-
     min-width: 0;
 }
 
 .info {
-
     display: flex;
-
     flex-direction: column;
-
     gap: 4px;
-
     min-width: 0;
 }
 
 .info strong,
 .info .nome {
-
     color: white;
-
     font-size: 15px;
-
     font-weight: 700;
-
     overflow: hidden;
-
     text-overflow: ellipsis;
-
     white-space: nowrap;
 }
 
 .info span {
-
     color: #a1a1aa;
-
     font-size: 13px;
 }
 
 .preco,
 .subtotal {
-
     color: #4ade80 !important;
-
     font-weight: 700;
 }
 
@@ -367,28 +372,18 @@
 
 .imagem-produto,
 .sem-imagem {
-
     width: 58px;
-
     height: 58px;
-
     border-radius: 16px;
-
     object-fit: cover;
-
     flex-shrink: 0;
 }
 
 .sem-imagem {
-
     background: rgba(255, 255, 255, 0.05);
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     font-size: 24px;
 }
 
@@ -397,35 +392,28 @@
 ========================= */
 
 button {
-
     border: none;
-
     cursor: pointer;
-
-    transition: 0.2s ease;
+    transition: 0.15s ease;
 }
 
-/* ADD */
-
+/* ADICIONAR PRODUTO (+) */
 .btn-add {
     width: 44px;
     height: 44px;
     border-radius: 14px;
-    background: #2563eb;
-    color: transparent; /* Esconde o texto "+" caso ele ainda esteja no HTML */
+    background: rgba(255, 255, 255, 0.1);
+    color: transparent; 
     flex-shrink: 0;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    
-    // Força o navegador a renderizar as bordas perfeitamente estáticas
     isolation: isolate;
     backface-visibility: hidden;
     transform: translate3d(0, 0, 0);
 
-    // Linha Horizontal do "+"
     &::before,
     &::after {
         content: '';
@@ -435,47 +423,48 @@ button {
         transition: background-color 0.2s ease;
     }
 
-    // Linha Horizontal
     &::before {
         width: 16px;
-        height: 2px; /* Valor inteiro limpo */
+        height: 2px; 
     }
 
-    // Linha Vertical
     &::after {
-        width: 2px;  /* Valor inteiro limpo */
+        width: 2px;  
         height: 16px;
     }
 }
 
 .btn-add:hover {
-    // Trocamos o 'scale' (que quebra pixels no zoom) por uma transição suave de cor ou sombra
-    background: #3b82f6;
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0 2px rgba(67, 67, 67, 0.4);
 }
 
-/* REMOVE */
+/* Efeito de Clique: Adicionar */
+.btn-add:active {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(0.92) translate3d(0, 0, 0);
+}
 
+/* REMOVER PRODUTO (Lixeira / Ícone de menos) */
 .btn-remove {
-
     width: 38px;
-
     height: 38px;
-
     border-radius: 12px;
-
     background: rgba(255, 255, 255, 0.05);
-
-    color: #ff6b6b;
-
+    color: #ffffff;
     font-size: 16px;
-
     flex-shrink: 0;
 }
 
 .btn-remove:hover {
-
     background: rgba(255, 107, 107, 0.12);
+    color: #ff6b6b;
+}
+
+/* Efeito de Clique: Remover */
+.btn-remove:active {
+    background: rgba(255, 107, 107, 0.25);
+    transform: scale(0.92);
 }
 
 /* =========================
@@ -483,63 +472,51 @@ button {
 ========================= */
 
 .acoes {
-
     display: flex;
-
     align-items: center;
-
     gap: 14px;
-
     flex-wrap: wrap;
-
     justify-content: flex-end;
+    flex: 1; /* Faz as ações ocuparem o espaço restante */
+}
+
+.acoes .stepper {
+    margin-right: auto; /* <--- O SEGREDO ESTÁ AQUI (Alinha o stepper à esquerda dentro das ações) */
 }
 
 /* =========================
-   STEPPER
+   STEPPER DE QUANTIDADE (CARRINHO)
 ========================= */
 
 .stepper {
-
     display: flex;
-
     align-items: center;
-
     overflow: hidden;
-
     border-radius: 16px;
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
     height: 44px;
 }
 
 .stepper button {
-
     width: 42px;
-
     height: 100%;
-
     background: rgba(255, 255, 255, 0.04);
-
     color: white;
-
     font-size: 18px;
 }
 
 .stepper button:hover {
-
     background: rgba(255, 255, 255, 0.08);
 }
 
+/* Efeito de Clique: Quantidade do Carrinho */
+.stepper button:active {
+    background: rgba(255, 255, 255, 0.18);
+}
+
 .quantidade {
-
     width: 46px;
-
     text-align: center;
-
     color: white;
-
     font-weight: 700;
 }
 
@@ -548,32 +525,19 @@ button {
 ========================= */
 
 .total {
-
     margin-top: 18px;
-
     padding-top: 18px;
-
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
     color: white;
-
     font-size: 20px;
-
     font-weight: 600;
-
     flex-shrink: 0;
 }
 
 .total strong {
-
     color: #4ade80;
-
     font-size: 28px;
 }
 
@@ -582,61 +546,43 @@ button {
 ========================= */
 
 .finalizar-container {
-
     margin-top: 20px;
-
     flex-shrink: 0;
 }
 
 .btn-finalizar {
-
     width: 100%;
-
     height: 58px;
-
     border-radius: 20px;
-
-    background:
-        linear-gradient(135deg,
-            #2563eb,
-            #3b82f6);
-
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
     color: white;
-
     font-weight: 700;
-
     font-size: 15px;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     gap: 12px;
 }
 
 .btn-finalizar:hover {
+    box-shadow: 0 12px 30px rgba(50, 50, 50, 0.35);
+    filter: brightness(1.1);
+}
 
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 12px 30px rgba(37, 99, 235, 0.35);
+/* Efeito de Clique: Finalizar */
+.btn-finalizar:active {
+    transform: scale(0.98);
+    box-shadow: 0 6px 15px rgba(50, 50, 50, 0.2);
 }
 
 .fundo-icone {
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 }
 
 .seta-svg {
-
     width: 18px;
-
     color: white;
 }
 
@@ -645,11 +591,8 @@ button {
 ========================= */
 
 .estado {
-
     text-align: center;
-
     padding: 30px;
-
     color: #777;
 }
 
@@ -658,224 +601,196 @@ button {
 ========================= */
 
 @media (max-width: 1100px) {
-
     .dashboard {
-
         height: auto;
-
         min-height: 100vh;
-
+        min-height: 100dvh;
         overflow: visible;
     }
 
     .container {
-
         grid-template-columns: 1fr;
-
         height: auto;
     }
 
+    /* CORRIGIDO: Remove a trava de 600px que cortava a lista de itens */
     .card.produtos,
     .card.carrinho {
-
-        height: auto;
-
-        max-height: unset;
+        height: auto !important; 
+        max-height: unset !important;
+        overflow: visible !important; /* Permite que o card se expanda com os dados */
     }
 
+    /* Torna as listas internas roláveis de forma independente com tamanhos generosos */
     .lista-produtos,
     .lista-carrinho {
-
-        max-height: 500px;
+        height: auto !important;
+        max-height: 600px !important; /* Limite seguro para forçar o scroll interno e não sumir */
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
     }
 }
 
 /* =========================
-   MOBILE
+   MOBILE (SMARTPHONES)
 ========================= */
 
 @media (max-width: 768px) {
-
     .dashboard {
-
         padding: 12px;
-
         height: auto;
-
+        min-height: 100vh;
+        min-height: 100dvh;
         overflow: visible;
     }
 
     .container {
-
         gap: 16px;
+        height: auto;
+    }
+
+    /* Garante comportamento elástico completo no celular */
+    .card.produtos,
+    .card.carrinho {
+        height: auto !important;
+        max-height: unset !important;
+        overflow: visible !important;
+    }
+
+    /* Evita que as áreas de scroll quebrem para fora do layout em viewports estreitas */
+    .lista-produtos,
+    .lista-carrinho {
+        height: auto !important;
+        max-height: 500px !important; /* Otimiza a rolagem interna para telas de smartphones */
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
     }
 
     .card {
-
         padding: 18px;
-
         border-radius: 22px;
     }
 
     .card h2 {
-
         font-size: 20px;
-
         margin-bottom: 16px;
     }
 
     .cliente-form {
-
         grid-template-columns: 1fr;
     }
 
     .cliente-form .mat-input:first-child,
     .cliente-form .mat-input:nth-child(3) {
-
         grid-column: span 1;
     }
 
     .produto,
     .item {
-
         flex-direction: column;
-
         align-items: stretch;
-
         gap: 14px;
-
         padding: 14px;
     }
 
     .produto-info {
-
         width: 100%;
     }
 
     .acoes {
-
         width: 100%;
-
         justify-content: space-between;
-
         gap: 10px;
     }
 
     .subtotal {
-
         font-size: 16px;
     }
 
     .total {
-
         flex-direction: column;
-
         align-items: flex-start;
-
         gap: 6px;
     }
 
     .total strong {
-
         font-size: 24px;
     }
 
     .btn-finalizar {
-
         height: 54px;
-
         border-radius: 18px;
     }
 
     .imagem-produto,
     .sem-imagem {
-
         width: 52px;
-
         height: 52px;
     }
 }
 
 /* =========================
-   EXTRA SMALL
+   EXTRA SMALL (CELULARES PEQUENOS)
 ========================= */
 
 @media (max-width: 480px) {
-
     .dashboard {
-
         padding: 10px;
     }
 
     .card {
-
         padding: 16px;
     }
 
     .produto-info {
-
         gap: 12px;
     }
 
     .info strong,
     .info .nome {
-
         font-size: 14px;
     }
 
     .info span {
-
         font-size: 12px;
     }
 
     .acoes {
-
         flex-direction: column;
-
         align-items: stretch;
     }
 
     .stepper {
-
         width: 100%;
     }
 
     .stepper button {
-
         flex: 1;
     }
 
     .quantidade {
-
         width: 50px;
     }
 
     .subtotal {
-
         width: 100%;
-
         text-align: left;
     }
 
     .btn-remove {
-
         width: 100%;
-
         height: 42px;
     }
 
     .btn-add {
-
         width: 100%;
-
         height: 46px;
-
         border-radius: 14px;
     }
 
+    /* Reduz o teto de rolagem interna para dispositivos muito pequenos não estourarem */
     .lista-produtos,
     .lista-carrinho {
-
-        max-height: 420px;
+        max-height: 380px !important;
     }
 }

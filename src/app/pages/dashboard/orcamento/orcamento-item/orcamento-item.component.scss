@@ -85,11 +85,13 @@
 
     outline: none;
 
-    transition: 0.2s ease;
+    transition: 0.15s ease;
+    appearance: none;
+    -webkit-appearance: none;
 }
 
 .mat-input input:focus {
-    border-color: #60a5fa;
+    border-color: rgba(255, 255, 255, 0.2); /* Suavizado o foco azul para o tema dark */
     background: rgba(255, 255, 255, 0.06);
 }
 
@@ -103,11 +105,12 @@
     transition: 0.2s;
 }
 
+/* CORRIGIDO: Agora a label fica na cor branca/cinza clara no foco, removendo o azul */
 .mat-input input:focus+label,
 .mat-input input:not(:placeholder-shown)+label {
     top: 6px;
     font-size: 11px;
-    color: #60a5fa;
+    color: #dcdcdc !important;
 }
 
 /* =========================
@@ -138,7 +141,7 @@
     position: absolute;
     inset: 0;
     background: radial-gradient(circle at top right,
-            rgba(96, 165, 250, 0.08),
+            rgba(255, 255, 255, 0.03),
             transparent 60%);
     pointer-events: none;
 }
@@ -167,37 +170,83 @@
 }
 
 /* =========================
-   DESCONTO
+   DESCONTO / BOTÕES CUSTOMIZADOS
 ========================= */
 
 .desconto-container {
     display: flex;
     align-items: center;
-    gap: 6px;
-
+    justify-content: center;
+    gap: 8px; 
+    
+    width: 150px; /* <--- Aumentado sutilmente para acomodar os botões maiores */
+    height: 36px; /* Ajustada a altura do bloco para harmonizar */
+    
     background: rgba(255, 255, 255, 0.03);
-    padding: 6px 10px;
+    padding: 0 6px;
     border-radius: 10px;
-
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+/* Remove as setinhas nativas residuais */
+.input-desconto::-webkit-outer-spin-button,
+.input-desconto::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 .input-desconto {
-    background: transparent;
-    border: none;
+    -moz-appearance: textfield;
+    appearance: textfield;
+    
+    background: transparent !important;
+    border: none !important;
     outline: none;
-
-    width: 70px;
-
-    color: #ff6b6b;
+    
+    width: 35px; 
+    height: 100%;
+    
+    color: #fff !important; 
     font-weight: 700;
-
+    font-size: 14px;
     font-variant-numeric: tabular-nums;
+    text-align: center;
+    padding: 0 !important;
 }
 
 .sinal-menos {
-    color: #ff6b6b;
+    color: #fff !important; 
     font-weight: 700;
+    font-size: 13px;
+    margin-right: -4px; 
+}
+
+/* Botões de + e - do Desconto (MAIORES E MAIS FÁCEIS DE CLICAR) */
+.desconto-container button {
+    width: 28px;  /* <--- Aumentado de 24px para 28px */
+    height: 28px; /* <--- Aumentado de 24px para 28px */
+    border-radius: 7px;
+    background: rgba(255, 255, 255, 0.04);
+    
+    color: #fff !important; 
+    font-size: 13px; /* Aumentado o tamanho do sinal matemático para acompanhar */
+    font-weight: 700;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: 0.15s ease;
+}
+
+.desconto-container button:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* Feedback tátil do clique mantido */
+.desconto-container button:active {
+    background: rgba(255, 255, 255, 0.22);
+    transform: scale(0.9);
 }
 
 /* =========================
@@ -321,12 +370,17 @@
     cursor: pointer;
     border-radius: 8px;
 
-    transition: 0.2s;
+    transition: 0.15s ease;
 }
 
 .qty-btn:hover {
     background: rgba(255, 255, 255, 0.08);
     color: #fff;
+}
+
+.qty-btn:active {
+    background: rgba(255, 255, 255, 0.18);
+    transform: scale(0.92);
 }
 
 .qty-value {
@@ -365,12 +419,23 @@
     background: transparent;
     color: #777;
     cursor: pointer;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
 
-    transition: 0.2s;
+    transition: 0.15s ease;
 }
 
 .btn-remove:hover {
     color: #ff5a5a;
+    background: rgba(255, 90, 90, 0.08);
+}
+
+.btn-remove:active {
+    background: rgba(255, 90, 90, 0.18);
+    transform: scale(0.9);
 }
 
 /* =========================
@@ -398,56 +463,186 @@
     color: #dcdcdc;
 
     cursor: pointer;
+    box-sizing: border-box; 
 
-    transition: 0.2s ease;
+    transition: 0.15s ease;
 }
 
 .acoes button:hover {
     background: rgba(255, 255, 255, 0.06);
-    transform: translateY(-2px);
 }
 
 .acoes .salvar:hover {
     color: #60a5fa;
-    border-color: rgba(96, 165, 250, 0.4);
+    border-color: rgba(96, 165, 250, 0.2);
 }
 
 .acoes .finalizar:hover {
     color: #d6ff8a;
-    border-color: rgba(214, 255, 138, 0.4);
+    border-color: rgba(214, 255, 138, 0.2);
+}
+
+.acoes button:active {
+    transform: scale(0.94);
+}
+
+.acoes .salvar:active {
+    background: rgba(96, 165, 250, 0.1);
+}
+
+.acoes .finalizar:active {
+    background: rgba(214, 255, 138, 0.1);
 }
 
 .acoes svg {
-    width: 18px;
-    height: 18px;
+    width: 20px;        
+    height: 20px;
+    flex-shrink: 0;     
+    display: block;
+}
+
+.acoes svg path {
     fill: currentColor;
+}
+
+.acoes svg[stroke] path,
+.acoes svg[stroke] {
+    stroke: currentColor;
+    fill: none;
 }
 
 /* =========================
    RESPONSIVO
 ========================= */
 
-@media (max-width: 900px) {
+/* 🔹 1. TABLETS (Telas de até 1024px) */
+@media (max-width: 1024px) {
+    .container {
+        padding: 20px;
+        gap: 20px;
+    }
 
+    /* Divide o topo em apenas uma coluna (Lista de Itens em cima, Resumo fixado embaixo) */
     .topo-container {
         grid-template-columns: 1fr;
+        gap: 20px;
     }
 
+    /* Reduz o formulário do cliente de 3 colunas para 2 colunas */
+    .dados-cliente {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    /* Remove a propriedade sticky para o resumo rolar naturalmente junto com a página */
+    .coluna-resumo {
+        position: static;
+        width: 100%;
+    }
+}
+
+/* 🔹 2. SMARTPHONES GRANDES (Telas de até 600px) */
+@media (max-width: 600px) {
+    .container {
+        padding: 16px;
+        gap: 16px;
+    }
+
+    /* Dados do cliente viram uma coluna única vertical */
     .dados-cliente {
         grid-template-columns: 1fr;
+        padding: 14px;
     }
 
+    .mat-input input {
+        height: 52px;
+        padding: 20px 14px 6px;
+        font-size: 13px;
+    }
+
+    .mat-input label {
+        top: 14px;
+        left: 14px;
+        font-size: 13px;
+    }
+
+    /* REESTRUTURAÇÃO DO ITEM DO CARRINHO: Transforma o grid horizontal em blocos verticais */
     .item {
         grid-template-columns: 1fr;
-        gap: 10px;
+        gap: 14px;
+        padding: 14px;
+        position: relative;
     }
 
+    /* O seletor de quantidade e o valor total do item ficam lado a lado na base do card */
     .quantity-selector {
         width: 100%;
         justify-content: space-between;
+        background: rgba(255, 255, 255, 0.04);
+        padding: 4px;
     }
 
+    /* Força o preço subtotal do item a se alinhar à direita de forma destacada */
     .total-item {
         text-align: right;
+        width: 100%;
+        padding-top: 4px;
+        border-top: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    /* Move o botão de lixeira (remover) de forma absoluta para o canto superior direito do item */
+    .btn-remove {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 36px;
+        height: 36px;
+        background: rgba(255, 90, 90, 0.04);
+        border-radius: 8px;
+    }
+
+    /* Hero visual do preço total do orçamento diminui um pouco para não quebrar a linha */
+    .numero-total {
+        font-size: 2rem;
+    }
+}
+
+/* 🔹 3. SMARTPHONES PEQUENOS (Telas de até 380px) */
+@media (max-width: 380px) {
+    .container {
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .dados-cliente,
+    .summary-card,
+    .card-dark {
+        padding: 12px;
+        border-radius: 14px;
+    }
+
+    /* Ajusta a linha de desconto para não esmagar os botões de + e - */
+    .linha {
+        font-size: 13px;
+    }
+
+    .desconto-container {
+        width: 135px;
+        gap: 4px;
+    }
+
+    .desconto-container button {
+        width: 26px;
+        height: 26px;
+    }
+
+    .numero-total {
+        font-size: 1.75rem;
+    }
+
+    /* Botões de salvar e finalizar ganham mais área de toque no celular pequeno */
+    .acoes button {
+        flex: 1;
+        height: 48px;
     }
 }

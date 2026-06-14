@@ -4,490 +4,337 @@ ion-content {
 
 /* ========================================
    BASE
-======================================== */
+======================================= */
 
 .dashboard {
-
     min-height: 100%;
-
     background: #212121;
-
     color: white;
-
     overflow-x: hidden;
-
 }
 
 .dashboard-content {
-
     padding: 20px;
+    
 
 }
 
 /* ========================================
    HEADER
-======================================== */
+======================================= */
 
 .headline {
-
     position: relative;
-
     height: 200px;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     text-align: center;
-
     color: white;
-
     background-image:
         linear-gradient(rgba(17, 17, 17, 0.55),
             rgba(17, 17, 17, 0.55)),
         url('/assets/images/mountain.jpg');
-
     background-position: center;
-
     background-repeat: no-repeat;
-
     background-size: cover;
-
 }
 
 .inner {
-
     position: relative;
-
     z-index: 2;
-
 }
 
 .inner h1 {
-
     margin: 0;
-
     font-size: 36px;
-
     line-height: 36px;
-
 }
 
 .inner p {
-
     margin-top: 10px;
-
     font-size: 24px;
-
     color: #d4d4d4;
-
 }
 
 /* ========================================
    OVERLAY
-======================================== */
+======================================= */
 
 .sidebar-overlay {
-
     position: fixed;
-
     inset: 0;
-
     background: rgba(0, 0, 0, 0.55);
-
     backdrop-filter: blur(4px);
-
     z-index: 40;
-
     animation: fadeOverlay 0.25s ease;
-
 }
 
 /* ========================================
    SIDEBAR
-======================================== */
+======================================= */
 
 .sidebar-nav {
-
     position: fixed;
-
     top: 0;
     left: calc(-300px + -36px);
-
     width: 300px;
-
     height: calc(100vh - 48px);
-
     padding: 24px 18px;
-
     display: flex;
-
     flex-direction: column;
-
     overflow-y: auto;
-
     background: rgba(17, 17, 17, 0.96);
-
     backdrop-filter: blur(20px);
-
-    border-right: 1px solid rgba(255, 255, 255, 0.05);
-
-    box-shadow:
-        0 0 40px rgba(0, 0, 0, 0.45);
-
-    transition: 0.35s ease;
-
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.45);
+    transition: 0.25s ease;
     z-index: 50;
-
 }
 
 .sidebar-nav.open {
-
     left: 0;
-
 }
 
 /* ========================================
    SIDEBAR HEADER
-======================================== */
+======================================= */
 
 .sidebar-header {
-
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
-
     gap: 14px;
-
     margin-bottom: 40px;
-
 }
 
 .sidebar-logo {
-
     width: 52px;
     height: 52px;
-
     border-radius: 16px;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     flex-shrink: 0;
-
     font-size: 20px;
-
     font-weight: bold;
-
-    color: white;
-
-    background: linear-gradient(135deg,
-            #3b82f6,
-            #2563eb);
-
+    color: white; 
+    
+    /* PADRÃO ESBRANQUIÇADO ESCURO APLICADO */
+    background: rgba(255, 255, 255, 0.06);
+    
 }
 
 .sidebar-user h2 {
-
     font-size: 17px;
-
     margin-bottom: 4px;
-
     color: white;
-
 }
 
 .sidebar-user p {
-
     font-size: 13px;
-
     color: #8b8b8b;
-
 }
 
 /* ========================================
    NAVIGATION
-======================================== */
+======================================= */
 
 .nav-title {
-
     padding: 12px 20px;
-
     font-size: 14px;
-
     text-transform: uppercase;
-
-    color: #9ca3af;
-
+    color: #8a8a8a;
     letter-spacing: 2px;
-
 }
 
 .nav-brand {
-
     display: block;
-
     margin: 10px 0 20px;
-
     padding: 10px 20px;
-
     border-radius: 12px;
-
     color: #878787;
-
     font-size: 15px;
-
     font-weight: bold;
-
     text-decoration: none;
-
 }
 
 .nav-list {
-
     list-style: none;
-
     display: flex;
-
     flex-direction: column;
-
     gap: 10px;
-
     padding: 0;
-
     margin: 0;
-
 }
 
 .nav-link {
-
     display: flex;
-
     align-items: center;
-
     gap: 14px;
-
     padding: 14px 16px;
-
     border-radius: 16px;
-
     color: #d4d4d4;
-
     text-decoration: none;
-
     font-size: 15px;
-
     font-weight: 500;
-
-    transition: 0.25s ease;
-
+    transition: 0.15s ease;
 }
 
 .nav-link i {
-
     width: 20px;
-
     text-align: center;
-
+    transition: transform 0.15s ease;
 }
 
 .nav-link:hover {
-
-    background: rgba(255, 255, 255, 0.06);
-
-    transform: translateX(6px);
-
+    background: rgba(255, 255, 255, 0.04);
     color: white;
-
 }
 
+/* Efeito de clique nos links comuns */
+.nav-link:active {
+    background: rgba(255, 255, 255, 0.08);
+}
+.nav-link:active i {
+    transform: scale(0.88);
+}
+
+/* ITEM SELECIONADO: PADRÃO ESBRANQUIÇADO ESCURO UNIFICADO */
 .nav-link.active {
+    background: rgba(255, 255, 255, 0.07);
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
 
-    background: linear-gradient(135deg,
-            #2563eb,
-            #1d4ed8);
+.nav-link.active i {
+    color: #fff;
+}
 
-    color: white;
-
-    box-shadow:
-        0 10px 20px rgba(37, 99, 235, 0.25);
-
+/* Clique no link que já está ativo */
+.nav-link.active:active {
+    background: rgba(255, 255, 255, 0.12);
 }
 
 /* ========================================
    SIDEBAR FOOTER
-======================================== */
+======================================= */
 
 .sidebar-footer {
-
     margin-top: auto;
-
     padding-top: 30px;
-
 }
 
 .botaosair {
-
     width: 100%;
-
     height: 50px;
-
     border: none;
-
     border-radius: 16px;
-
-    background: rgba(255, 77, 77, 0.15);
-
+    background: rgba(255, 255, 255, 0.04);
     color: #ff6b6b;
-
     font-size: 15px;
-
     font-weight: 600;
-
     cursor: pointer;
-
-    transition: 0.25s ease;
-
+    transition: 0.15s ease;
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     gap: 10px;
-
 }
 
 .botaosair:hover {
+    background: rgba(255, 107, 107, 0.12);
+}
 
-    background: #ff4d4d;
-
-    color: white;
-
+.botaosair:active {
+    background: rgba(255, 107, 107, 0.2);
+    transform: scale(0.97);
 }
 
 /* ========================================
-   MENU BUTTON
-======================================== */
+   MENU BUTTON (BOTÃO FLUTUANTE)
+======================================= */
 
 .btn-show-nav {
-
     position: fixed;
-
     top: 20px;
     left: 20px;
-
     width: 50px;
     height: 50px;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     border: none;
-
     border-radius: 14px;
-
-    background: rgba(20, 20, 20, 0.9);
-
+    background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(12px);
-
     color: white;
-
     font-size: 18px;
-
     cursor: pointer;
-
-    transition: 0.25s ease;
-
+    transition: 0.15s ease;
     z-index: 30;
-
-    box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.35);
-
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
 .btn-show-nav:hover {
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
+}
 
-    transform: scale(1.05);
-
+.btn-show-nav:active {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(0.93);
 }
 
 /* ========================================
-   CLOSE BUTTON
-======================================== */
+   CLOSE BUTTON (X)
+======================================= */
 
 .btn-hide-nav {
-
-    top: 20px;
-    right: 20px;
-
+    position: relative;
     width: 42px;
     height: 42px;
-
     border: none;
-
     border-radius: 12px;
-
-    background: rgba(255, 255, 255, 0.08);
-
+    background: rgba(255, 255, 255, 0.05);
     color: white;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     cursor: pointer;
-
-    transition: 0.25s ease;
-
+    transition: 0.15s ease;
     z-index: 60;
-
 }
 
 .btn-hide-nav:hover {
+    background: rgba(255, 107, 107, 0.12);
+    color: #ff6b6b;
+}
 
-    background: rgba(255, 255, 255, 0.16);
-
+.btn-hide-nav:active {
+    background: rgba(255, 107, 107, 0.25);
+    transform: scale(0.92);
 }
 
 /* ========================================
    ANIMATION
-======================================== */
+======================================= */
 
 @keyframes fadeOverlay {
-
     from {
-
         opacity: 0;
-
     }
-
     to {
-
         opacity: 1;
-
     }
-
 }
 
 /* ========================================
    MOBILE
-======================================== */
+======================================= */
 
 @media (max-width: 768px) {
-
     .headline {
-
         height: 150px;
-
     }
-
 }
