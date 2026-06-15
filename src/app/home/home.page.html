@@ -2,172 +2,125 @@
 
     <div class="page">
 
-        <header>
-            <div class="container navbar">
-                <div class="logo">FERRAGENS GENER</div>
+        <header class="main-header">
+    <div class="container navbar">
+        <div class="logo">FERRAGENS GENER</div>
 
-                <nav class="menu">
-                    <a (click)="scrollTo('produtos')">
-                        Produtos
-                    </a>
+        <button class="hamburger" (click)="toggleMenu()" [class.active]="menuAtivo">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
-                    <a (click)="scrollTo('categorias')">
-                        Categorias
-                    </a>
-
-                    <a (click)="scrollTo('contatos')">
-                        Contatos
-                    </a>
-
-                    <a routerLink="/login" class="btn-primary">LOGIN</a>
-                </nav>
-            </div>
-        </header>
+        <nav class="menu" [class.active]="menuAtivo">
+            <a class="menu-item" (click)="scrollTo('produtos')">
+                <span>Produtos</span>
+            </a>
+            <a class="menu-item" (click)="scrollTo('categorias')">
+                <span>Categorias</span>
+            </a>
+            <a class="menu-item" (click)="scrollTo('contatos')">
+                <span>Contatos</span>
+            </a>
+            <a routerLink="/login" class="btn-primary" (click)="closeMenu()">LOGIN</a>
+        </nav>
+    </div>
+</header>
 
         <section class="hero">
             <div class="container hero-content">
-
-                <div class="hero-text">
-
-                    <h1>
-                        Tudo em ferragens para marcenaria em um só lugar
-                    </h1>
-
-                    <p>
-                        Trabalhamos com corrediças, dobradiças, puxadores,
-                        parafusos, MDF, acessórios e ferramentas para
-                        marceneiros e montadores.
-                    </p>
-
+                
+                <div class="hero-text scroll-left">
+                    <h1>Tudo em ferragens para marcenaria em um só lugar</h1>
+                    <p>Trabalhamos com corrediças, dobradiças, puxadores, parafusos, MDF, acessórios e ferramentas para marceneiros e montadores.</p>
                     <div class="hero-buttons">
-                        <a class="btn-secondary" (click)="scrollTo('categorias')">
-                            Ver produtos
-                        </a>
+                        <a class="btn-secondary" (click)="scrollTo('categorias')">Ver produtos</a>
                     </div>
                 </div>
 
-                <div class="hero-image">
-                    <img src="https://cdn-gjljh.nitrocdn.com/aecfHBNraDnCvHypYkUakAjUnSZsahSq/assets/images/optimized/rev-765aa77/pinheiroferragens.com.br/site/wp-content/uploads/2014/08/Fachada-Ferragens-Pinheiro-SIA.png"
-                        alt="Ferragens para marcenaria">
+                <div class="hero-image scroll-right" 
+                     (mousemove)="onMouseMove($event)" 
+                     (mouseleave)="onMouseLeave($event)">
+                    <img src="https://cdn-gjljh.nitrocdn.com/aecfHBNraDnCvHypYkUakAjUnSZsahSq/assets/images/optimized/rev-765aa77/pinheiroferragens.com.br/site/wp-content/uploads/2014/08/Fachada-Ferragens-Pinheiro-SIA.png" alt="Ferragens para marcenaria">
                 </div>
 
             </div>
         </section>
 
         <section id="produtos">
-
             <div class="container">
-
-                <div class="section-title">
+                
+                <div class="section-title scroll-left">
                     <h2>Principais produtos</h2>
-
-                    <p>
-                        Produtos selecionados para oferecer resistência,
-                        praticidade e acabamento profissional.
-                    </p>
+                    <p>Produtos selecionados para oferecer resistência, praticidade e acabamento profissional.</p>
                 </div>
 
                 <div class="cards">
-
-                    <div class="card">
+                    <div class="card scroll-left">
                         <h3>Ferragens</h3>
-
-                        <p>
-                            Corrediças, dobradiças,
-                            pistões e suportes.
-                        </p>
+                        <p>Corrediças, dobradiças, pistões e suportes.</p>
                     </div>
-
-                    <div class="card">
+                    <div class="card scroll-right">
                         <h3>Puxadores e Perfis</h3>
-
-                        <p>
-                            Materiais modernos e resistentes
-                            para seus móveis.
-                        </p>
+                        <p>Materiais modernos e resistentes para seus móveis.</p>
                     </div>
-
-                    <div class="card">
+                    <div class="card scroll-left">
                         <h3>Ferramentas</h3>
-
-                        <p>
-                            Tudo para o dia a dia
-                            da marcenaria profissional.
-                        </p>
+                        <p>Tudo para o dia a dia da marcenaria profissional.</p>
                     </div>
-
                 </div>
 
             </div>
-
         </section>
 
         <section id="categorias">
+    <div class="container">
 
-            <div class="container">
+        <div class="section-title scroll-right">
+            <h2>Categorias</h2>
+            <p>Confira alguns dos produtos disponíveis em nossa loja.</p>
+        </div>
 
-                <div class="section-title">
-
-                    <h2>Categorias</h2>
-
-                    <p>
-                        Confira alguns dos produtos disponíveis em nossa loja.
-                    </p>
-
-                </div>
-
-                <div class="portfolio">
-
-                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200&auto=format&fit=crop"
-                        alt="Ferramentas">
-
-                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1200&auto=format&fit=crop"
-                        alt="Ferragens">
-
-                    <img src="https://images.unsplash.com/photo-1513467535987-fd81bc7d62f8?q=80&w=1200&auto=format&fit=crop"
-                        alt="Marcenaria">
-
-                </div>
-
+        <div class="portfolio">
+            
+            <div class="portfolio-item scroll-left" 
+                 (mousemove)="onPortfolioMouseMove($event)" 
+                 (mouseleave)="onPortfolioMouseLeave($event)">
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200&auto=format&fit=crop" alt="Ferramentas">
             </div>
 
-        </section>
-
-        <section>
-
-            <div class="container">
-
-                <div class="cta" id="contatos">
-
-                    <h2>
-                        Precisa de ferragens?
-                    </h2>
-
-                    <p>
-                        Entre em contato conosco e encontre os melhores produtos
-                        para sua marcenaria.
-                    </p>
-
-                    <a href="https://wa.me/5561991690710" class="btn-primary">
-                        Chamar no WhatsApp
-                    </a>
-
-                </div>
-
+            <div class="portfolio-item scroll-right" 
+                 (mousemove)="onPortfolioMouseMove($event)" 
+                 (mouseleave)="onPortfolioMouseLeave($event)">
+                <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1200&auto=format&fit=crop" alt="Ferragens">
             </div>
 
-        </section>
-
-        <footer>
-
-            <div class="container">
-                <p>
-                    © 2026 Diogo Vilela — Todos os direitos reservados.
-                </p>
+            <div class="portfolio-item scroll-left" 
+                 (mousemove)="onPortfolioMouseMove($event)" 
+                 (mouseleave)="onPortfolioMouseLeave($event)">
+                <img src="https://images.unsplash.com/photo-1513467535987-fd81bc7d62f8?q=80&w=1200&auto=format&fit=crop" alt="Marcenaria">
             </div>
 
-        </footer>
+        </div>
 
     </div>
+</section>
 
+        <section>
+            <div class="container">
+                <div class="cta scroll-right" id="contatos">
+                    <h2>Precisa de ferragens?</h2>
+                    <p>Entre em contato conosco e encontre os melhores produtos para sua marcenaria.</p>
+                    <a href="https://wa.me/5561991690710" class="btn-primary">Chamar no WhatsApp</a>
+                </div>
+            </div>
+        </section>
+
+        <footer class="main-footer">
+    <div class="container">
+        <p>© 2026 Diogo Vilela e Eduardo Calassio Sebba — Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+    </div>
 </ion-content>
