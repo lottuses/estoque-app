@@ -14,10 +14,6 @@ Aplicação interna de gestão de estoque e catálogo para uma empresa de móvei
 
 Angular · TypeScript · Ionic · Capacitor · ESLint · Karma
 
-## Status
-
-Desenvolvimento encerrado.
-
 ## Autor
 
-**Eduardo Calassio Sebba** — [lottuses.com](https://lottuses.com)
+**Eduardo Calassio Sebba e Diogo Vilela da Silva Alves Jacinto**
